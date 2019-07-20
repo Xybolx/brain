@@ -1,0 +1,68 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.toast-header {
+  color: black;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.messages {
+  text-align: center;
+}
+
+.toast {
+  max-width: 100%;
+}
+
+.toast-body {
+  word-wrap: normal;
+  word-break: break-word;
+}
+
+.buttonDiv {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.img-fluid {
+  background: url('https://media1.giphy.com/media/oyPXvDjOcri9H2cnbL/source.gif');
+}
+
+.users {
+  text-align: start;
+}
