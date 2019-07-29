@@ -1,137 +1,120 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import API from '../utils/API';
-import UserContext from './userContext';
 import SocketContext from './socketContext';
+import UserContext from './userContext';
+import moment from 'moment';
 import Avatar from 'avataaars';
-import {
-    Button,
-    Col,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Toast,
-    ToastHeader,
-    ToastBody
-}
-    from 'reactstrap';
+import { Badge, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 
-class Messages extends Component {
-    static contextType = UserContext;
-    constructor(props) {
-        super(props);
+const Messages = props => {
 
-        this.state = {
-            message: '',
-            messages: []
-        }
+    // Context 
+    const { user, setUser } = useContext(UserContext);
 
-        this.props.socket.on('RECEIVE_MESSAGE', data => {
+    // State
+    const [messages, setMessages] = useState([]);
+
+    // Get and set state
+    useEffect(() => {
+        API.getMessages()
+            .then(res => setMessages(res.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    // Subscribe and un-subscribe to socket
+    useEffect(() => {
+        props.socket.on('RECEIVE_MESSAGE', data => {
             if (data) {
-                this.loadMessages();
+                API.getMessages()
+                    .then(res => setMessages(res.data))
+                    .catch(err => console.log(err))
             }
         });
-    };
+        return () => {
+            props.socket.off('RECEIVE_MESSAGE');
+        };
+    }, [props.socket])
 
-    handleInputChange = ev => {
-        const { name, value } = ev.target;
-        this.setState({
-            [name]: value
-        });
-    };
-
-    handleFormSubmit = ev => {
-        ev.preventDefault();
-        this.props.socket.emit('SEND_MESSAGE', {
-            author: this.context.user,
-            message: this.state.message,
-        });
-
-        API.saveMessage({
-            author: this.context.user,
-            message: this.state.message
-        });
-
-        this.setState({ message: '' });
-    };
-
-    loadMessages = () => {
-        API.getMessages()
-        .then(res => this.setState({ messages: res.data }))
-    };
-
-    componentDidMount() {
-        this.loadMessages();
+    // Msg div style
+    const msgDivStyle = {
+        marginTop: "20px",
+        height: "250px",
+        overflow: "scroll",
+        overflowX: "hidden"
     }
 
-    render() {
-        return (
-            <div>
-                <h4>Messages</h4>
-                <Col sm="12" md={{ size: 6, offset: 3 }} className="messages">
-                    {this.state.messages.map(message => {
-                        return (
-                            <Toast key={message.id}>
-                                <ToastHeader
-                                    icon={<Avatar
+    return (
+        <div>
+            <h4>Messages</h4>
+            <Col
+                sm="12"
+                style={msgDivStyle}
+                className="messages">
+                {messages.map(message => {
+                    return (
+                        <Card key={message._id}>
+                            <CardBody>
+                                <CardTitle>
+                                    <Avatar
                                         style={{ width: '30px', height: '30px' }}
-                                        avatarStyle={message.author[0].avatarStyle}
-                                        topType={message.author[0].topType}
-                                        accessoriesType={message.author[0].accessoriesType}
-                                        hairColor={message.author[0].hairColor}
-                                        facialHairType={message.author[0].facialHairType}
-                                        facialHairColor={message.author[0].facialHairColor}
-                                        clotheType={message.author[0].clotheType}
-                                        clotheColor={message.author[0].clotheColor}
-                                        graphicType={message.author[0].graphicType}
-                                        eyeType={message.author[0].eyeType}
-                                        eyebrowType={message.author[0].eyebrowType}
-                                        mouthType={message.author[0].mouthType}
-                                        skinColor={message.author[0].skinColor}
-                                    />}>
-                                    <h6>{message.author[0].username}</h6>
-                                </ToastHeader>
-                                <ToastBody>
-                                    <div>
-                                        "{message.message}"
-                                        </div>
-                                </ToastBody>
-                            </Toast>
-                        );
-                    })}
-                </Col>
-                <br />
-                <h4>Send Message</h4>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                    <Form onSubmit={this.handleFormSubmit}>
-                        <FormGroup>
-                            <Label htmlFor="messageInput">Message</Label>
-                            <Input
-                                type="textarea"
-                                name="message"
-                                placeholder="Enter Message"
-                                value={this.state.message}
-                                onChange={this.handleInputChange}
-                            />
-                        </FormGroup>
-                        <Button
-                            type="submit"
-                            color="info"
-                            size="md"
-                            outline
-                            block>
-                            Post
-                        </Button>
-                    </Form>
-                </Col>
-            </div>
-        );
-    }
+                                        avatarStyle={message.avatar[0].avatarStyle}
+                                        topType={message.avatar[0].topType}
+                                        accessoriesType={message.avatar[0].accessoriesType}
+                                        hairColor={message.avatar[0].hairColor}
+                                        facialHairType={message.avatar[0].facialHairType}
+                                        facialHairColor={message.avatar[0].facialHairColor}
+                                        clotheType={message.avatar[0].clotheType}
+                                        clotheColor={message.avatar[0].clotheColor}
+                                        graphicType={message.avatar[0].graphicType}
+                                        eyeType={message.avatar[0].eyeType}
+                                        eyebrowType={message.avatar[0].eyebrowType}
+                                        mouthType={message.avatar[0].mouthType}
+                                        skinColor={message.avatar[0].skinColor}
+                                    />
+                                    {message.author}
+                                    <span className="infoSpan">
+                                        <span
+                                            className="dateSpan">
+                                            {moment(message.date).fromNow()}
+                                        </span>
+                                        <Badge
+                                            style={message.result > 0
+                                                ? { display: 'inline' }
+                                                : { display: 'none' }}
+                                            color="success" pill>
+                                            Positive
+                                            </Badge>
+                                        <Badge
+                                            style={message.result === 0
+                                                ? { display: 'inline' }
+                                                : { display: 'none' }}
+                                            color="warning" pill>
+                                            Nuetral
+                                            </Badge>
+                                        <Badge
+                                            style={message.result < 0
+                                                ? { display: 'inline' }
+                                                : { display: 'none' }}
+                                            color="danger" pill>
+                                            Negative
+                                            </Badge>
+                                    </span>
+                                </CardTitle>
+                                <CardText>
+                                    "{message.message}"
+                                    </CardText>
+                            </CardBody>
+                        </Card>
+                    );
+                })}
+            </Col>
+        </div>
+    );
 }
 
 const MessagesWithSocket = props => (
     <SocketContext.Consumer>
-        {socket => <Messages {...props} socket={socket} />}
+        {socket => <Messages socket={socket} />}
     </SocketContext.Consumer>
 );
 

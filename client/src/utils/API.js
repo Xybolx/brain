@@ -25,6 +25,9 @@ export default {
   getMessages: function() {
     return axios.get("/api/messages");
   },
+  getUserMessages: function(id) {
+    return axios.get("/api/messages", id)
+  },
   // Saves a message to the database
   saveMessage: function(messageData) {
     return axios.post("/api/messages", messageData);

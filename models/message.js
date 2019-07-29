@@ -3,11 +3,18 @@ const Schema = mongoose.Schema;
 
 const messageSchema = new Schema({
     author: {
-      type: Array,
-      required: true,
+      type: String,
+      required: true
+    },
+    avatar: {
+      type: Array
     },
     message: {
       type: String,
+      required: true
+    },
+    result: {
+      type: Number,
       required: true
     },
     date: {

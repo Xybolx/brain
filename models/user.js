@@ -30,44 +30,37 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
-    avatarStyle: {
-        type: String
-    },
-    topType: {
-        type: String
-    },
-    accessoriesType: {
-        type: String
-    },
-    hairColor: {
-        type: String
-    },
-    facialHairType: {
-        type: String
-    },
-    facialHairColor: {
-        type: String
-    },
-    clotheType: {
-        type: String
-    },
-    clotheColor: {
-        type: String
-    },
-    graphicType: {
-        type: String
-    },
-    eyeType: {
-        type: String
-    },
-    eyebrowType: {
-        type: String
-    },
-    mouthType: {
-        type: String
-    },
-    skinColor: {
-        type: String
+    avatar: [{
+
+    avatarStyle: String,
+
+    topType: String,
+
+    accessoriesType: String,
+
+    hairColor: String,
+
+    facialHairType: String,
+
+    facialHairColor: String,
+
+    clotheType: String,
+
+    clotheColor: String,
+
+    graphicType: String,
+
+    eyeType: String,
+
+    eyebrowType: String,
+
+    mouthType: String,
+
+    skinColor: String,
+    }],
+    userMessages: {
+        type: Array,
+        default: []
     }
 });
 

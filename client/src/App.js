@@ -1,34 +1,48 @@
-import React, { useState, useMemo, useContext } from 'react';
+import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import SocketContext from './components/socketContext';
+import * as io from 'socket.io-client';
 import UserContext from './components/userContext';
+import SocketContext from './components/socketContext';
 import IsValidEmailContext from './components/isValidEmailContext';
 import IsValidPasswordContext from './components/isValidPasswordContext';
-import * as io from 'socket.io-client';
 import TopNav from './components/navbar';
 import Home from './components/home';
 import SignUp from './components/signup';
 import LogIn from './components/login';
 import Chat from './components/chat';
 import LogOut from './components/logOut';
-import { Container } from 'reactstrap';
+import { Container, Col, Row } from 'reactstrap';
 import './App.css';
 
-const socket = io("http://localhost:3001/");
+const socket = io();
+
+socket.on('connect', () => {
+  let id = socket.io.engine.id;
+  console.log('A user connected on: ' + id);
+});
+
+socket.on('disconnect', () => {
+  let id = socket.io.engine.id;
+  console.log('A user disconnected from: ' + id);
+});
 
 const App = () => {
 
+  // State
   const [user, setUser] = useState(null);
-
-  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
-
   const [isValidEmail, setIsValidEmail] = useState(false);
-
-  const isValidEmailValue = useMemo(() => ({ isValidEmail, setIsValidEmail }), [isValidEmail, setIsValidEmail]);
-
   const [isValidPassword, setIsValidPassword] = useState(false);
 
-  const isValidPasswordValue = useMemo(() => ({ isValidPassword, setIsValidPassword }), [isValidPassword, setIsValidPassword]);
+  // Memo
+  const value = useMemo(() =>
+    ({ user, setUser }),
+    [user, setUser]);
+  const isValidEmailValue = useMemo(() =>
+    ({ isValidEmail, setIsValidEmail }),
+    [isValidEmail, setIsValidEmail]);
+  const isValidPasswordValue = useMemo(() =>
+    ({ isValidPassword, setIsValidPassword }),
+    [isValidPassword, setIsValidPassword]);
 
   return (
     <Router>
@@ -42,7 +56,13 @@ const App = () => {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/signup" component={SignUp} />
                   <Route exact path="/login" component={LogIn} />
-                  <Route exact path="/chat" component={Chat} />
+                  <Route exact path="/chat" render={() => (
+                    value.user !== null && value.user !== "" ? (
+                      <Chat />
+                    ) : (
+                        <Redirect to="/logout" />
+                      )
+                  )} />
                   <Route exact path="/logout" component={LogOut} />
                 </IsValidPasswordContext.Provider>
               </IsValidEmailContext.Provider>

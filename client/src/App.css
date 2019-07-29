@@ -23,12 +23,13 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes Flash {
+  0% {
+    color: red;
+    text-shadow: yellow 1px 1px;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    text-shadow: yellow 1px 1px 1px;
   }
 }
 
@@ -41,16 +42,17 @@
 }
 
 .messages {
-  text-align: center;
+  text-align: left;
 }
 
 .toast {
   max-width: 100%;
 }
 
-.toast-body {
+.card-text {
   word-wrap: normal;
   word-break: break-word;
+  text-align: center;
 }
 
 .buttonDiv {
@@ -64,5 +66,44 @@
 }
 
 .users {
-  text-align: start;
+  text-align: center;
+}
+
+.card-title {
+  text-align: left;
+}
+
+.infoSpan {
+  text-align: right;
+  font-size: small;
+  margin-left: 10px;
+}
+
+.dateSpan {
+  text-align: right;
+  font-size: small;
+  margin-right: 10px;
+}
+
+.progress-bar .danger {
+  background: linear-gradient(darkred, red, tomato)
+}
+
+.progress .success {
+  background: linear-gradient(darkgreen, green, lawngreen)
+}
+
+.progress-bar .warning {
+  background: linear-gradient(goldenrod, gold, yellow)
+}
+
+.nameplate {
+  background: url("https://clipartstation.com/wp-content/uploads/2018/10/scroll-clipart-border-2-298x200.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-y: top;
+  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }

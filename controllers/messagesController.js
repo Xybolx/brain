@@ -11,7 +11,7 @@ module.exports = {
   },
   findById: function(req, res) {
     db.Message
-      .findById(req.params.id)
+      .findById({ author: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -24,6 +24,12 @@ module.exports = {
   create: function(req, res) {
     db.Message
       .create(req.body)
+      .then(function(dbMessage) {
+        return db.User.findOneAndUpdate({ username: dbMessage.author}, { $push: { userMessages: dbMessage.result } }, { new: true });
+      })
+      .then(function(dbUser) {
+        res.json(dbUser);
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

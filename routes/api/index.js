@@ -33,19 +33,21 @@ router.post("/signup", function (req, res) {
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
-        avatarStyle: req.body.avatarStyle,
-        topType: req.body.topType,
-        accessoriesType: req.body.accessoriesType,
-        hairColor: req.body.hairColor,
-        facialHairType: req.body.facialHairType,
-        facialHairColor: req.body.facialHairColor,
-        clotheType: req.body.clotheType,
-        clotheColor: req.body.clotheColor,
-        graphicType: req.body.graphicType,
-        eyeType: req.body.eyeType,
-        eyebrowType: req.body.eyebrowType,
-        mouthType: req.body.mouthType,
-        skinColor: req.body.skinColor
+        avatar: {
+            avatarStyle: req.body.avatarStyle,
+            topType: req.body.topType,
+            accessoriesType: req.body.accessoriesType,
+            hairColor: req.body.hairColor,
+            facialHairType: req.body.facialHairType,
+            facialHairColor: req.body.facialHairColor,
+            clotheType: req.body.clotheType,
+            clotheColor: req.body.clotheColor,
+            graphicType: req.body.graphicType,
+            eyeType: req.body.eyeType,
+            eyebrowType: req.body.eyebrowType,
+            mouthType: req.body.mouthType,
+            skinColor: req.body.skinColor
+        }
     }).then(function () {
         res.redirect(307, "/api/login");
     }).catch(function (err) {

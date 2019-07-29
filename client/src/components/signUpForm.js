@@ -1,18 +1,18 @@
 import React, { useContext } from 'react';
 import Avatar from 'avataaars';
 import API from '../utils/API';
-import { useForm } from './useForm';
+import { useValidation } from './useForm';
 import IsValidEmailContext from './isValidEmailContext';
 import IsValidPasswordContext from './isValidPasswordContext';
 import { Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
 
-const SignUpForm = props => {
+const SignUpForm = () => {
 
     const { isValidEmail } = useContext(IsValidEmailContext);
 
     const { isValidPassword } = useContext(IsValidPasswordContext);
 
-    const [values, handleChange] = useForm({
+    const [values, handleChange] = useValidation({
 
         email: '',
         username: '',
@@ -34,9 +34,7 @@ const SignUpForm = props => {
 
     const handleFormSubmit = ev => {
         ev.preventDefault();
-        if (values.email
-            && values.username
-            && values.password) {
+        if (values.email && values.username && values.password) {
             API.signUp({
                 email: values.email,
                 username: values.username,
@@ -103,7 +101,6 @@ const SignUpForm = props => {
                         valid={isValidEmail}
                         invalid={!isValidEmail}
                         onChange={handleChange}
-                        id="emailInput"
                     />
                     <FormFeedback
                         style={
@@ -112,8 +109,7 @@ const SignUpForm = props => {
                                 : { display: 'none' }
                         }
                         valid={isValidEmail}
-                        invalid={!isValidEmail}>
-                        Valid Email!
+                        >Valid email!
                         </FormFeedback>
                     <FormFeedback
                         style={
@@ -121,8 +117,7 @@ const SignUpForm = props => {
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        invalid={!isValidEmail}>
-                        Enter A Valid Email!
+                        >Enter a valid email!
                         </FormFeedback>
                 </FormGroup>
                 <FormGroup>
@@ -139,18 +134,16 @@ const SignUpForm = props => {
                         valid={values.username}
                         invalid={!values.username}
                         onChange={handleChange}
-                        id="usernameInput"
                     />
                     <FormFeedback
                         style={
-                            values.username 
-                                === true
+                            values.username
+                                !== '' 
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
                         valid={values.username}
-                        invalid={!values.username}>
-                        Strange Name... But Ok!
+                        >Strange name...but okay!
                         </FormFeedback>
                     <FormFeedback
                         style={
@@ -158,8 +151,7 @@ const SignUpForm = props => {
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        invalid={!values.username}>
-                        Username Is Required!
+                        >Username is required!
                         </FormFeedback>
                 </FormGroup>
                 <FormGroup>
@@ -176,7 +168,6 @@ const SignUpForm = props => {
                         valid={isValidPassword}
                         invalid={!isValidPassword}
                         onChange={handleChange}
-                        id="passwordInput"
                     />
                     <FormFeedback
                         style={
@@ -185,18 +176,15 @@ const SignUpForm = props => {
                                 : { display: 'none' }
                         }
                         valid={isValidPassword}
-                        invalid={!isValidPassword}>
-                        Valid PassWord!
+                        >Valid password!
                         </FormFeedback>
                     <FormFeedback
                         style={
-                            isValidPassword 
-                                === true 
+                            !isValidPassword 
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        invalid={isValidPassword}>
-                        Minimum 6 Characters!
+                        >Minimum 6 characters!
                         </FormFeedback>
                 </FormGroup>
                 <Avatar
@@ -544,7 +532,7 @@ const SignUpForm = props => {
                     <Button
                         type="submit"
                         color="info"
-                        size="lg"
+                        size="md"
                         block>
                         Submit
                         </Button>

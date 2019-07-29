@@ -11,7 +11,7 @@ router
 // Matches with "/api/messages/:id"
 router
   .route("/:id")
-  .get(messagesController.findOne)
+  .get(messagesController.findById)
   .put(messagesController.update);
 
 module.exports = router;
