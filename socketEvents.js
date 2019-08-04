@@ -9,9 +9,9 @@ module.exports = function (io) {
       });
 
       socket.on('SEND_USER', data => {
-          console.log(data);
-        const user = data.username;
+        const user = data.user;
         connections[user] = socket;
+        console.log(socket);
         io.emit('RECEIVE_USER', data);
       });
 
@@ -20,14 +20,22 @@ module.exports = function (io) {
       });
       
       socket.on('SEND_MESSAGE', data => {
-          console.log(data);
-        io.emit('RECEIVE_MESSAGE', data);
+          let room = data.movie;
+          console.log(room);
+        io.in(room).emit('RECEIVE_MESSAGE', data);
       });
 
-      socket.on('SEND_TYPING_USER', data => {
-        console.log(data);
-        io.emit('RECEIVE_TYPING_USER', data);
+      socket.on('SEND_MOVIE', data => {
+        io.emit('RECEIVE_MOVIE', data);
       });
+
+      socket.on('SEND_JOIN_ROOM', data => {
+        let room = data.room;
+        console.log(socket.rooms);
+        socket.join(room);
+        io.in(room).emit('RECEIVE_JOIN_ROOM', data);
+      });
+
     });
   };
   

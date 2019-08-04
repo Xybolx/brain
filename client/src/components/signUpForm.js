@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import Avatar from 'avataaars';
 import API from '../utils/API';
-import { useValidation } from './useForm';
-import IsValidEmailContext from './isValidEmailContext';
-import IsValidPasswordContext from './isValidPasswordContext';
+import useForm from './useForm';
+import IsValidEmailContext from './context/isValidEmailContext';
+import IsValidPasswordContext from './context/isValidPasswordContext';
+import IsValidUsernameContext from './context/isValidUsernameContext';
 import { Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
 
 const SignUpForm = () => {
@@ -12,7 +13,9 @@ const SignUpForm = () => {
 
     const { isValidPassword } = useContext(IsValidPasswordContext);
 
-    const [values, handleChange] = useValidation({
+    const { isValidUsername } = useContext(IsValidUsernameContext);
+
+    const [values, handleChange] = useForm({
 
         email: '',
         username: '',
@@ -30,6 +33,7 @@ const SignUpForm = () => {
         eyebrowType: 'Default',
         mouthType: 'Default',
         skinColor: 'Light',
+        permissions: 'user'
     })
 
     const handleFormSubmit = ev => {
@@ -51,7 +55,8 @@ const SignUpForm = () => {
                 eyeType: values.eyeType,
                 eyebrowType: values.eyebrowType,
                 mouthType: values.mouthType,
-                skinColor: values.skinColor
+                skinColor: values.skinColor,
+                permissions: values.permissions
             });
         };
     };
@@ -90,7 +95,8 @@ const SignUpForm = () => {
                 <FormGroup>
                     <Label
                         style={{ marginLeft: 5 }}
-                        htmlFor="emailInput">
+                        htmlFor="emailInput"
+                    >
                         Email
                             </Label>
                     <Input
@@ -109,7 +115,7 @@ const SignUpForm = () => {
                                 : { display: 'none' }
                         }
                         valid={isValidEmail}
-                        >Valid email!
+                    >Valid email!
                         </FormFeedback>
                     <FormFeedback
                         style={
@@ -117,13 +123,14 @@ const SignUpForm = () => {
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        >Enter a valid email!
+                    >Enter a valid email!
                         </FormFeedback>
                 </FormGroup>
                 <FormGroup>
                     <Label
                         style={{ marginLeft: 5 }}
-                        htmlFor="usernameInput">
+                        htmlFor="usernameInput"
+                    >
                         Username
                             </Label>
                     <Input
@@ -131,33 +138,35 @@ const SignUpForm = () => {
                         name="username"
                         placeholder="Enter Username"
                         value={values.username}
-                        valid={values.username}
-                        invalid={!values.username}
+                        valid={isValidUsername}
+                        invalid={!isValidUsername}
                         onChange={handleChange}
                     />
                     <FormFeedback
                         style={
-                            values.username
-                                !== '' 
+                            isValidUsername
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        valid={values.username}
-                        >Strange name...but okay!
+                        valid={isValidUsername}
+                    >
+                        Strange name...but okay!
                         </FormFeedback>
                     <FormFeedback
                         style={
-                            !values.username
+                            !isValidUsername
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        >Username is required!
+                    >
+                        Minimum 2 characters!
                         </FormFeedback>
                 </FormGroup>
                 <FormGroup>
                     <Label
                         style={{ marginLeft: 5 }}
-                        htmlFor="passwordInput">
+                        htmlFor="passwordInput"
+                    >
                         Password
                             </Label>
                     <Input
@@ -176,20 +185,22 @@ const SignUpForm = () => {
                                 : { display: 'none' }
                         }
                         valid={isValidPassword}
-                        >Valid password!
+                    >
+                        Valid password!
                         </FormFeedback>
                     <FormFeedback
                         style={
-                            !isValidPassword 
+                            !isValidPassword
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        >Minimum 6 characters!
+                    >
+                        Minimum 6 characters!
                         </FormFeedback>
                 </FormGroup>
                 <Avatar
                     className="img-fluid"
-                    style={{ width: '200px', height: '200px'}}
+                    style={{ width: '200px', height: '200px' }}
                     avatarStyle={values.avatarStyle}
                     topType={values.topType}
                     accessoriesType={values.accessoriesType}
@@ -208,7 +219,8 @@ const SignUpForm = () => {
                 <div style={avatarSelectStyle}>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            style={{ marginLeft: 5 }}
+                        >
                             Background Select
                                 </Label>
                         <div>
@@ -224,7 +236,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            style={{ marginLeft: 5 }}
+                        >
                             Top Select
                                 </Label>
                         <div>
@@ -530,11 +543,18 @@ const SignUpForm = () => {
                 </div>
                 <div className="buttonDiv">
                     <Button
+                        disabled={
+                            !isValidEmail
+                            && !isValidPassword
+                            && !isValidUsername
+                        }
                         type="submit"
                         color="info"
                         size="md"
-                        block>
-                        Submit
+                        outline
+                        block
+                    >
+                        <i className="fas fa-user-plus" /> Submit
                         </Button>
                 </div>
             </Form>

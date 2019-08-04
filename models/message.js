@@ -13,6 +13,9 @@ const messageSchema = new Schema({
       type: String,
       required: true
     },
+    movie: {
+      type: String
+    },
     result: {
       type: Number,
       required: true

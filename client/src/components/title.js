@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
-import socketIOClient from 'socket.io-client';
-
-let socket;
+import React from 'react';
 
 const Title = () => {
-
-const [endpoint, setEndpoint] = useState('http://localhost:3001/');
-
-  socket = socketIOClient(endpoint);
-
-  socket.on('connect', () => {
-    let id = socket.io.engine.id;
-    console.log('A user connected on: ' + id);
-  });
-
-  socket.on('disconnect', () => {
-    let id = socket.io.engine.id;
-    console.log('A user disconnected from: ' + id);
-  });
-    return (
-        <h2>Brain</h2>
-    );
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h2 id="titleHeader">
+      <span className="fa-stack fa-1x d-inline-block align-top">
+                    <span>
+                    <i className="fas fa-film fa-stack-2x" />
+                    <i className="fas fa-brain fa-stack-1x" style={{ color: "lightpink" }} />
+                    </span>
+                </span>
+        <span id="titleSpan">FilmBrain.com</span>
+        </h2>
+    </div>
+  );
 }
 
-export { Title, socket };
+export default Title;

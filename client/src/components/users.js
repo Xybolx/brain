@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import UserContext from './userContext';
-import SocketContext from './socketContext';
+import UserContext from './context/userContext';
+import SocketContext from './context/socketContext';
 import API from '../utils/API';
 import Avatar from 'avataaars';
 import Detail from './detail';
@@ -16,7 +15,7 @@ const Users = props => {
 
     useEffect(() => {
         props.socket.emit('SEND_USER', {
-            user
+            user: user.username
         });
         props.socket.on('RECEIVE_USER', data => {
             if (data) {
@@ -37,10 +36,11 @@ const Users = props => {
     }, [user])
 
     return (
-            <div>
-                <h3>Online Users</h3>
-                {users.map(online => {
-                    return (
+        <div>
+            <h4 style={{ marginTop: 30 }}>Online Users</h4>
+            {users.length ? (
+                <div>
+                    {users.map(online => (
                         <div key={online._id}>
                             <strong>
                                 <Avatar
@@ -64,15 +64,18 @@ const Users = props => {
                                 <Detail online={online} />
                             </strong>
                         </div>
-                    );
-                })}
-            </div>
+                    ))}
+                </div>
+            ) : (
+                    <h3><i className="fas fa-spinner fa-spin" />Loading...</h3>
+                )}
+        </div>
     );
 }
 
 const UsersWithSocket = props => (
     <SocketContext.Consumer>
-        {socket => <Users socket={socket} />}
+        {socket => <Users {...props} socket={socket} />}
     </SocketContext.Consumer>
 );
 

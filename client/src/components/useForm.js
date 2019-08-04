@@ -1,30 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
-import IsValidEmailContext from './isValidEmailContext';
-import IsValidPasswordContext from './isValidPasswordContext';
+import IsValidEmailContext from './context/isValidEmailContext';
+import IsValidPasswordContext from './context/isValidPasswordContext';
+import IsValidUsernameContext from './context/isValidUsernameContext';
 
-export const useForm = initialValues => {
-
-    // State
-    const [values, setValues] = useState(initialValues);
-
-    // Keep values, handleChange
-    return [
-        values,
-        ev => {
-            const { name, value } = ev.target;
-            setValues({
-                ...values,
-                [name]: value
-            });
-        }
-    ];
-}
-
-export const useValidation = initialValues => {
+const useForm = initialValues => {
 
     // Context
     const { setIsValidEmail } = useContext(IsValidEmailContext);
     const { setIsValidPassword } = useContext(IsValidPasswordContext);
+    const { setIsValidUsername } = useContext(IsValidUsernameContext);
 
     // State
     const [values, setValues] = useState(initialValues);
@@ -49,7 +33,7 @@ export const useValidation = initialValues => {
                 console.log(emailMatch);
                 setIsValidEmail(true);
             }
-            if (email && !emailMatch) {
+            if (!emailMatch) {
                 console.log(emailMatch);
                 setIsValidEmail(false);
             }
@@ -63,10 +47,26 @@ export const useValidation = initialValues => {
                 console.log(passwordMatch);
                 setIsValidPassword(true);
             }
-            if (password && !passwordMatch) {
+            if (!passwordMatch) {
                 console.log(passwordMatch);
                 setIsValidPassword(false);
             }
-        }, [values.password, setIsValidPassword])
+        }, [values.password, setIsValidPassword]),
+
+        useEffect(() => {
+            const username = values.username;
+            const usernameRegEx = /^(?=[0-9a-zA-Z#@$?]{2,}$).*/;
+            const usernameMatch = usernameRegEx.test(username);
+            if (username && usernameMatch) {
+                console.log(usernameMatch);
+                setIsValidUsername(true);
+            }
+            if (!usernameMatch) {
+                console.log(usernameMatch);
+                setIsValidUsername(false);
+            }
+        }, [values.username, setIsValidUsername])
     ];
 }
+
+export default useForm;

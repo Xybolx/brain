@@ -1,38 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import API from '../utils/API';
-import UserContext from './userContext';
-import SocketContext from './socketContext';
-import { useForm } from './useForm';
+import UserContext from './context/userContext';
+import SocketContext from './context/socketContext';
+import RoomContext from './context/roomContext';
 import Sentiment from 'sentiment';
 import { Button, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 
-const Messages = props => {
+const Message = props => {
 
     // Context
     const { user, setUser } = useContext(UserContext);
+    const { room } = useContext(RoomContext);
 
-    // useForm
-    const [values, handleChange] = useForm({
-        message: ''
-    });
+    // State
+    const [review, setReview] = useState('');
 
+    // Get and set current user state
     const loadUser = () => {
         API.getUser()
             .then(res => setUser(res.data))
             .catch(err => console.log(err))
     };
 
+    // Handle input change
+    const handleChange = ev => {
+        setReview(ev.target.value)
+    }
+
     // Handle submit
     const handleFormSubmit = ev => {
-        const message = values.message;
         const sentiment = new Sentiment();
-        const result = sentiment.analyze(message);
+        const result = sentiment.analyze(review);
         ev.preventDefault();
-        if (message) {
+        if (review) {
             API.saveMessage({
                 author: user.username,
                 avatar: user.avatar[0],
-                message: message,
+                message: review,
+                movie: room,
                 result: result.score
             })
                 .then(res => loadUser())
@@ -40,26 +45,28 @@ const Messages = props => {
                     props.socket.emit('SEND_MESSAGE', {
                         author: user.username,
                         avatar: user.avatar[0],
-                        message: message,
+                        message: review,
+                        movie: room,
                         result: result.score
                     })
                 })
                 .catch(err => console.log(err))
+            setReview('');
         }
     };
 
     return (
-        <div>
-            <h4>Send Message</h4>
+        <div style={room ? { display: 'block' } : { display: 'none' }}>
+            <h5 style={{ marginTop: 30 }}>Write a Review for {room}</h5>
             <Col sm="12">
                 <Form onSubmit={handleFormSubmit}>
                     <FormGroup>
-                        <Label htmlFor="messageInput">Message</Label>
+                        <Label style={{ marginLeft: 5 }} htmlFor="review">Review</Label>
                         <Input
                             type="textarea"
-                            name="message"
-                            placeholder="Enter Message"
-                            value={values.message}
+                            name="review"
+                            placeholder={"Write a review for " + room}
+                            value={review}
                             onChange={handleChange}
                         />
                     </FormGroup>
@@ -67,9 +74,8 @@ const Messages = props => {
                         type="submit"
                         color="info"
                         size="md"
-                        outline
                         block>
-                        Post
+                        <span className="fas fa-paper-plane"></span>
                     </Button>
                 </Form>
             </Col>
@@ -79,7 +85,7 @@ const Messages = props => {
 
 const MessageWithSocket = props => (
     <SocketContext.Consumer>
-        {socket => <Messages socket={socket} />}
+        {socket => <Message {...props} socket={socket} />}
     </SocketContext.Consumer>
 );
 

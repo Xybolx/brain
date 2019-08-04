@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import UserContext from './userContext';
-import { Badge, Progress, Button } from 'reactstrap';
-import API from '../utils/API';
+import UserContext from './context/userContext';
+import { Badge, Progress, Button, UncontrolledCollapse, Col } from 'reactstrap';
 
 const Detail = props => {
 
@@ -10,21 +9,17 @@ const Detail = props => {
 
     // State 
     const [scoreTotal, setScoreTotal] = useState('');
-
     const [neutralTotal, setNeutralTotal] = useState('');
-
     const [positiveTotal, setPositiveTotal] = useState('');
-
     const [negativeTotal, setNegativeTotal] = useState('');
+    const [neutralAvg, setNeutralAvg] = useState('');
+    const [positiveAvg, setPositiveAvg] = useState('');
+    const [negativeAvg, setNegativeAvg] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
 
-    const [isHidden, setIsHidden] = useState(true);
-
-    const toggleHidden = () => {
-        if (isHidden) {
-            setIsHidden(false);
-        } else {
-            setIsHidden(true);
-        }
+    // Toggle user info
+    const toggler = () => {
+        setIsOpen(!isOpen);
     };
 
     // Getting and setting state
@@ -68,17 +63,121 @@ const Detail = props => {
         getNegativeTotal();
     }, [negativeTotal, props.online.userMessages])
 
+    useEffect(() => {
+        const getNeutralAvg = () => {
+            let userMessages = props.online.userMessages;
+            const neutralAverage = Math.round(neutralTotal / userMessages.length * 100);
+            setNeutralAvg(neutralAverage);
+            console.log('neutral %' + neutralAverage);
+        }
+        getNeutralAvg();
+    }, [neutralAvg, neutralTotal, props.online.userMessages])
+
+    useEffect(() => {
+        const getPositiveAvg = () => {
+            let userMessages = props.online.userMessages;
+            const positiveAverage = Math.round(positiveTotal / userMessages.length * 100);
+            setPositiveAvg(positiveAverage);
+            console.log('positive %' + positiveAverage);
+        }
+        getPositiveAvg();
+    }, [positiveAvg, positiveTotal, props.online.userMessages])
+
+    useEffect(() => {
+        const getNegativeAvg = () => {
+            let userMessages = props.online.userMessages;
+            const negativeAverage = Math.round(negativeTotal / userMessages.length * 100);
+            setNegativeAvg(negativeAverage);
+            console.log('negative %' + negativeAverage);
+        }
+        getNegativeAvg();
+    }, [negativeAvg, negativeTotal, props.online.userMessages])
+
     return (
         <span>
-            <Button style={!user.userMessages.length ? { display: 'none' } : { display: 'inline' }} onClick={toggleHidden}  disabled={!props.online.userMessages.length} type="button" color="link" size="sm">{isHidden ? "➪ Details" : "⇳ Details"}</Button>
-            <div style={isHidden ? { display: 'none' } : { display: 'block' }}>
-                <h6>Sentiment</h6>
-                <div>
-                    <h6 style={scoreTotal < 0 ? { display: 'block' } : { display: 'none' }}>Overall:<span className="hello" style={{ color: "red" }}><Badge color="danger">Negative {scoreTotal}</Badge></span></h6>
-                    <h6 style={scoreTotal === 0 ? { display: 'block' } : { display: 'none' }}>Overall:<span className="hello" style={{ color: "gold" }}><Badge color="warning">Neutral {scoreTotal}</Badge></span></h6>
-                    <h6 style={scoreTotal > 0 ? { display: 'block' } : { display: 'none' }}>Overall:&nbsp;<span className="hello" style={{ color: "green" }}><Badge color="success">Positive {scoreTotal}</Badge></span></h6>
+            <h6 style={
+                scoreTotal < 0
+                    ? { display: 'inline' }
+                    : { display: 'none' }}
+            >
+                <Badge
+                    color="danger"
+                    pill
+                >
+                    Negative {scoreTotal}
+                        </Badge>
+            </h6>
+            <h6 style={
+                scoreTotal === 0
+                    ? { display: 'inline' }
+                    : { display: 'none' }}
+            >
+                <Badge
+                    color="warning"
+                    pill
+                >
+                    Neutral {scoreTotal}
+                    </Badge>
+            </h6>
+            <h6 style={
+                scoreTotal > 0
+                    ? { display: 'inline' }
+                    : { display: 'none' }}
+            >
+                <Badge
+                    color="success"
+                    pill
+                >
+                    Positive {scoreTotal}
+                    </Badge>
+            </h6>
+            <Button
+                onClick={toggler}
+                id={`${props.online.username}toggler`}
+                style={
+                    !user.userMessages.length
+                        ? { display: 'none' }
+                        : { display: 'inline' }}
+                type="button"
+                color="link"
+                size="sm"
+            >
+                <i className="fas fa-poll-h" />
+                <span style={
+                    { marginLeft: 2 }}
+                >
+                    {isOpen ? 'Close' : 'Stats'}
+                </span>
+            </Button>
+            <UncontrolledCollapse
+                toggler={`#${props.online.username}toggler`}>
+                <Col sm="12">
                     <div>
-                        <h6>Sentiment History</h6>
+                        Average
+                        <Progress
+                            color="success"
+                            value={positiveAvg}
+                            max={100}
+                        >
+                            {isNaN(positiveAvg) ? `Positive: No Data` : `Positive ${positiveAvg}%`}
+                            </Progress>
+                        <Progress
+                            color="warning"
+                            value={neutralAvg}
+                            max={100}
+                        >
+                            {isNaN(neutralAvg) ? `Neutral: No Data` : `Neutral ${neutralAvg}%`}
+                            </Progress>
+                        <Progress
+                            color="danger"
+                            value={negativeAvg}
+                            max={100}
+                        >
+                            {isNaN(negativeAvg) ? `Negative: No Data` : `Negative ${negativeAvg}%`}
+                            </Progress>
+                    </div>
+                    <div>
+                        Totals
                         <Progress
                             color="success"
                             value={positiveTotal}
@@ -103,8 +202,8 @@ const Detail = props => {
                             Negative {negativeTotal}
                         </Progress>
                     </div>
-                </div>
-            </div>
+                </Col>
+            </UncontrolledCollapse>
         </span>
     );
 }

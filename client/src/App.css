@@ -23,13 +23,12 @@
   color: #61dafb;
 }
 
-@keyframes Flash {
+@keyframes Fade {
   0% {
-    color: red;
-    text-shadow: yellow 1px 1px;
+    opacity: 0;
   }
   100% {
-    text-shadow: yellow 1px 1px 1px;
+    opacity: 1;
   }
 }
 
@@ -62,7 +61,9 @@
 }
 
 .img-fluid {
-  background: url('https://media1.giphy.com/media/oyPXvDjOcri9H2cnbL/source.gif');
+  max-width: 100%;
+  max-height: 400px;
+  animation: Fade 3s;
 }
 
 .users {
@@ -75,35 +76,135 @@
 
 .infoSpan {
   text-align: right;
-  font-size: small;
-  margin-left: 10px;
+  font-size: x-small;
+  margin-left: 5px;
 }
 
 .dateSpan {
   text-align: right;
-  font-size: small;
-  margin-right: 10px;
+  font-size: x-small;
+  margin-right: 5px;
 }
 
-.progress-bar .danger {
-  background: linear-gradient(darkred, red, tomato)
+.progress {
+  text-shadow: 1px 1px 1px black;
+  background: rgba(43, 40, 40, 0.466) !important;
+  overflow: visible !important;
+  border-radius: 0% !important;
 }
 
-.progress .success {
-  background: linear-gradient(darkgreen, green, lawngreen)
+.bg-danger {
+  background: linear-gradient(darkred, tomato, darkred);
 }
 
-.progress-bar .warning {
-  background: linear-gradient(goldenrod, gold, yellow)
+.bg-success {
+  background: linear-gradient(darkgreen, lawngreen, darkgreen);
 }
 
-.nameplate {
-  background: url("https://clipartstation.com/wp-content/uploads/2018/10/scroll-clipart-border-2-298x200.png");
+.bg-warning {
+  background: linear-gradient(darkgoldenrod, yellow, goldenrod);
+}
+
+.badge-warning {
+  background: linear-gradient(darkgoldenrod, yellow, goldenrod);
+  text-shadow: 1px 1px 1px white;
+}
+
+.badge-success {
+  background: linear-gradient(darkgreen, lawngreen, darkgreen);
+  text-shadow: 1px 1px 1px black;
+}
+
+.badge-danger {
+  background: linear-gradient(darkred, tomato, darkred);
+  text-shadow: 1px 1px 1px black;
+}
+
+.carousel-control-prev {
+  background: url("https://www.raymac.co.uk/resources/images/b923ce28bea9315d3b03308b632dfa44/1486904045-product.large/white-and-red-arrow-sign.jpg");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position-y: top;
-  padding-bottom: 20px;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
+  background-position: right;
+  z-index: 0;
+  top: 100px !important;
+  cursor: pointer;
+  height: 25%;
+}
+
+.carousel-control-next {
+  background: url("https://www.raymac.co.uk/resources/images/b923ce28bea9315d3b03308b632dfa44/1486904045-product.large/white-and-red-arrow-sign.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  z-index: 0;
+  top: 100px !important;
+  transform: rotate(180deg);
+  cursor: pointer;
+  height: 25%;
+}
+
+.carousel-control-next-icon {
+  background: url("https://www.wisc-online.com/assetrepository/getfile?id=4466&getType=view&width=0&height=0");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  width: 0px;
+  z-index: -1;
+  transform: rotate(180deg);
+  top: -50px;
+  display: none !important;
+}
+
+.carousel-control-prev-icon {
+  background: url("https://www.wisc-online.com/assetrepository/getfile?id=4466&getType=view&width=0&height=0");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  width: 0px;
+  z-index: -1;
+  top: -50px;
+  display: none !important;
+}
+
+.carousel-indicators {
+  display: none !important;
+}
+
+.btn {
+  vertical-align: baseline !important;
+}
+
+#brandSpan {
+  vertical-align: -4px;
+}
+
+#titleSpan {
+  vertical-align: -11px;
+  text-shadow: 2px 2px 2px silver;
+}
+
+.navbar-toggler {
+  background: url("https://static.wixstatic.com/media/b9a0f2_38bbaa4200624778ac43c1d59e962d2d~mv2.gif");
+  background-size: 100% 100%;
+  background-clip: border-box;
+  background-repeat: no-repeat;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  text-shadow: 2px 1px 2px silver;
+}
+
+h6 {
+  text-shadow: 1px 1px 1px silver;
+}
+
+.movieTitle {
+  text-shadow: 1px 1px 1px silver;
+}
+
+p {
+  text-shadow: 1px 1px 1px gainsboro;
 }
