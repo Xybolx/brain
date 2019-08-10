@@ -1,24 +1,32 @@
 import React, { useContext, useState } from 'react';
 import API from '../utils/API';
-import UserContext from './context/userContext';
-import SocketContext from './context/socketContext';
-import RoomContext from './context/roomContext';
+import UserContext from '../context/userContext';
+import UsersContext from '../context/usersContext';
+import SocketContext from '../context/socketContext';
+import RoomContext from '../context/roomContext';
 import Sentiment from 'sentiment';
-import { Button, Col, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
-const Message = props => {
+const Message = ({ socket }) => {
 
     // Context
     const { user, setUser } = useContext(UserContext);
+    const { setUsers } = useContext(UsersContext);
     const { room } = useContext(RoomContext);
 
     // State
     const [review, setReview] = useState('');
 
     // Get and set current user state
-    const loadUser = () => {
+    const getUser = () => {
         API.getUser()
             .then(res => setUser(res.data))
+            .catch(err => console.log(err))
+    };
+
+    const getUsers = () => {
+        API.getUsers()
+            .then(res => setUsers(res.data))
             .catch(err => console.log(err))
     };
 
@@ -40,9 +48,10 @@ const Message = props => {
                 movie: room,
                 result: result.score
             })
-                .then(res => loadUser())
+                .then(res => getUser())
+                .then(() => getUsers())
                 .then(() => {
-                    props.socket.emit('SEND_MESSAGE', {
+                    socket.emit('SEND_MESSAGE', {
                         author: user.username,
                         avatar: user.avatar[0],
                         message: review,
@@ -56,27 +65,22 @@ const Message = props => {
     };
 
     return (
-        <div style={room ? { display: 'block' } : { display: 'none' }}>
-            <h5 style={{ marginTop: 30 }}>Write a Review for {room}</h5>
+        <div style={room ? { display: 'block', marginBottom: 30, marginTop: 30 } : { display: 'none' }}>
+            <h4 style={{ marginTop: 30 }}>Review {room}</h4>
             <Col sm="12">
                 <Form onSubmit={handleFormSubmit}>
                     <FormGroup>
-                        <Label style={{ marginLeft: 5 }} htmlFor="review">Review</Label>
-                        <Input
-                            type="textarea"
-                            name="review"
-                            placeholder={"Write a review for " + room}
-                            value={review}
-                            onChange={handleChange}
-                        />
+                        <InputGroup>
+                            <Input
+                                type="textarea"
+                                name="review"
+                                placeholder="Write a review..."
+                                value={review}
+                                onChange={handleChange}
+                            />
+                            <InputGroupAddon addonType="append"><Button type="submit" color="dark" size="md"><span className="fas fa-paper-plane"></span></Button></InputGroupAddon>
+                        </InputGroup>
                     </FormGroup>
-                    <Button
-                        type="submit"
-                        color="info"
-                        size="md"
-                        block>
-                        <span className="fas fa-paper-plane"></span>
-                    </Button>
                 </Form>
             </Col>
         </div>

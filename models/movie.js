@@ -20,9 +20,8 @@ const movieSchema = new Schema({
     released: {
       type: String
     },
-    movieMessages: {
-      type: Array,
-      default: []
+    plot: {
+      type: String
     },
     date: {
       type: Date,

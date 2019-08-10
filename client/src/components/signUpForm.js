@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import Avatar from 'avataaars';
 import API from '../utils/API';
 import useForm from './useForm';
-import IsValidEmailContext from './context/isValidEmailContext';
-import IsValidPasswordContext from './context/isValidPasswordContext';
-import IsValidUsernameContext from './context/isValidUsernameContext';
+import PageTitle from './pageTitle';
+import IsValidEmailContext from '../context/isValidEmailContext';
+import IsValidPasswordContext from '../context/isValidPasswordContext';
+import IsValidUsernameContext from '../context/isValidUsernameContext';
 import { Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
 
 const SignUpForm = () => {
@@ -20,7 +21,7 @@ const SignUpForm = () => {
         email: '',
         username: '',
         password: '',
-        avatarStyle: 'Circle',
+        avatarStyle: 'Transparent',
         topType: 'NoHair',
         accessoriesType: '',
         hairColor: 'Auburn',
@@ -215,25 +216,11 @@ const SignUpForm = () => {
                     mouthType={values.mouthType}
                     skinColor={values.skinColor}
                 />
-                <h2>Avatar Options</h2>
+                <PageTitle
+                    icon={<i className="fas fa-user" />}
+                    heading="Avatar Options"
+                />
                 <div style={avatarSelectStyle}>
-                    <FormGroup>
-                        <Label
-                            style={{ marginLeft: 5 }}
-                        >
-                            Background Select
-                                </Label>
-                        <div>
-                            <Input
-                                type="select"
-                                name="avatarStyle"
-                                value={values.avatarStyle}
-                                onChange={handleChange}>
-                                <option>Circle</option>
-                                <option>Transparent</option>
-                            </Input>
-                        </div>
-                    </FormGroup>
                     <FormGroup>
                         <Label
                             style={{ marginLeft: 5 }}
@@ -549,9 +536,8 @@ const SignUpForm = () => {
                             && !isValidUsername
                         }
                         type="submit"
-                        color="info"
+                        color="dark"
                         size="md"
-                        outline
                         block
                     >
                         <i className="fas fa-user-plus" /> Submit

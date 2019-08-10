@@ -1,6 +1,6 @@
 import axios from "axios";
 const BASEURL = "https://www.omdbapi.com/?t=";
-const APIKEY = "&y=&plot=short&apikey=trilogy";
+const APIKEY = "&y=&plot=short&apikey=db7cc1d8";
 
 export default {
   // gets all users who are online

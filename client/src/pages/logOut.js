@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Col } from 'reactstrap';
-import UserContext from './context/userContext';
-import RoomContext from './context/roomContext';
+import UserContext from '../context/userContext';
+import RoomContext from '../context/roomContext';
 import API from '../utils/API';
+import PageTitle from '../components/pageTitle';
 
 const LogOut = () => {
 
@@ -21,10 +22,16 @@ const LogOut = () => {
 
     // Logout function runs on component mount
     useEffect(() => {
+        setRoom(null);
+    }, [setRoom])
+
+    useEffect(() => {
+        setUser(null)
+    }, [setUser])
+
+    useEffect(() => {
         const logOut = () => {
             API.logOut()
-                .then(res => setUser(null))
-                .then(() => setRoom(null))
                 .then(() => redirect())
                 .catch(err => console.log(err))
         };
@@ -38,7 +45,10 @@ const LogOut = () => {
 
     return (
         <Col sm="12" md={{ size: 6, offset: 3 }}>
-            <h1><i className="fas fa-sign-out-alt" /> Logging Out...</h1>
+            <PageTitle
+                icon={<i className="fas fa-sign-out-alt" />}
+                heading="Logging Out..."
+            />
         </Col>
     );
 }

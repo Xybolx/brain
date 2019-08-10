@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Aldrich&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Limelight&display=swap');
+
 .App {
   text-align: center;
 }
@@ -27,8 +32,26 @@
   0% {
     opacity: 0;
   }
+  50% {
+    opacity: 0;
+  }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes Curtain {
+  0% {
+    background: url("https://s7.orientaltrading.com/is/image/OrientalTrading/3_2329?$PDP_VIEWER_IMAGE$");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
+  100% {
+    background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), linear-gradient(black, black, silver);;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
   }
 }
 
@@ -63,34 +86,37 @@
 .img-fluid {
   max-width: 100%;
   max-height: 400px;
+  min-height: 400px;
   animation: Fade 3s;
 }
 
 .users {
+  margin-bottom: 20px;
   text-align: center;
+  font-family: 'Aldrich', sans-serif;
 }
 
 .card-title {
-  text-align: left;
+  text-align: center;
 }
 
 .infoSpan {
-  text-align: right;
   font-size: x-small;
   margin-left: 5px;
 }
 
 .dateSpan {
-  text-align: right;
-  font-size: x-small;
+  font-size: xx-small;
   margin-right: 5px;
 }
 
 .progress {
   text-shadow: 1px 1px 1px black;
-  background: rgba(43, 40, 40, 0.466) !important;
+  background: transparent !important;
   overflow: visible !important;
   border-radius: 0% !important;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .bg-danger {
@@ -103,6 +129,10 @@
 
 .bg-warning {
   background: linear-gradient(darkgoldenrod, yellow, goldenrod);
+}
+
+.bg-dark {
+  background: linear-gradient(black, black, silver);
 }
 
 .badge-warning {
@@ -120,27 +150,37 @@
   text-shadow: 1px 1px 1px black;
 }
 
+.badge-dark {
+  background: linear-gradient(black, black, silver);
+}
+
+.badge {
+  font-family: 'Aldrich', sans-serif !important;
+}
+
 .carousel-control-prev {
-  background: url("https://www.raymac.co.uk/resources/images/b923ce28bea9315d3b03308b632dfa44/1486904045-product.large/white-and-red-arrow-sign.jpg");
+  background: url("https://webstockreview.net/images/clipart-arrow-animated-4.gif");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right;
   z-index: 0;
-  top: 100px !important;
   cursor: pointer;
-  height: 25%;
+  top: 35px !important;
+  height: 10%;
+  opacity: 1 !important;
 }
 
 .carousel-control-next {
-  background: url("https://www.raymac.co.uk/resources/images/b923ce28bea9315d3b03308b632dfa44/1486904045-product.large/white-and-red-arrow-sign.jpg");
+  background: url("https://webstockreview.net/images/clipart-arrow-animated-4.gif");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right;
   z-index: 0;
-  top: 100px !important;
   transform: rotate(180deg);
   cursor: pointer;
-  height: 25%;
+  top: 35px !important;
+  height: 10%;
+  opacity: 1 !important;
 }
 
 .carousel-control-next-icon {
@@ -176,11 +216,18 @@
 
 #brandSpan {
   vertical-align: -4px;
+  font-family: 'Aldrich', sans-serif;
+}
+
+.spinnerSpan {
+  vertical-align: -11px;
+  text-shadow: 1px 1px 1px silver;
 }
 
 #titleSpan {
   vertical-align: -11px;
-  text-shadow: 2px 2px 2px silver;
+  text-shadow: 1px 1px 1px silver;
+  font-family: 'Aldrich', sans-serif;
 }
 
 .navbar-toggler {
@@ -190,21 +237,154 @@
   background-repeat: no-repeat;
 }
 
+.nav-link {
+  font-family: 'Aldrich', sans-serif;
+}
+
 h2,
 h3,
 h4,
-h5 {
-  text-shadow: 2px 1px 2px silver;
-}
-
+h5,
 h6 {
   text-shadow: 1px 1px 1px silver;
+  font-family: 'Aldrich', sans-serif;
 }
 
-.movieTitle {
-  text-shadow: 1px 1px 1px silver;
+.btn-dark {
+  background: linear-gradient(black, black, silver);
+  font-family: 'Aldrich', sans-serif;
+}
+
+.btn-dark:hover {
+  background: linear-gradient(silver, black, black);
+}
+
+.btn-link {
+  font-family: 'Aldrich', sans-serif;
+}
+
+.fa-layers-counter {
+  border: solid black;
+  text-shadow: 1px 1px 1px black;
+  border-radius: 1rem;
+}
+
+.movieTitleDiv {
+  font-family: 'Limelight', cursive;
+  background: url("https://static.wixstatic.com/media/a6ce87_c2d0a2dc44e14355b9e6e078fa72d1f2~mv2.gif");
+  background-size: 100% 100%;
+  background-clip: border-box;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  max-width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.movieTitleSpan {
+  max-width: 100%;
+}
+
+.userStrong {
+  font-family: 'Limelight', cursive;
+  color: black;
+}
+
+.movieStrong {
+  font-family: 'Limelight', cursive;
+  color: white;
 }
 
 p {
-  text-shadow: 1px 1px 1px gainsboro;
+  font-family: 'Special Elite', cursive;
+  /* text-shadow: 1px 1px 1px yellow; */
+  word-wrap: normal;
+  word-break: break-word;
+  color: whitesmoke;
 }
+
+/* .carousel-item {
+  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  animation: Curtain 6s;
+} */
+
+/* .carousel {
+  background: url("https://s7.orientaltrading.com/is/image/OrientalTrading/3_2329?$PDP_VIEWER_IMAGE$");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  animation: Curtain 6s;
+} */
+
+.searchDiv {
+  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), linear-gradient(black, black, silver);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  animation: Curtain 6s;
+  border-radius: 2%;
+}
+
+.moviesDiv {
+  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), linear-gradient(black, black, silver);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  animation: Curtain 6s;
+  border-radius: 2%;
+}
+
+.plot {
+  margin-left: 50px;
+  margin-right: 50px;
+  color: white;
+}
+
+.released {
+  color: white;
+}
+
+.director {
+  color: white;
+}
+
+.genre {
+  color: white;
+}
+
+.amazon {
+  color: white;
+}
+
+.plotTitle {
+  font-family: 'Limelight', cursive;
+  color: yellow;
+}
+
+.releasedTitle {
+  font-family: 'Limelight', cursive;
+  color: yellow;
+}
+
+.directorTitle {
+  font-family: 'Limelight', cursive;
+  color: yellow;
+}
+
+.genreTitle {
+  font-family: 'Limelight', cursive;
+  color: yellow;
+}
+
+.amazonTitle {
+  font-family: 'Limelight', cursive;
+  color: yellow;
+}
+

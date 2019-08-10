@@ -1,5 +1,6 @@
 import React from 'react';
-import SignUpForm from './signUpForm';
+import SignUpForm from '../components/signUpForm';
+import PageTitle from '../components/pageTitle';
 import { Container, Col } from 'reactstrap';
 
 const SignUp = () => {
@@ -7,7 +8,10 @@ const SignUp = () => {
     return (
         <Container>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <h2><i className="fas fa-user-plus" /> Sign Up</h2>
+                <PageTitle
+                    icon={<i className="fas fa-user-plus" />}
+                    heading="Sign Up"
+                />
                 <SignUpForm />
             </Col>
         </Container>

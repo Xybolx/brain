@@ -22,7 +22,7 @@ const TopNav = () => {
                             <i className="fas fa-brain fa-stack-1x" style={{ color: "pink" }} />
                         </span>
                     </span>
-                    <span id="brandSpan">FilmBrain.com</span>
+                    <span id="brandSpan">FilmBrains</span>
                 </NavLink>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>

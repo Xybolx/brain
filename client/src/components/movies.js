@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Carousel, CarouselItem, CarouselIndicators, CarouselControl, Container } from 'reactstrap';
+import { Carousel, CarouselItem, CarouselIndicators, CarouselControl, Container } from 'reactstrap';
 import moment from 'moment';
-import SocketContext from './context/socketContext';
-import RoomContext from './context/roomContext';
-import UserContext from './context/userContext';
+import SocketContext from '../context/socketContext';
+import RoomContext from '../context/roomContext';
+import UserContext from '../context/userContext';
 import MovieDetail from './movieDetail';
+import Spinner from './spinner';
 import API from "../utils/API";
 
 const Movies = props => {
@@ -89,35 +90,44 @@ const Movies = props => {
 
     return (
         <Container style={{ marginBottom: 20 }}>
-            <Carousel
-                pause="hover"
-                interval={false}
-                activeIndex={activeIndex}
-                next={next}
-                previous={previous}
-            >
-                <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
-                {items.map(item => {
-                    return (
-                        <CarouselItem
-                            onExiting={onExiting}
-                            onExited={onExited}
-                            key={item._id}
-                        >
-                            <Button onClick={() => handleSetRoom(item._id)} type="button" color="link" size="lg"><i className="fas fa-film" /> Rate This Title</Button>
-                            <MovieDetail
-                                title={item.title}
-                                src={item.src}
-                                director={item.director}
-                                genre={item.genre}
-                                released={moment(item.released).format('M/D/YYYY')}
-                            />
-                        </CarouselItem>
-                    );
-                })}
-                <CarouselControl direction="prev" onClickHandler={previous}></CarouselControl>
-                <CarouselControl direction="next" onClickHandler={next}></CarouselControl>
-            </Carousel>
+            <h4>{items.length ? items.length : ""} <i className="fas fa-film" /> Reviewed</h4>
+            {items.length ? (
+                <Carousel
+                    pause="hover"
+                    keyboard={false}
+                    interval={false}
+                    activeIndex={activeIndex}
+                    next={next}
+                    previous={previous}
+                >
+                    <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+                    {items.map(item => {
+                        return (
+                            <CarouselItem
+                                onExiting={onExiting}
+                                onExited={onExited}
+                                key={item._id}
+                            >
+                                <MovieDetail
+                                    title={item.title}
+                                    onClick={() => handleSetRoom(item._id)}
+                                    src={item.src}
+                                    released={moment(item.released).format('M/D/YYYY')}
+                                    director={item.director}
+                                    plot={item.plot}
+                                    genre={item.genre}
+                                />
+                            </CarouselItem>
+                        );
+                    })}
+                    <CarouselControl  style={ props.isOpen ? { display: 'none' } : { display: 'flex' }} direction="prev" onClickHandler={previous}></CarouselControl>
+                    <CarouselControl  style={ props.isOpen ? { display: 'none' } : { display: 'flex' }} direction="next" onClickHandler={next}></CarouselControl>
+                </Carousel>
+            ) : (
+                    <Spinner
+                        altMsg="Loading..."
+                    />
+                )}
         </Container>
     );
 }

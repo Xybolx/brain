@@ -15,17 +15,7 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
     console.log("Back in the redirect!");
     console.log("Req.user is ", req.user);
     console.log(req.session);
-    db.User.findOneAndUpdate({
-        email: req.user.email
-    },
-        {
-            $set: { "online": true }
-        },
-        {
-            returnNewDocument: true
-        }).then(function () {
-            res.status(200).send("user authenticated!");
-        })
+    res.status(200).send("user authenticated!");
 });
 
 // route to sign up a user
@@ -49,8 +39,7 @@ router.post("/signup", function (req, res) {
             eyebrowType: req.body.eyebrowType,
             mouthType: req.body.mouthType,
             skinColor: req.body.skinColor
-        },
-        permissions: req.body.permissions
+        }
     }).then(function () {
         res.redirect(307, "/api/login");
     }).catch(function (err) {
@@ -61,19 +50,9 @@ router.post("/signup", function (req, res) {
 
 // Route for logging user out
 router.get("/logout", function (req, res) {
-    db.User.findOneAndUpdate({
-        email: req.user.email
-    },
-        {
-            $set: { "online": false }
-        },
-        {
-            returnNewDocument: true
-        }).then(function () {
-            req.logout();
-            res.redirect("/");
-            console.log("user logged out");
-        })
+        req.logout();
+        res.redirect("/");
+        console.log("user logged out");
 });
 
 module.exports = router;

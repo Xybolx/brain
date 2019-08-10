@@ -58,9 +58,6 @@ const userSchema = new Schema({
 
     skinColor: String,
     }],
-    permissions: {
-        type: String
-    },
     userMessages: {
         type: Array,
         default: []

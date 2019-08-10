@@ -1,50 +1,51 @@
-import React, { useEffect, useState, useContext } from 'react';
-import UserContext from './context/userContext';
-import SocketContext from './context/socketContext';
+import React, { useEffect, useContext } from 'react';
+import { Container } from 'reactstrap';
+import UserContext from '../context/userContext';
+import UsersContext from '../context/usersContext';
+import SocketContext from '../context/socketContext';
 import API from '../utils/API';
 import Avatar from 'avataaars';
-import Detail from './detail';
+import UserStats from './userStats';
+import Spinner from './spinner';
 
 const Users = props => {
 
     // Context
     const { user } = useContext(UserContext);
-
-    // Initial State
-    const [users, setUsers] = useState([]);
+    const { users, setUsers } = useContext(UsersContext);
 
     useEffect(() => {
         props.socket.emit('SEND_USER', {
-            user: user.username
+            user
         });
+    }, [user, props.socket])
+
+    // Subscribe/un-subscribe to socket
+    useEffect(() => {
         props.socket.on('RECEIVE_USER', data => {
             if (data) {
                 console.log(data);
+                API.getUsers()
+                    .then(res => setUsers(res.data))
+                    .catch(err => console.log(err))
             }
         });
         return () => {
             props.socket.off('RECEIVE_USER');
         };
-    }, [user, props.socket])
+    }, [setUsers, props.socket])
 
-    // API Calls
-    useEffect(() => {
-        console.log('getUsers effect fired')
-        API.getUsers()
-            .then(res => setUsers(res.data))
-            .catch(err => console.log(err))
-    }, [user])
 
     return (
-        <div>
-            <h4 style={{ marginTop: 30 }}>Online Users</h4>
+        <div style={{ marginBottom: 30 }}>
+            <h4>{users.length ? users.length : ""} <i className="fas fa-users" /> Users</h4>
             {users.length ? (
-                <div>
+                <Container className="users">
                     {users.map(online => (
                         <div key={online._id}>
-                            <strong>
+                            <strong className="userStrong">
                                 <Avatar
-                                    style={{ width: '40px', height: '40px' }}
+                                    style={{ width: '30px', height: '30px' }}
                                     avatarStyle={online.avatar[0].avatarStyle}
                                     topType={online.avatar[0].topType}
                                     accessoriesType={online.avatar[0].accessoriesType}
@@ -61,13 +62,15 @@ const Users = props => {
                                     online={online}
                                 />
                                 {online.username}&nbsp;
-                                <Detail online={online} />
+                                <UserStats online={online} />
                             </strong>
                         </div>
                     ))}
-                </div>
+                </Container>
             ) : (
-                    <h3><i className="fas fa-spinner fa-spin" />Loading...</h3>
+                    <Spinner
+                        altMsg="Loading..."
+                    />
                 )}
         </div>
     );
