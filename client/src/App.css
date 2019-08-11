@@ -42,13 +42,13 @@
 
 @keyframes Curtain {
   0% {
-    background: url("https://s7.orientaltrading.com/is/image/OrientalTrading/3_2329?$PDP_VIEWER_IMAGE$");
+    background: url("https://ak6.picdn.net/shutterstock/videos/4744526/thumb/1.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position-y: bottom;
   }
   100% {
-    background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), linear-gradient(black, black, silver);;
+    background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-radial-gradient(black, silver, black, black, black);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position-y: bottom;
@@ -65,6 +65,8 @@
 
 .messages {
   text-align: left;
+  scrollbar-width: 1px !important;
+  max-height: 200px;
 }
 
 .toast {
@@ -75,6 +77,7 @@
   word-wrap: normal;
   word-break: break-word;
   text-align: center;
+  color: black;
 }
 
 .buttonDiv {
@@ -85,9 +88,9 @@
 
 .img-fluid {
   max-width: 100%;
-  max-height: 400px;
-  min-height: 400px;
-  animation: Fade 3s;
+  max-height: 300px;
+  min-height: 200px;
+  animation: Fade 2.75s;
 }
 
 .users {
@@ -112,7 +115,7 @@
 
 .progress {
   text-shadow: 1px 1px 1px black;
-  background: transparent !important;
+  background: rgba(0, 0, 0, 0.507) !important;
   overflow: visible !important;
   border-radius: 0% !important;
   margin-left: 30px;
@@ -165,7 +168,7 @@
   background-position: right;
   z-index: 0;
   cursor: pointer;
-  top: 35px !important;
+  top: 40px !important;
   height: 10%;
   opacity: 1 !important;
 }
@@ -178,7 +181,7 @@
   z-index: 0;
   transform: rotate(180deg);
   cursor: pointer;
-  top: 35px !important;
+  top: 40px !important;
   height: 10%;
   opacity: 1 !important;
 }
@@ -231,10 +234,8 @@
 }
 
 .navbar-toggler {
-  background: url("https://static.wixstatic.com/media/b9a0f2_38bbaa4200624778ac43c1d59e962d2d~mv2.gif");
-  background-size: 100% 100%;
-  background-clip: border-box;
-  background-repeat: no-repeat;
+  background: url("imgs/marquee.gif"), linear-gradient(black, black, silver) !important;
+  background-size: 100% 100% !important;
 }
 
 .nav-link {
@@ -248,6 +249,11 @@ h5,
 h6 {
   text-shadow: 1px 1px 1px silver;
   font-family: 'Aldrich', sans-serif;
+}
+
+h4 {
+  background: linear-gradient(black, black, silver, black, black);
+  color: white;
 }
 
 .btn-dark {
@@ -276,17 +282,20 @@ h6 {
   background-clip: border-box;
   background-repeat: no-repeat;
   background-position: center;
+  /* background: rgba(0, 0, 0, 0.562); */
   padding-bottom: 10px;
   padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  /* padding-right: 10px;
+  padding-left: 10px; */
   max-width: 100%;
   margin-left: 20px;
   margin-right: 20px;
+  color: black;
 }
 
 .movieTitleSpan {
   max-width: 100%;
+  min-width: fit-content;
 }
 
 .userStrong {
@@ -301,7 +310,6 @@ h6 {
 
 p {
   font-family: 'Special Elite', cursive;
-  /* text-shadow: 1px 1px 1px yellow; */
   word-wrap: normal;
   word-break: break-word;
   color: whitesmoke;
@@ -324,67 +332,128 @@ p {
 } */
 
 .searchDiv {
-  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), linear-gradient(black, black, silver);
+  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-linear-gradient(black, black, silver);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position-y: bottom;
-  animation: Curtain 6s;
-  border-radius: 2%;
+  animation: Curtain 5s;
 }
 
-.moviesDiv {
-  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), linear-gradient(black, black, silver);
+.insideSearch {
+  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-radial-gradient(black, black, silver);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position-y: bottom;
-  animation: Curtain 6s;
-  border-radius: 2%;
+  animation: Curtain 5s;
+}
+
+.insideMovies {
+  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-radial-gradient(black, silver, black, black, black);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  animation: Curtain 5s;
 }
 
 .plot {
-  margin-left: 50px;
-  margin-right: 50px;
+  /* margin-left: 50px;
+  margin-right: 50px; */
   color: white;
+  text-shadow: 1px 1px 1px darkred;
 }
 
 .released {
+  /* margin-left: 50px;
+  margin-right: 50px; */
   color: white;
+  text-shadow: 1px 1px 1px darkred;
 }
 
 .director {
+  /* margin-left: 50px;
+  margin-right: 50px; */
   color: white;
+  text-shadow: 1px 1px 1px darkred;
 }
 
 .genre {
+  /* margin-left: 50px;
+  margin-right: 50px; */
   color: white;
+  text-shadow: 1px 1px 1px darkred;
 }
 
 .amazon {
-  color: white;
+  /* margin-left: 50px;
+  margin-right: 50px; */
+  font-family: 'Aldrich', sans-serif;
 }
 
 .plotTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
+  background: rgba(0, 0, 0, 0.562);
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .releasedTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
+  background: rgba(0, 0, 0, 0.562);
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .directorTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
+  background: rgba(0, 0, 0, 0.562);
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .genreTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
+  background: rgba(0, 0, 0, 0.562);
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .amazonTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
+  background: rgba(0, 0, 0, 0.562);
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
+.left {
+  background: transparent !important;
+  /* padding: 0px !important; */
+  /* border-right: solid black;
+  border-left: solid black;
+  border-top: solid black;
+  border-bottom: solid black; */
+  border-collapse: separate;
+  border-spacing: 1px;
+  padding-top: 20px !important;
+}
+
+.right {
+  background: transparent !important;
+  /* padding: 0px !important; */
+  /* border-right: solid black;
+  border-left: solid black;
+  border-top: solid black;
+  border-bottom: solid black; */
+  border-collapse: separate;
+  border-spacing: 1px;
+  padding-top: 20px !important;
+}
+
+.container {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}

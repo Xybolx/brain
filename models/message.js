@@ -7,7 +7,31 @@ const messageSchema = new Schema({
       required: true
     },
     avatar: {
-      type: Array
+    avatarStyle: String,
+
+    topType: String,
+
+    accessoriesType: String,
+
+    hairColor: String,
+
+    facialHairType: String,
+
+    facialHairColor: String,
+
+    clotheType: String,
+
+    clotheColor: String,
+
+    graphicType: String,
+
+    eyeType: String,
+
+    eyebrowType: String,
+
+    mouthType: String,
+
+    skinColor: String,
     },
     message: {
       type: String,

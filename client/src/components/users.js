@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Container } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, ListGroupItemText } from 'reactstrap';
 import UserContext from '../context/userContext';
 import UsersContext from '../context/usersContext';
 import SocketContext from '../context/socketContext';
@@ -8,21 +8,21 @@ import Avatar from 'avataaars';
 import UserStats from './userStats';
 import Spinner from './spinner';
 
-const Users = props => {
+const Users = ({ socket }) => {
 
     // Context
     const { user } = useContext(UserContext);
     const { users, setUsers } = useContext(UsersContext);
 
     useEffect(() => {
-        props.socket.emit('SEND_USER', {
+        socket.emit('SEND_USER', {
             user
         });
-    }, [user, props.socket])
+    }, [user, socket])
 
     // Subscribe/un-subscribe to socket
     useEffect(() => {
-        props.socket.on('RECEIVE_USER', data => {
+        socket.on('RECEIVE_USER', data => {
             if (data) {
                 console.log(data);
                 API.getUsers()
@@ -31,42 +31,42 @@ const Users = props => {
             }
         });
         return () => {
-            props.socket.off('RECEIVE_USER');
+            socket.off('RECEIVE_USER');
         };
-    }, [setUsers, props.socket])
+    }, [setUsers, socket])
 
 
     return (
         <div style={{ marginBottom: 30 }}>
             <h4>{users.length ? users.length : ""} <i className="fas fa-users" /> Users</h4>
             {users.length ? (
-                <Container className="users">
+                <ListGroup className="users">
                     {users.map(online => (
-                        <div key={online._id}>
-                            <strong className="userStrong">
+                        <ListGroupItem key={online._id}>
+                            <ListGroupItemText className="userStrong">
                                 <Avatar
                                     style={{ width: '30px', height: '30px' }}
-                                    avatarStyle={online.avatar[0].avatarStyle}
-                                    topType={online.avatar[0].topType}
-                                    accessoriesType={online.avatar[0].accessoriesType}
-                                    hairColor={online.avatar[0].hairColor}
-                                    facialHairType={online.avatar[0].facialHairType}
-                                    facialHairColor={online.avatar[0].facialHairColor}
-                                    clotheType={online.avatar[0].clotheType}
-                                    clotheColor={online.avatar[0].clotheColor}
-                                    graphicType={online.avatar[0].graphicType}
-                                    eyeType={online.avatar[0].eyeType}
-                                    eyebrowType={online.avatar[0].eyebrowType}
-                                    mouthType={online.avatar[0].mouthType}
-                                    skinColor={online.avatar[0].skinColor}
+                                    avatarStyle={online.avatar.avatarStyle}
+                                    topType={online.avatar.topType}
+                                    accessoriesType={online.avatar.accessoriesType}
+                                    hairColor={online.avatar.hairColor}
+                                    facialHairType={online.avatar.facialHairType}
+                                    facialHairColor={online.avatar.facialHairColor}
+                                    clotheType={online.avatar.clotheType}
+                                    clotheColor={online.avatar.clotheColor}
+                                    graphicType={online.avatar.graphicType}
+                                    eyeType={online.avatar.eyeType}
+                                    eyebrowType={online.avatar.eyebrowType}
+                                    mouthType={online.avatar.mouthType}
+                                    skinColor={online.avatar.skinColor}
                                     online={online}
                                 />
                                 {online.username}&nbsp;
                                 <UserStats online={online} />
-                            </strong>
-                        </div>
+                            </ListGroupItemText>
+                        </ListGroupItem>
                     ))}
-                </Container>
+                </ListGroup>
             ) : (
                     <Spinner
                         altMsg="Loading..."

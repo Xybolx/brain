@@ -57,7 +57,7 @@ const Messages = ({ socket }) => {
     }
 
     return (
-        <Container style={room ? { display: 'block' } : { display: 'none' }}>
+        <div style={room ? { display: 'block' } : { display: 'none' }}>
             <h4>{room} Reviews</h4>
             {roomMessages.length ? (
                 <div
@@ -70,18 +70,18 @@ const Messages = ({ socket }) => {
                                     <strong>
                                         <Avatar
                                             style={{ width: '30px', height: '30px' }}
-                                            topType={roomMessage.avatar[0].topType}
-                                            accessoriesType={roomMessage.avatar[0].accessoriesType}
-                                            hairColor={roomMessage.avatar[0].hairColor}
-                                            facialHairType={roomMessage.avatar[0].facialHairType}
-                                            facialHairColor={roomMessage.avatar[0].facialHairColor}
-                                            clotheType={roomMessage.avatar[0].clotheType}
-                                            clotheColor={roomMessage.avatar[0].clotheColor}
-                                            graphicType={roomMessage.avatar[0].graphicType}
-                                            eyeType={roomMessage.avatar[0].eyeType}
-                                            eyebrowType={roomMessage.avatar[0].eyebrowType}
-                                            mouthType={roomMessage.avatar[0].mouthType}
-                                            skinColor={roomMessage.avatar[0].skinColor}
+                                            topType={roomMessage.avatar.topType}
+                                            accessoriesType={roomMessage.avatar.accessoriesType}
+                                            hairColor={roomMessage.avatar.hairColor}
+                                            facialHairType={roomMessage.avatar.facialHairType}
+                                            facialHairColor={roomMessage.avatar.facialHairColor}
+                                            clotheType={roomMessage.avatar.clotheType}
+                                            clotheColor={roomMessage.avatar.clotheColor}
+                                            graphicType={roomMessage.avatar.graphicType}
+                                            eyeType={roomMessage.avatar.eyeType}
+                                            eyebrowType={roomMessage.avatar.eyebrowType}
+                                            mouthType={roomMessage.avatar.mouthType}
+                                            skinColor={roomMessage.avatar.skinColor}
                                         />
                                         {roomMessage.author}
                                         <span className="infoSpan">
@@ -109,7 +109,7 @@ const Messages = ({ socket }) => {
                         altMsg="No Results..."
                     />
                 )}
-        </Container>
+        </div>
     );
 }
 

@@ -26,11 +26,7 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    online: {
-        type: Boolean,
-        default: false
-    },
-    avatar: [{
+    avatar: {
 
     avatarStyle: String,
 
@@ -57,7 +53,7 @@ const userSchema = new Schema({
     mouthType: String,
 
     skinColor: String,
-    }],
+    },
     userMessages: {
         type: Array,
         default: []

@@ -8,7 +8,7 @@ import MovieDetail from './movieDetail';
 import Spinner from './spinner';
 import API from "../utils/API";
 
-const Movies = props => {
+const Movies = ({ socket }) => {
 
     // Context
     const { setRoom } = useContext(RoomContext);
@@ -48,7 +48,7 @@ const Movies = props => {
     const handleSetRoom = id => {
         API.getMovie(id)
             .then(res => {
-                props.socket.emit('SEND_JOIN_ROOM', {
+                socket.emit('SEND_JOIN_ROOM', {
                     room: res.data.title,
                     user: user.username
                 })
@@ -63,7 +63,7 @@ const Movies = props => {
     }, [])
 
     useEffect(() => {
-        props.socket.on('RECEIVE_MOVIE', data => {
+        socket.on('RECEIVE_MOVIE', data => {
             if (data) {
                 console.log('receive movie: ' + data)
                 API.getMovies()
@@ -72,21 +72,21 @@ const Movies = props => {
             }
         });
         return () => {
-            props.socket.off('RECEIVE_MOVIE');
+            socket.off('RECEIVE_MOVIE');
         };
-    }, [props.socket])
+    }, [socket])
 
     useEffect(() => {
-        props.socket.on('RECEIVE_JOIN_ROOM', data => {
+        socket.on('RECEIVE_JOIN_ROOM', data => {
             if (data) {
                 console.log(data);
                 setRoom(data.room);
             }
         });
         return () => {
-            props.socket.off('RECEIVE_JOIN_ROOM');
+            socket.off('RECEIVE_JOIN_ROOM');
         };
-    }, [props.socket, setRoom])
+    }, [socket, setRoom])
 
     return (
         <Container style={{ marginBottom: 20 }}>
@@ -120,8 +120,8 @@ const Movies = props => {
                             </CarouselItem>
                         );
                     })}
-                    <CarouselControl  style={ props.isOpen ? { display: 'none' } : { display: 'flex' }} direction="prev" onClickHandler={previous}></CarouselControl>
-                    <CarouselControl  style={ props.isOpen ? { display: 'none' } : { display: 'flex' }} direction="next" onClickHandler={next}></CarouselControl>
+                    <CarouselControl direction="prev" onClickHandler={previous}></CarouselControl>
+                    <CarouselControl direction="next" onClickHandler={next}></CarouselControl>
                 </Carousel>
             ) : (
                     <Spinner

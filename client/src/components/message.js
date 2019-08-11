@@ -5,7 +5,7 @@ import UsersContext from '../context/usersContext';
 import SocketContext from '../context/socketContext';
 import RoomContext from '../context/roomContext';
 import Sentiment from 'sentiment';
-import { Button, Col, Form, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { Button, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
 const Message = ({ socket }) => {
 
@@ -43,7 +43,7 @@ const Message = ({ socket }) => {
         if (review) {
             API.saveMessage({
                 author: user.username,
-                avatar: user.avatar[0],
+                avatar: user.avatar,
                 message: review,
                 movie: room,
                 result: result.score
@@ -53,7 +53,7 @@ const Message = ({ socket }) => {
                 .then(() => {
                     socket.emit('SEND_MESSAGE', {
                         author: user.username,
-                        avatar: user.avatar[0],
+                        avatar: user.avatar,
                         message: review,
                         movie: room,
                         result: result.score
@@ -67,7 +67,6 @@ const Message = ({ socket }) => {
     return (
         <div style={room ? { display: 'block', marginBottom: 30, marginTop: 30 } : { display: 'none' }}>
             <h4 style={{ marginTop: 30 }}>Review {room}</h4>
-            <Col sm="12">
                 <Form onSubmit={handleFormSubmit}>
                     <FormGroup>
                         <InputGroup>
@@ -82,7 +81,6 @@ const Message = ({ socket }) => {
                         </InputGroup>
                     </FormGroup>
                 </Form>
-            </Col>
         </div>
     );
 }

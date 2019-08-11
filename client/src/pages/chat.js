@@ -18,28 +18,28 @@ const Chat = () => {
     };
 
     return (
-        <Container>
+        <div>
             <PageTitle
                 icon={<i className="fas fa-theater-masks" />}
                 heading="Reviews"
             />
             <Row noGutters>
-                <Col md="6" style={{ marginBottom: 30 }}>
-                    <Container style={isOpen ? { display: 'none' } : { display: 'block' }}>
+                <Col className="jumbotron jumbotron-fluid left" md="6" style={{ marginBottom: 30 }}>
+                    <div style={isOpen ? { display: 'none' } : { display: 'block' }}>
                         <Movies isOpen={isOpen} />
-                    </Container>
-                    <Button onClick={toggle} color="dark" size="md"><i className="fas fa-search" /> {isOpen ? "Close" : "Search"}</Button>
+                    </div>
                     <Collapse isOpen={isOpen}>
                         <Movie toggle={toggle} />
-                        </Collapse>
+                    </Collapse>
+                    <Button onClick={toggle} color="dark" size="md"><i className="fas fa-search" /> {isOpen ? "Close" : "Search"}</Button>
                 </Col>
-                <Col md="6" style={{ marginBottom: 30 }}>
+                <Col className="jumbotron jumbotron-fluid right" md="6" style={{ marginBottom: 30 }}>
                     <Users />
                     <Message />
                     <Messages />
                 </Col>
             </Row>
-        </Container>
+        </div>
     );
 }
 

@@ -113,6 +113,7 @@ const UserStats = ({ online }) => {
                 </span>
             </Button>
             <Collapse
+                className="userStatDiv"
                 isOpen={isOpen}
             >
                 <Col sm="12">

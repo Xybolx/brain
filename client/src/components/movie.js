@@ -6,7 +6,7 @@ import SearchDetail from './searchDetail';
 import Spinner from './spinner';
 import API from '../utils/API';
 
-const Movie = props => {
+const Movie = ({ socket, toggle }) => {
 
     // State
     const [result, setResult] = useState({});
@@ -28,7 +28,7 @@ const Movie = props => {
             plot: result.Plot
         })
             .then(() => {
-                props.socket.emit('SEND_MOVIE', {
+                socket.emit('SEND_MOVIE', {
                     title: result.Title,
                     src: result.Poster,
                     director: result.Director,
@@ -38,7 +38,7 @@ const Movie = props => {
                 })
             })
             .catch(err => console.log(err))
-        props.toggle();
+        toggle();
         setSearch('');
         setResult({});
     };
@@ -55,6 +55,7 @@ const Movie = props => {
 
     return (
         <Container>
+            <h4><i className="fas fa-search" /> Search</h4>
             <div style={{ marginTop: 20, marginBottom: 60 }}>
                 {result.Title ? (
                     <SearchDetail
