@@ -289,22 +289,6 @@
   vertical-align: -11px;
 }
 
-.titleSpan {
-  color: white;
-  vertical-align: -11px;
-  text-shadow: 1px 1px 1px gold;
-  font-family: 'Monoton', cursive;
-  background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.514);
-  background-size: contain;
-  background-repeat: round;
-}
-
-/* .titleDiv {
-  background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.514);
-  background-size: contain;
-  background-repeat: round;
-} */
-
 .navbar-toggler {
   background: url("imgs/marquee.gif"), linear-gradient(black, black, silver) !important;
   background-size: 100% 100% !important;
@@ -328,6 +312,17 @@ h4 {
   text-shadow: 1px 1px 1px gold;
   background: linear-gradient(darkred, black, silver, black, darkred);
 }
+
+.titleSpan {
+  color: white;
+  vertical-align: -11px;
+  text-shadow: 1px 1px 1px gold;
+  font-family: 'Monoton', cursive;
+  background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.678);
+  background-size: contain;
+  background-repeat: round;
+}
+
 
 .btn-dark {
   background: linear-gradient(black, black, silver);
@@ -561,6 +556,7 @@ h6 {
 
 #titleHeader {
   color: black;
+  background: transparent;
 }
 
 .fa-brain {
@@ -587,4 +583,18 @@ h6 {
 
 .closeDiv {
   text-align: right;
+}
+
+.valid-feedback,
+.invalid-feedback {
+  font-family: 'Aldrich', sans-serif;
+}
+
+.form-control {
+  border-style: inset !important;
+  border-width: medium !important;
+}
+
+.is-invalid .form-control {
+  border-color: red !important;
 }

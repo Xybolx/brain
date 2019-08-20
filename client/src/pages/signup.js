@@ -5,9 +5,11 @@ import { Col } from 'reactstrap';
 const SignUp = () => {
 
     return (
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
-            <SignUpForm />
-        </Col>
+        <div style={{ marginTop: 60 }}>
+            <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <SignUpForm />
+            </Col>
+        </div>
     );
 };
 

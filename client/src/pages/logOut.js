@@ -44,11 +44,13 @@ const LogOut = () => {
     }
 
     return (
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
-            <Title
-                header="Log Out"
-            />
-        </Col>
+        <div style={{ marginTop: 60 }}>
+            <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <Title
+                    header="Log Out"
+                />
+            </Col>
+        </div>
     );
 }
 

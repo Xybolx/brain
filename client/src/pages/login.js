@@ -33,19 +33,19 @@ const LogIn = () => {
         }
     }, [values.email, setIsValidEmail])
 
-        useEffect(() => {
-            const password = values.password;
-            const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
-            const passwordMatch = passwordRegEx.test(password);
-            if (password && passwordMatch) {
-                console.log(passwordMatch);
-                setIsValidPassword(true);
-            }
-            if (!passwordMatch) {
-                console.log(passwordMatch);
-                setIsValidPassword(false);
-            }
-        }, [values.password, setIsValidPassword])
+    useEffect(() => {
+        const password = values.password;
+        const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
+        const passwordMatch = passwordRegEx.test(password);
+        if (password && passwordMatch) {
+            console.log(passwordMatch);
+            setIsValidPassword(true);
+        }
+        if (!passwordMatch) {
+            console.log(passwordMatch);
+            setIsValidPassword(false);
+        }
+    }, [values.password, setIsValidPassword])
 
     // Get user and redirect function
     const getUser = () => {
@@ -80,15 +80,17 @@ const LogIn = () => {
     }
 
     return (
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
-            <LogInForm
-                handleFormSubmit={handleFormSubmit}
-                emailValue={values.email || ""}
-                handleEmailChange={handleChange}
-                passwordValue={values.password || ""}
-                handlePasswordChange={handleChange}
-            />
-        </Col>
+        <div style={{ marginTop: 60 }}>
+            <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <LogInForm
+                    handleFormSubmit={handleFormSubmit}
+                    emailValue={values.email || ""}
+                    handleEmailChange={handleChange}
+                    passwordValue={values.password || ""}
+                    handlePasswordChange={handleChange}
+                />
+            </Col>
+        </div>
     );
 };
 

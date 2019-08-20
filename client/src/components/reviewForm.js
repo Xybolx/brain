@@ -2,18 +2,18 @@ import React from 'react';
 import { Input, InputGroup, InputGroupAddon, Form, FormGroup } from 'reactstrap';
 import Btn from './btn';
 
-const ReviewForm = props => {
+const ReviewForm = ({ inputType, handleFormSubmit, placeholder, value, name, handleChange }) => {
 
     return (
-        <Form onSubmit={props.handleFormSubmit}>
+        <Form onSubmit={handleFormSubmit}>
             <FormGroup>
                 <InputGroup>
                     <Input
-                        type={props.inputType}
-                        placeholder={props.placeholder}
-                        value={props.value}
-                        name={props.name}
-                        onChange={props.handleChange}
+                        type={inputType}
+                        placeholder={placeholder}
+                        value={value}
+                        name={name}
+                        onChange={handleChange}
                     />
                     <InputGroupAddon
                         addonType="append"
