@@ -5,9 +5,10 @@ import UsersContext from '../context/usersContext';
 import SocketContext from '../context/socketContext';
 import RoomContext from '../context/roomContext';
 import Sentiment from 'sentiment';
-import { Button, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import ReviewForm from './reviewForm';
+import SubTitle from './subTitle';
 
-const Message = ({ socket }) => {
+const Review = ({ socket }) => {
 
     // Context
     const { user, setUser } = useContext(UserContext);
@@ -66,29 +67,27 @@ const Message = ({ socket }) => {
 
     return (
         <div style={room ? { display: 'block', marginBottom: 30, marginTop: 30 } : { display: 'none' }}>
-            <h4 style={{ marginTop: 30 }}>Review {room}</h4>
-                <Form onSubmit={handleFormSubmit}>
-                    <FormGroup>
-                        <InputGroup>
-                            <Input
-                                type="textarea"
-                                name="review"
-                                placeholder="Write a review..."
-                                value={review}
-                                onChange={handleChange}
-                            />
-                            <InputGroupAddon addonType="append"><Button type="submit" color="dark" size="md"><span className="fas fa-paper-plane"></span></Button></InputGroupAddon>
-                        </InputGroup>
-                    </FormGroup>
-                </Form>
+            <SubTitle
+                style={{ marginTop: 30 }}
+                icon={<i className="fas fa-theater-masks" />}
+                header={`${room}`}
+            />
+            <ReviewForm
+                handleFormSubmit={handleFormSubmit}
+                inputType="textarea"
+                placeholder="Write a review..."
+                value={review}
+                name="review"
+                handleChange={handleChange}
+            />
         </div>
     );
 }
 
-const MessageWithSocket = props => (
+const ReviewWithSocket = props => (
     <SocketContext.Consumer>
-        {socket => <Message {...props} socket={socket} />}
+        {socket => <Review {...props} socket={socket} />}
     </SocketContext.Consumer>
 );
 
-export default MessageWithSocket;
+export default ReviewWithSocket;

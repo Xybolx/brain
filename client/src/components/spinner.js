@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Spinner = props => {
+const Spinner = ({ altMsg }) => {
 
     return (
         <h4>
@@ -10,7 +10,7 @@ const Spinner = props => {
                     <i className="fas fa-brain fa-stack-1x fa-spin" style={{ color: "lightpink" }} />
                 </span>
             </span>
-            <span className="spinnerSpan">{props.altMsg}</span>
+            <span className="spinnerSpan">{altMsg}</span>
         </h4>
     );
 }

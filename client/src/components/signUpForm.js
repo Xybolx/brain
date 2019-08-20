@@ -1,42 +1,81 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Avatar from 'avataaars';
 import API from '../utils/API';
-import useForm from './useForm';
-import PageTitle from './pageTitle';
+import useInput from './useInput';
+import Title from './title';
 import IsValidEmailContext from '../context/isValidEmailContext';
 import IsValidPasswordContext from '../context/isValidPasswordContext';
 import IsValidUsernameContext from '../context/isValidUsernameContext';
-import { Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
+import UserContext from '../context/userContext';
+import { Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
+import Btn from './btn';
 
 const SignUpForm = () => {
 
-    const { isValidEmail } = useContext(IsValidEmailContext);
+    // state
+    const [isSignedUp, setIsSignedUp] = useState(false);
 
-    const { isValidPassword } = useContext(IsValidPasswordContext);
+    // context
+    const { isValidEmail, setIsValidEmail } = useContext(IsValidEmailContext);
+    const { isValidPassword, setIsValidPassword } = useContext(IsValidPasswordContext);
+    const { isValidUsername, setIsValidUsername } = useContext(IsValidUsernameContext);
+    const { setUser } = useContext(UserContext);
 
-    const { isValidUsername } = useContext(IsValidUsernameContext);
+    // useInput
+    const [values, handleChange, handleClearInputs] = useInput();
 
-    const [values, handleChange] = useForm({
+    // Get user and redirect function
+    const getUser = () => {
+        API.getUser()
+            .then(res => setUser(res.data))
+            .catch(err => console.log(err))
+    };
 
-        email: '',
-        username: '',
-        password: '',
-        avatarStyle: 'Transparent',
-        topType: 'NoHair',
-        accessoriesType: '',
-        hairColor: 'Auburn',
-        facialHairType: 'Blank',
-        facialHairColor: '',
-        clotheType: 'BlazerShirt',
-        clotheColor: 'Black',
-        graphicType: 'Bat',
-        eyeType: 'Default',
-        eyebrowType: 'Default',
-        mouthType: 'Default',
-        skinColor: 'Light',
-        permissions: 'user'
-    })
+    const redirect = () => {
+        setTimeout(() => setIsSignedUp(true), 1000);
+    };
 
+    // Client-side validation
+    useEffect(() => {
+        const email = values.email;
+        const emailRegEx = /.+@.+\..+/;
+        const emailMatch = emailRegEx.test(email);
+        if (email && emailMatch) {
+            setIsValidEmail(true);
+        }
+        if (!emailMatch) {
+            setIsValidEmail(false);
+        }
+    }, [values.email, setIsValidEmail])
+
+    useEffect(() => {
+        const password = values.password;
+        const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
+        const passwordMatch = passwordRegEx.test(password);
+        if (password && passwordMatch) {
+            setIsValidPassword(true);
+        }
+        if (!passwordMatch) {
+            setIsValidPassword(false);
+        }
+    }, [values.password, setIsValidPassword])
+
+    useEffect(() => {
+        const username = values.username;
+        const usernameRegEx = /^(?=[0-9a-zA-Z#@$?]{2,}$).*/;
+        const usernameMatch = usernameRegEx.test(username);
+        if (username && usernameMatch) {
+            setIsValidUsername(true);
+        }
+        if (!usernameMatch) {
+            setIsValidUsername(false);
+        }
+    }, [values.username, setIsValidUsername])
+
+    
+
+    // handle submit
     const handleFormSubmit = ev => {
         ev.preventDefault();
         if (values.email && values.username && values.password) {
@@ -57,11 +96,15 @@ const SignUpForm = () => {
                 eyebrowType: values.eyebrowType,
                 mouthType: values.mouthType,
                 skinColor: values.skinColor,
-                permissions: values.permissions
-            });
+            })
+                .then(res => handleClearInputs())
+                .then(() => getUser())
+                .then(() => redirect())
+                .catch(err => console.log(err))
         };
     };
 
+    // styles
     const facialStyle = {
         ...values.facialHairType
             !== 'Blank'
@@ -90,12 +133,19 @@ const SignUpForm = () => {
         overflowX: "hidden"
     }
 
+    if (isSignedUp) {
+        return <Redirect to="/reviews" />
+    }
+
     return (
-        <div>
+        <div style={{ textAlign: "center" }}>
             <Form onSubmit={handleFormSubmit}>
+                <Title
+                    header="Sign Up"
+                />
                 <FormGroup>
                     <Label
-                        style={{ marginLeft: 5 }}
+                        className="label"
                         htmlFor="emailInput"
                     >
                         Email
@@ -129,7 +179,7 @@ const SignUpForm = () => {
                 </FormGroup>
                 <FormGroup>
                     <Label
-                        style={{ marginLeft: 5 }}
+                        className="label"
                         htmlFor="usernameInput"
                     >
                         Username
@@ -165,7 +215,7 @@ const SignUpForm = () => {
                 </FormGroup>
                 <FormGroup>
                     <Label
-                        style={{ marginLeft: 5 }}
+                        className="label"
                         htmlFor="passwordInput"
                     >
                         Password
@@ -216,14 +266,13 @@ const SignUpForm = () => {
                     mouthType={values.mouthType}
                     skinColor={values.skinColor}
                 />
-                <PageTitle
-                    icon={<i className="fas fa-user" />}
-                    heading="Avatar Options"
+                <Title
+                    header="Avatar"
                 />
                 <div style={avatarSelectStyle}>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}
+                            className="label"
                         >
                             Top Select
                                 </Label>
@@ -233,6 +282,7 @@ const SignUpForm = () => {
                                 name="topType"
                                 value={values.topType}
                                 onChange={handleChange}>
+                                <option></option>
                                 <option>NoHair</option>
                                 <option>Eyepatch</option>
                                 <option>LongHairBigHair</option>
@@ -245,7 +295,6 @@ const SignUpForm = () => {
                                 <option>LongHairFro</option>
                                 <option>LongHairFroBand</option>
                                 <option>LongHairNotTooLong</option>
-                                <option>LongHairShavedSides</option>
                                 <option>LongHairMiaWallace</option>
                                 <option>LongHairStraight</option>
                                 <option>LongHairStraight2</option>
@@ -266,7 +315,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Accessory Select
                                 </Label>
                         <div>
@@ -287,7 +337,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Hair Color Select
                                 </Label>
                         <div>
@@ -296,6 +347,7 @@ const SignUpForm = () => {
                                 name="hairColor"
                                 value={values.hairColor}
                                 onChange={handleChange}>
+                                <option></option>
                                 <option>Auburn</option>
                                 <option>Black</option>
                                 <option>Blonde</option>
@@ -311,7 +363,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Facial Hair Select
                                 </Label>
                         <div>
@@ -330,7 +383,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup style={facialStyle}>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Facial Hair Color Select
                                 </Label>
                         <div>
@@ -339,6 +393,7 @@ const SignUpForm = () => {
                                 name="facialHairColor"
                                 value={values.facialHairColor}
                                 onChange={handleChange}>
+                                <option></option>
                                 <option>Auburn</option>
                                 <option>Black</option>
                                 <option>Blonde</option>
@@ -352,7 +407,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Clothing Select
                                 </Label>
                         <div>
@@ -361,6 +417,7 @@ const SignUpForm = () => {
                                 name="clotheType"
                                 value={values.clotheType}
                                 onChange={handleChange}>
+                                <option></option>
                                 <option>BlazerShirt</option>
                                 <option>BlazerSweater</option>
                                 <option>CollarSweater</option>
@@ -375,7 +432,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup style={fabricStyle}>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Fabric Color Select
                                 </Label>
                         <div>
@@ -405,7 +463,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup style={graphicStyle}>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Graphic Select
                                 </Label>
                         <div>
@@ -414,6 +473,7 @@ const SignUpForm = () => {
                                 name="graphicType"
                                 value={values.graphicType}
                                 onChange={handleChange}>
+                                <option></option>
                                 <option>Bat</option>
                                 <option>Cumbia</option>
                                 <option>Deer</option>
@@ -430,7 +490,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Eye Type Select
                                 </Label>
                         <div>
@@ -439,9 +500,9 @@ const SignUpForm = () => {
                                 name="eyeType"
                                 value={values.eyeType}
                                 onChange={handleChange}>
+                                <option>Default</option>
                                 <option>Close</option>
                                 <option>Cry</option>
-                                <option>Default</option>
                                 <option>Dizzy</option>
                                 <option>EyeRoll</option>
                                 <option>Happy</option>
@@ -456,7 +517,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Eyebrow Type Select
                                 </Label>
                         <div>
@@ -465,9 +527,9 @@ const SignUpForm = () => {
                                 name="eyebrowType"
                                 value={values.eyebrowType}
                                 onChange={handleChange}>
+                                <option>Default</option>
                                 <option>Angry</option>
                                 <option>AngryNatural</option>
-                                <option>Default</option>
                                 <option>DefaultNatural</option>
                                 <option>FlatNatural</option>
                                 <option>RaisedExcited</option>
@@ -482,7 +544,8 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Mouth Type Select
                                 </Label>
                         <div>
@@ -491,8 +554,8 @@ const SignUpForm = () => {
                                 name="mouthType"
                                 value={values.mouthType}
                                 onChange={handleChange}>
-                                <option>Concerned</option>
                                 <option>Default</option>
+                                <option>Concerned</option>
                                 <option>Disbelief</option>
                                 <option>Eating</option>
                                 <option>Grimace</option>
@@ -508,14 +571,15 @@ const SignUpForm = () => {
                     </FormGroup>
                     <FormGroup>
                         <Label
-                            style={{ marginLeft: 5 }}>
+                            className="label"
+                        >
                             Skin Color Select
                                 </Label>
                         <div>
                             <Input
                                 type="select"
                                 name="skinColor"
-                                value={values.skinColor}
+                                value={values.skinColor || "Light"}
                                 onChange={handleChange}>
                                 <option>Tanned</option>
                                 <option>Yellow</option>
@@ -529,7 +593,7 @@ const SignUpForm = () => {
                     </FormGroup>
                 </div>
                 <div className="buttonDiv">
-                    <Button
+                    <Btn
                         disabled={
                             !isValidEmail
                             && !isValidPassword
@@ -538,10 +602,10 @@ const SignUpForm = () => {
                         type="submit"
                         color="dark"
                         size="md"
-                        block
+                        icon={<i className="fas fa-user-plus" />}
+                        name="Submit"
                     >
-                        <i className="fas fa-user-plus" /> Submit
-                        </Button>
+                    </Btn>
                 </div>
             </Form>
         </div>

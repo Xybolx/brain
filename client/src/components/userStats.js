@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect, useMemo } from 'react';
 import UserContext from '../context/userContext';
-import { Badge, Progress, Button, Collapse, Col } from 'reactstrap';
+import StatTitle from '../components/statTitle';
+import Btn from '../components/btn';
+import { Badge, Progress, Modal, ModalBody } from 'reactstrap';
 
-const UserStats = ({ online }) => {
+const UserStats = ({ online, getUsers }) => {
 
     // Context
     const { user } = useContext(UserContext);
@@ -24,12 +26,12 @@ const UserStats = ({ online }) => {
     // Toggle user stats
     const toggle = () => {
         setIsOpen(!isOpen);
+        getUsers();
     };
 
     // Getting and setting state
     useEffect(() => {
         setMsgs(online.userMessages);
-        console.log('user set msgs');
     }, [online.userMessages])
 
     useEffect(() => {
@@ -41,21 +43,18 @@ const UserStats = ({ online }) => {
             });
         }
         getScoreTotal();
-        console.log('user score total');
     }, [msgs])
-    
+
     useEffect(() => {
         const getNeutralTotal = () => {
             const neutralMessages = msgs.filter(userMessage => userMessage === 0);
             setNeutralTotal(neutralMessages.length);
         }
         getNeutralTotal();
-        console.log('user neutral total');
     }, [msgs])
 
     useEffect(() => {
-            setNeutralAvg(Math.round(neutralTotal / msgs.length * 100));
-            console.log('user neutral %');
+        setNeutralAvg(Math.round(neutralTotal / msgs.length * 100));
     }, [neutralAvg, neutralTotal, msgs.length])
 
     useEffect(() => {
@@ -64,12 +63,10 @@ const UserStats = ({ online }) => {
             setPositiveTotal(positiveMessages.length);
         }
         getPositiveTotal();
-        console.log('user positive total');
     }, [msgs])
 
     useEffect(() => {
-            setPositiveAvg(Math.round(positiveTotal / msgs.length * 100));
-            console.log('user positive %');
+        setPositiveAvg(Math.round(positiveTotal / msgs.length * 100));
     }, [positiveAvg, positiveTotal, msgs.length])
 
     useEffect(() => {
@@ -78,47 +75,61 @@ const UserStats = ({ online }) => {
             setNegativeTotal(negativeMessages.length);
         }
         getNegativeTotal();
-        console.log('user negative total');
     }, [msgs])
 
     useEffect(() => {
-            setNegativeAvg(Math.round(negativeTotal / msgs.length * 100));
-            console.log('user negative %');
+        setNegativeAvg(Math.round(negativeTotal / msgs.length * 100));
     }, [negativeAvg, negativeTotal, msgs.length])
 
     return (
-        <span>
-            <h6 style={{ display: "inline" }}>
-                <Badge
-                    color={scoreTotal === 0 ? "warning" : scoreTotal < 0 ? "danger" : scoreTotal > 0 ? "success" : "dark"}
-                >
-                    {scoreTotal === 0 ? "Neutral" : scoreTotal < 0 ? "Negative" : scoreTotal > 0 ? "Positive" : "No Data"}
-                </Badge>
-            </h6>
-            <Button
+        <>
+            <Btn
                 onClick={toggle}
                 style={
                     !user.userMessages.length
                         ? { display: 'none' }
                         : { display: 'inline' }}
-                type="button"
                 color="link"
                 size="sm"
-            >
-                <i className="fas fa-poll-h" />
-                <span style={
-                    { marginLeft: 2 }}
-                >
-                    {isOpen ? 'Close' : 'Stats'}
-                </span>
-            </Button>
-            <Collapse
+                icon={<i className="fas fa-poll-h" />}
+                name="Stats"
+            />
+            <Modal
                 className="userStatDiv"
                 isOpen={isOpen}
             >
-                <Col sm="12">
-                    <div>
-                        Average
+                <ModalBody>
+                    <div className="statsTitle">
+                        <StatTitle
+                            header={online.username}
+                            icon={<i className="fas fa-user" />}
+                        />
+                        <StatTitle
+                            header="Overall Rating:"
+                            badge={
+                                <Badge
+                                    color={
+                                        scoreTotal === 0
+                                            ? "warning"
+                                            : scoreTotal < 0
+                                                ? "danger"
+                                                : scoreTotal > 0
+                                                    ? "success" : "dark"}
+                                    pill
+                                >
+                                    <i className="fas fa-poll-h" /> {scoreTotal === 0
+                                        ? "Neutral"
+                                        : scoreTotal < 0
+                                            ? "Negative"
+                                            : scoreTotal > 0
+                                                ? "Positive"
+                                                : "No Data"}
+                                </Badge>}
+                        />
+                        <StatTitle
+                            header="Averages"
+                            icon={<i className="fas fa-poll-h" />}
+                        />
                         <Progress
                             color="success"
                             value={positiveAvg}
@@ -140,9 +151,10 @@ const UserStats = ({ online }) => {
                         >
                             {isNaN(negativeAvg) ? `Negative: No Data` : `Negative ${negativeAvg}%`}
                         </Progress>
-                    </div>
-                    <div>
-                        Totals
+                        <StatTitle
+                            header="Totals"
+                            icon={<i className="fas fa-poll-h" />}
+                        />
                         <Progress
                             color="success"
                             value={positiveTotal}
@@ -166,10 +178,19 @@ const UserStats = ({ online }) => {
                         >
                             Negative {negativeTotal}
                         </Progress>
+                        <div className="closeDiv">
+                            <Btn
+                                color="dark"
+                                size="md"
+                                onClick={toggle}
+                                icon={<i className="fas fa-window-close" />}
+                                name="Close"
+                            />
+                        </div>
                     </div>
-                </Col>
-            </Collapse>
-        </span>
+                </ModalBody>
+            </Modal>
+        </>
     );
 }
 

@@ -36,6 +36,13 @@ module.exports = function (io) {
         io.in(room).emit('RECEIVE_JOIN_ROOM', data);
       });
 
+      socket.on('SEND_LEAVE_ROOM', data => {
+        let room = data.room;
+        socket.leave(room);
+        io.in(room).emit('RECEIVE_LEAVE_ROOM', data);
+      });
+
+
     });
   };
   

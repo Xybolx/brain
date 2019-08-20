@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, Nav } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
 
 const TopNav = () => {
 
@@ -12,37 +12,122 @@ const TopNav = () => {
         setIsOpen(!isOpen)
     };
 
+    const isActiveHome = () => {
+        if (window.location.pathname === "/") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    const isActiveSignUp = () => {
+        if (window.location.pathname === "/signup") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    const isActiveLogIn = () => {
+        if (window.location.pathname === "/login") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    const isActiveChat = () => {
+        if (window.location.pathname === "/reviews") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    const isActiveLogOut = () => {
+        if (window.location.pathname === "/logout") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     return (
-        <div>
-            <Navbar color="dark" dark expand="md">
-                <NavLink className="navbar-brand" to="/">
-                    <span className="fa-stack fa-1x d-inline-block align-top">
-                        <span>
-                            <i className="fas fa-film fa-stack-2x" />
-                            <i className="fas fa-brain fa-stack-1x" style={{ color: "pink" }} />
-                        </span>
+        <Navbar color="dark" dark expand="md">
+            <NavLink className="navbar-brand" to="/logout">
+                <span className="fa-stack d-inline-block align-top">
+                    <span>
+                        <i className="fas fa-film fa-stack-2x" />
+                        <i className="fas fa-brain fa-stack-1x" />
                     </span>
-                    <span id="brandSpan">FilmBrains</span>
-                </NavLink>
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav className="navbar-nav" style={{ textAlign: "center" }} navbar>
-                        <NavLink className="nav-item nav-link" onClick={toggle} activeStyle={{ fontWeight: "bold" }} exact to="/"><i className="fas fa-home fa-fw" /> Home</NavLink>
-                        <NavLink className="nav-item nav-link" onClick={toggle} activeStyle={{ fontWeight: "bold" }} exact to="/signup"><i className="fas fa-user-plus fa-fw" /> Sign Up</NavLink>
-                        <NavLink className="nav-item nav-link" onClick={toggle} activeStyle={{ fontWeight: "bold" }} exact to="/login"><i className="fas fa-sign-in-alt fa-fw" /> Log In</NavLink>
+                </span>
+                <span id="brandSpan">FilmBrains</span>
+            </NavLink>
+            <NavbarToggler onClick={toggle} />
+            <Collapse isOpen={isOpen} navbar>
+                <Nav
+                    className="navbar-nav"
+                    style={{ textAlign: "center" }}
+                    navbar
+                >
+                    <NavItem>
                         <NavLink
-                            className="nav-item nav-link"
+                            className="nav-link"
                             onClick={toggle}
-                            activeStyle={{ fontWeight: "bold" }}
-                            exact to="/chat"
+                            activeStyle={{ fontWeight: "bold", textShadow: "1px 1px 1px gold" }}
+                            isActive={isActiveHome}
+                            exact to="/"
+                        >
+                            <i className="fas fa-home fa-fw" /> Home
+                            </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className="nav-link"
+                            onClick={toggle}
+                            activeStyle={{ fontWeight: "bold", textShadow: "1px 1px 1px gold" }}
+                            isActive={isActiveSignUp}
+                            exact to="/signup"
+                        >
+                            <i className="fas fa-user-plus fa-fw" /> Sign Up
+                            </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className="nav-link"
+                            onClick={toggle}
+                            activeStyle={{ fontWeight: "bold", textShadow: "1px 1px 1px gold" }}
+                            isActive={isActiveLogIn}
+                            exact to="/login"
+                        >
+                            <i className="fas fa-sign-in-alt fa-fw" /> Log In
+                            </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className="nav-link"
+                            onClick={toggle}
+                            activeStyle={{ fontWeight: "bold", textShadow: "1px 1px 1px gold" }}
+                            isActive={isActiveChat}
+                            exact to="/reviews"
                         >
                             <i className="fas fa-theater-masks" /> Reviews
                             </NavLink>
-                        <NavLink className="nav-item nav-link" onClick={toggle} activeStyle={{ fontWeight: "bold" }} exact to="/logout"><i className="fas fa-sign-out-alt fa-fw" /> Log Out</NavLink>
-                    </Nav>
-                </Collapse>
-            </Navbar>
-        </div>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className="nav-link"
+                            onClick={toggle}
+                            activeStyle={{ fontWeight: "bold", textShadow: "1px 1px 1px gold" }}
+                            isActive={isActiveLogOut}
+                            exact to="/logout"
+                        >
+                            <i className="fas fa-sign-out-alt fa-fw" /> Log Out
+                            </NavLink>
+                    </NavItem>
+                </Nav>
+            </Collapse>
+        </Navbar>
     );
 }
 

@@ -4,7 +4,7 @@ import { Col } from 'reactstrap';
 import UserContext from '../context/userContext';
 import RoomContext from '../context/roomContext';
 import API from '../utils/API';
-import PageTitle from '../components/pageTitle';
+import Title from '../components/title';
 
 const LogOut = () => {
 
@@ -45,9 +45,8 @@ const LogOut = () => {
 
     return (
         <Col sm="12" md={{ size: 6, offset: 3 }}>
-            <PageTitle
-                icon={<i className="fas fa-sign-out-alt" />}
-                heading="Logging Out..."
+            <Title
+                header="Log Out"
             />
         </Col>
     );

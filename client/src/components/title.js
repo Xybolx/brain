@@ -1,23 +1,23 @@
 import React from 'react';
 
-const Title = () => {
+const Title = ({ header }) => {
   return (
-    <div style={{ textAlign: "center" }}>
-      <h2 id="titleHeader">
-        <span className="fa-stack fa-1x d-inline-block align-top">
+    <div className="titleDiv">
+      <h3 id="titleHeader">
+        <span className="fa-stack d-inline-block align-top">
           <span>
-            <i className="fas fa-film fa-stack-2x"></i>
-            <i className="fas fa-brain fa-stack-1x" style={{ color: "lightpink" }}></i>
+            <i className="fas fa-film fa-stack-2x" />
+            <i className="fas fa-brain fa-stack-1x" />
           </span>
         </span>
-        <span id="titleSpan">FilmBrains</span>
-        <span className="fa-stack fa-1x d-inline-block align-top">
+        <span className="titleSpan">{header}</span>
+        <span className="fa-stack d-inline-block align-top">
           <span>
-            <i className="fas fa-film fa-stack-2x"></i>
-            <i className="fas fa-brain fa-stack-1x" style={{ color: "lightpink" }}></i>
+            <i className="fas fa-film fa-stack-2x" />
+            <i className="fas fa-brain fa-stack-1x" />
           </span>
         </span>
-      </h2>
+      </h3>
     </div>
   );
 }

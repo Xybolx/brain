@@ -5,7 +5,7 @@ const movieRoutes = require("./movies");
 const db = require("../../models");
 const passport = require("../../config/passport-setup");
 
-// User/Message/Movie routes
+// User/Message/Movie/ routes
 router.use("/users", userRoutes);
 router.use("/messages", messageRoutes);
 router.use("/movies", movieRoutes);

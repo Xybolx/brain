@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Container } from 'reactstrap';
 import * as io from 'socket.io-client';
 import UserContext from './context/userContext';
 import UsersContext from './context/usersContext';
@@ -9,13 +10,11 @@ import IsValidPasswordContext from './context/isValidPasswordContext';
 import IsValidUsernameContext from './context/isValidUsernameContext';
 import RoomContext from './context/roomContext';
 import TopNav from './components/navbar';
-import Title from './components/title';
 import Home from './pages/home';
 import SignUp from './pages/signup';
 import LogIn from './pages/login';
-import Chat from './pages/chat';
+import UserReviews from './pages/reviews';
 import LogOut from './pages/logOut';
-import { Container } from 'reactstrap';
 import './App.css';
 
 const socket = io();
@@ -51,8 +50,7 @@ const App = () => {
   return (
     <Router>
       <TopNav />
-      <Container style={{ textAlign: "center" }}>
-        <Title />
+        <Container className="App">
         <Switch>
           <SocketContext.Provider value={socket}>
             <UserContext.Provider value={userValue}>
@@ -64,9 +62,9 @@ const App = () => {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/signup" component={SignUp} />
                         <Route exact path="/login" component={LogIn} />
-                        <Route exact path="/chat" render={() => (
+                        <Route exact path="/reviews" render={() => (
                           userValue.user !== null && userValue.user !== "" ? (
-                            <Chat />
+                            <UserReviews />
                           ) : (
                               <Redirect to="/logout" />
                             )

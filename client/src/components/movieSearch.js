@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Container, Input, InputGroup, InputGroupAddon, Form, FormGroup, Button } from 'reactstrap';
+import SearchForm from './searchForm';
 import moment from 'moment';
 import SocketContext from '../context/socketContext';
 import SearchDetail from './searchDetail';
 import Spinner from './spinner';
 import API from '../utils/API';
 
-const Movie = ({ socket, toggle }) => {
+const MovieSearch = ({ socket, toggle }) => {
 
     // State
     const [result, setResult] = useState({});
@@ -54,7 +54,7 @@ const Movie = ({ socket, toggle }) => {
     };
 
     return (
-        <Container>
+        <div>
             <h4><i className="fas fa-search" /> Search</h4>
             <div style={{ marginTop: 20, marginBottom: 60 }}>
                 {result.Title ? (
@@ -65,7 +65,6 @@ const Movie = ({ socket, toggle }) => {
                         released={moment(result.Released).format('M/D/YYYY')}
                         director={result.Director}
                         plot={result.Plot}
-                        genre={result.Genre}
                     />
                 ) : (
                         <Spinner
@@ -73,40 +72,25 @@ const Movie = ({ socket, toggle }) => {
                         />
                     )}
                 <div style={{ marginTop: 20 }}>
-                    <Form onSubmit={handleFormSubmit}>
-                        <FormGroup>
-                            <InputGroup>
-                                <Input
-                                    type="text"
-                                    placeholder="Search"
-                                    value={search}
-                                    name="search"
-                                    onChange={handleChange}
-                                />
-                                <InputGroupAddon
-                                    addonType="append"
-                                >
-                                    <Button
-                                        type="submit"
-                                        color="dark"
-                                    >
-                                        <i className="fas fa-search" />
-                                    </Button>
-                                </InputGroupAddon>
-                            </InputGroup>
-                        </FormGroup>
-                    </Form>
+                    <SearchForm
+                        handleFormSubmit={handleFormSubmit}
+                        inputType="search"
+                        placeholder="Search for a movie"
+                        value={search}
+                        name="search"
+                        handleChange={handleChange}
+                    />
                 </div>
             </div>
-        </Container>
+        </div>
     );
 }
 
-const MovieWithSocket = props => (
+const MovieSearchWithSocket = props => (
     <SocketContext.Consumer>
-        {socket => <Movie {...props} socket={socket} />}
+        {socket => <MovieSearch {...props} socket={socket} />}
     </SocketContext.Consumer>
 );
 
-export default MovieWithSocket;
+export default MovieSearchWithSocket;
 

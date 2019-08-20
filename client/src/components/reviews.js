@@ -5,12 +5,14 @@ import RoomContext from '../context/roomContext';
 import moment from 'moment';
 import Avatar from 'avataaars';
 import Spinner from './spinner';
-import { Badge, Container, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import SubTitle from './subTitle';
+import { Badge, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 
-const Messages = ({ socket }) => {
+const Reviews = ({ socket }) => {
 
     // Context
     const { room } = useContext(RoomContext);
+    
     // State
     const [messages, setMessages] = useState([]);
     const [roomMessages, setRoomMessages] = useState([]);
@@ -48,21 +50,17 @@ const Messages = ({ socket }) => {
         };
     }, [socket])
 
-    // Msg div style
-    const msgDivStyle = {
-        marginTop: "20px",
-        height: "300px",
-        overflow: "scroll",
-        overflowX: "hidden"
-    }
-
     return (
         <div style={room ? { display: 'block' } : { display: 'none' }}>
-            <h4>{room} Reviews</h4>
+            <SubTitle
+                style={ roomMessages.length ? { display: "block" } : { display: "none" }}
+                className="reviewTitle"
+                number={roomMessages.length ? `${roomMessages.length}` : ``}
+                icon={<i className="fas fa-theater-masks" />}
+                header="Review(s)"
+            />
             {roomMessages.length ? (
-                <div
-                    style={msgDivStyle}
-                    className="messages">
+                <div className="messages">
                     {roomMessages.map(roomMessage => (
                         <Card key={roomMessage._id}>
                             <CardBody>
@@ -90,9 +88,9 @@ const Messages = ({ socket }) => {
                                                 {moment(roomMessage.date).fromNow()}
                                             </span>
                                             <Badge
-                                                color={roomMessage.result === 0 ? "warning" : roomMessage.result < 0 ? "danger" : roomMessage.result > 0 ? "success" : "dark"} pill
-                                                >
-                                                    {roomMessage.result === 0 ? "Neutral" : roomMessage.result < 0 ? "Negative" : roomMessage.result > 0 ? "Positive" : ""}
+                                                color={roomMessage.result === 0 ? "warning" : roomMessage.result < 0 ? "danger" : roomMessage.result > 0 ? "success" : "dark"}
+                                            >
+                                                {roomMessage.result === 0 ? "Neutral" : roomMessage.result < 0 ? "Negative" : roomMessage.result > 0 ? "Positive" : ""}
                                             </Badge>
                                         </span>
                                     </strong>
@@ -106,17 +104,17 @@ const Messages = ({ socket }) => {
                 </div>
             ) : (
                     <Spinner
-                        altMsg="No Results..."
+                        altMsg="No Reviews..."
                     />
                 )}
         </div>
     );
 }
 
-const MessagesWithSocket = props => (
+const ReviewsWithSocket = props => (
     <SocketContext.Consumer>
-        {socket => <Messages {...props} socket={socket} />}
+        {socket => <Reviews {...props} socket={socket} />}
     </SocketContext.Consumer>
 );
 
-export default MessagesWithSocket;
+export default ReviewsWithSocket;

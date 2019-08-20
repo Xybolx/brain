@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Aldrich&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Special+Elite&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Monoton&display=swap');
 
 .App {
   text-align: center;
@@ -42,7 +43,7 @@
 
 @keyframes Curtain {
   0% {
-    background: url("https://ak6.picdn.net/shutterstock/videos/4744526/thumb/1.jpg");
+    background: url("https://ak6.picdn.net/shutterstock/videos/4744526/thumb/1.jpg"), url("https://s3-us-east-2.amazonaws.com/fgwebsitemedia/wp-content/uploads/2018/03/02161726/vintage-film-overlays.gif");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position-y: bottom;
@@ -55,6 +56,48 @@
   }
 }
 
+@keyframes Neon {
+  10%{
+    color: transparent;
+    text-shadow: 1px 1px 1px transparent;
+  }
+  20%{
+    color: white;
+    text-shadow: 1px 1px 2px gold;
+  }
+  30%{
+    color: transparent;
+    text-shadow: 1px 1px 1px transparent;
+  }
+  40%{
+    color: white;
+    text-shadow: 1px 1px 2px dodgerblue;
+  }
+  50%{
+    color: transparent;
+    text-shadow: 1px 1px 2px transparent;
+  }
+  60%{
+    color: white;
+    text-shadow: 1px 1px 2px tomato;
+  }
+  70%{
+    color: transparent;
+    text-shadow: 1px 1px 2px transparent;
+  }
+  80%{
+    color: white;
+    text-shadow: 1px 1px 2px violet; 
+  }
+  90%{
+    color: transparent;
+    text-shadow: 1px 1px 2px transparent;
+  }
+  100%{
+    color: white;
+  }
+}
+
 .toast-header {
   color: black;
 }
@@ -64,9 +107,13 @@
 }
 
 .messages {
-  text-align: left;
-  scrollbar-width: 1px !important;
-  max-height: 200px;
+  text-align: center;
+  min-height: 250px;
+  max-height: 250px;
+  background: url("imgs/clap.jpg");
+  overflow-y: scroll;
+  background-size: contain;
+  background-repeat: round;
 }
 
 .toast {
@@ -77,7 +124,7 @@
   word-wrap: normal;
   word-break: break-word;
   text-align: center;
-  color: black;
+  color: white;
 }
 
 .buttonDiv {
@@ -87,16 +134,21 @@
 }
 
 .img-fluid {
-  max-width: 100%;
-  max-height: 300px;
-  min-height: 200px;
-  animation: Fade 2.75s;
+  width: 50%;
+  max-height: 375px;
+  min-height: 300px;
+  animation: Fade 2.70s;
 }
 
 .users {
   margin-bottom: 20px;
   text-align: center;
   font-family: 'Aldrich', sans-serif;
+}
+
+.usersDiv {
+  max-height: 250px;
+  overflow-y: scroll;
 }
 
 .card-title {
@@ -115,11 +167,18 @@
 
 .progress {
   text-shadow: 1px 1px 1px black;
-  background: rgba(0, 0, 0, 0.507) !important;
+  background: transparent !important;
   overflow: visible !important;
   border-radius: 0% !important;
   margin-left: 30px;
   margin-right: 30px;
+  font-family: 'Aldrich', sans-serif;
+}
+
+.statTitle {
+  font-family: 'Permanent Marker', cursive;
+  color: white;
+  border-bottom: solid white;
 }
 
 .bg-danger {
@@ -135,7 +194,7 @@
 }
 
 .bg-dark {
-  background: linear-gradient(black, black, silver);
+  background: linear-gradient(darkred, black, black, black, silver, black, black, black, darkred);
 }
 
 .badge-warning {
@@ -168,9 +227,8 @@
   background-position: right;
   z-index: 0;
   cursor: pointer;
-  top: 40px !important;
+  top: 30px !important;
   height: 10%;
-  opacity: 1 !important;
 }
 
 .carousel-control-next {
@@ -181,9 +239,8 @@
   z-index: 0;
   transform: rotate(180deg);
   cursor: pointer;
-  top: 40px !important;
+  top: 30px !important;
   height: 10%;
-  opacity: 1 !important;
 }
 
 .carousel-control-next-icon {
@@ -219,19 +276,34 @@
 
 #brandSpan {
   vertical-align: -4px;
-  font-family: 'Aldrich', sans-serif;
+  font-family: 'Monoton', cursive;
+  text-shadow: 1px 1px 1px gold;
+  background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.514);
+  background-size: contain;
+  background-repeat: round;
+  background-size: contain;
+  background-repeat: round;
 }
 
 .spinnerSpan {
   vertical-align: -11px;
-  text-shadow: 1px 1px 1px silver;
 }
 
-#titleSpan {
+.titleSpan {
+  color: white;
   vertical-align: -11px;
-  text-shadow: 1px 1px 1px silver;
-  font-family: 'Aldrich', sans-serif;
+  text-shadow: 1px 1px 1px gold;
+  font-family: 'Monoton', cursive;
+  background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.514);
+  background-size: contain;
+  background-repeat: round;
 }
+
+/* .titleDiv {
+  background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.514);
+  background-size: contain;
+  background-repeat: round;
+} */
 
 .navbar-toggler {
   background: url("imgs/marquee.gif"), linear-gradient(black, black, silver) !important;
@@ -242,18 +314,19 @@
   font-family: 'Aldrich', sans-serif;
 }
 
-h2,
+
 h3,
 h4,
 h5,
 h6 {
-  text-shadow: 1px 1px 1px silver;
-  font-family: 'Aldrich', sans-serif;
+  color: whitesmoke;
+  font-family: 'Monoton', cursive;
 }
 
 h4 {
-  background: linear-gradient(black, black, silver, black, black);
   color: white;
+  text-shadow: 1px 1px 1px gold;
+  background: linear-gradient(darkred, black, silver, black, darkred);
 }
 
 .btn-dark {
@@ -269,28 +342,22 @@ h4 {
   font-family: 'Aldrich', sans-serif;
 }
 
-.fa-layers-counter {
-  border: solid black;
-  text-shadow: 1px 1px 1px black;
-  border-radius: 1rem;
-}
-
 .movieTitleDiv {
   font-family: 'Limelight', cursive;
-  background: url("https://static.wixstatic.com/media/a6ce87_c2d0a2dc44e14355b9e6e078fa72d1f2~mv2.gif");
-  background-size: 100% 100%;
+  background: url("http://www.permanentmemories.com.au/wp-content/uploads/2016/12/twuceh.gif"), url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif");
+  background-size: cover, contain;
+  background-blend-mode: multiply;
   background-clip: border-box;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y, round;
   background-position: center;
-  /* background: rgba(0, 0, 0, 0.562); */
   padding-bottom: 10px;
   padding-top: 10px;
-  /* padding-right: 10px;
-  padding-left: 10px; */
   max-width: 100%;
   margin-left: 20px;
   margin-right: 20px;
   color: black;
+  text-shadow: 1px 1px 1px rgba(255, 255, 0, 0.329);
+  text-transform: uppercase; 
 }
 
 .movieTitleSpan {
@@ -300,36 +367,21 @@ h4 {
 
 .userStrong {
   font-family: 'Limelight', cursive;
-  color: black;
 }
 
 .movieStrong {
   font-family: 'Limelight', cursive;
-  color: white;
+  color: black;
 }
 
 p {
-  font-family: 'Special Elite', cursive;
+  font-family: 'Aldrich', sans-serif;
   word-wrap: normal;
   word-break: break-word;
   color: whitesmoke;
+  text-shadow: 1px 1px 1px darkred;
+
 }
-
-/* .carousel-item {
-  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position-y: bottom;
-  animation: Curtain 6s;
-} */
-
-/* .carousel {
-  background: url("https://s7.orientaltrading.com/is/image/OrientalTrading/3_2329?$PDP_VIEWER_IMAGE$");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position-y: bottom;
-  animation: Curtain 6s;
-} */
 
 .searchDiv {
   background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-linear-gradient(black, black, silver);
@@ -340,7 +392,7 @@ p {
 }
 
 .insideSearch {
-  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-radial-gradient(black, black, silver);
+  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), url("https://s3-us-east-2.amazonaws.com/fgwebsitemedia/wp-content/uploads/2018/03/02161726/vintage-film-overlays.gif");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position-y: bottom;
@@ -348,51 +400,45 @@ p {
 }
 
 .insideMovies {
-  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-radial-gradient(black, silver, black, black, black);
+  background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), url("https://s3-us-east-2.amazonaws.com/fgwebsitemedia/wp-content/uploads/2018/03/02161726/vintage-film-overlays.gif");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-position-y: bottom;
   animation: Curtain 5s;
 }
 
 .plot {
-  /* margin-left: 50px;
-  margin-right: 50px; */
+  margin-bottom: 50px;
   color: white;
   text-shadow: 1px 1px 1px darkred;
 }
 
 .released {
-  /* margin-left: 50px;
-  margin-right: 50px; */
   color: white;
   text-shadow: 1px 1px 1px darkred;
 }
 
 .director {
-  /* margin-left: 50px;
-  margin-right: 50px; */
   color: white;
   text-shadow: 1px 1px 1px darkred;
 }
 
 .genre {
-  /* margin-left: 50px;
-  margin-right: 50px; */
   color: white;
   text-shadow: 1px 1px 1px darkred;
 }
 
 .amazon {
-  /* margin-left: 50px;
-  margin-right: 50px; */
+  font-family: 'Aldrich', sans-serif;
+}
+
+.trailer {
   font-family: 'Aldrich', sans-serif;
 }
 
 .plotTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
-  background: rgba(0, 0, 0, 0.562);
+  background: rgba(0, 0, 0, 0.76);
   margin-left: 30px;
   margin-right: 30px;
 }
@@ -400,7 +446,7 @@ p {
 .releasedTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
-  background: rgba(0, 0, 0, 0.562);
+  background: rgba(0, 0, 0, 0.76);
   margin-left: 30px;
   margin-right: 30px;
 }
@@ -408,7 +454,7 @@ p {
 .directorTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
-  background: rgba(0, 0, 0, 0.562);
+  background: rgba(0, 0, 0, 0.76);
   margin-left: 30px;
   margin-right: 30px;
 }
@@ -416,7 +462,7 @@ p {
 .genreTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
-  background: rgba(0, 0, 0, 0.562);
+  background: rgba(0, 0, 0, 0.76);
   margin-left: 30px;
   margin-right: 30px;
 }
@@ -424,36 +470,121 @@ p {
 .amazonTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
-  background: rgba(0, 0, 0, 0.562);
+  background: rgba(0, 0, 0, 0.76);
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.trailerTitle {
+  background: rgba(0, 0, 0, 0.76);
   margin-left: 30px;
   margin-right: 30px;
 }
 
 .left {
-  background: transparent !important;
-  /* padding: 0px !important; */
-  /* border-right: solid black;
-  border-left: solid black;
-  border-top: solid black;
-  border-bottom: solid black; */
+  background: url("https://vanessabrooks2020.com/wp-content/uploads/2017/02/seats.jpg") !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+  background-clip: padding-box;
   border-collapse: separate;
   border-spacing: 1px;
   padding-top: 20px !important;
 }
 
 .right {
-  background: transparent !important;
-  /* padding: 0px !important; */
-  /* border-right: solid black;
-  border-left: solid black;
-  border-top: solid black;
-  border-bottom: solid black; */
-  border-collapse: separate;
-  border-spacing: 1px;
+  background: black !important;
+  background-size: contain !important;
+  background-repeat: round;
   padding-top: 20px !important;
 }
 
-.container {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
+.card {
+  background: #161616a9 !important;
+  color: white;
+  font-family: 'Aldrich', sans-serif;
+  border-radius: 0px !important;
+  border-bottom: .5px solid white !important;
+}
+
+form {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.table td {
+  vertical-align: baseline !important;
+  color: white;
+  padding: 0px !important;
+}
+
+.table th {
+  vertical-align: baseline !important;
+  padding: 0px !important;
+}
+
+.table tr {
+ background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.514);
+ background-size: contain;
+ background-repeat: round;
+}
+
+.reviewTitle {
+  color: white;
+}
+
+.details {
+  margin-left: 45px;
+  margin-right: 45px;
+  margin-bottom: 40px;
+  max-height: 250px;
+}
+
+.modal-body {
+  background: url("imgs/clap.jpg");
+  background-size: cover;
+  background-repeat: round;
+  text-align: center;
+}
+
+h6 {
+  font-family: 'Limelight', cursive;
+  color: black;
+}
+
+.statsTitle {
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  margin-top: 10px;
+  padding-top: 70px;
+}
+
+#titleHeader {
+  color: black;
+}
+
+.fa-brain {
+  color: lightpink;
+}
+
+.homeLink {
+  font-family: 'Aldrich', sans-serif;
+  text-shadow: 1px 1px 1px transparent;
+}
+
+.homeText {
+  font-family: 'Aldrich', sans-serif;
+  color: black;
+  text-shadow: 1px 1px 1px gold;
+}
+
+.label {
+  font-family: 'Aldrich', sans-serif;
+  color: black;
+  text-shadow: 1px 1px 1px gold;
+  margin-left: 5px;
+}
+
+.closeDiv {
+  text-align: right;
 }

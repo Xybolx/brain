@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Container, ListGroup, ListGroupItem, ListGroupItemText } from 'reactstrap';
+import { Table } from 'reactstrap';
 import UserContext from '../context/userContext';
 import UsersContext from '../context/usersContext';
 import SocketContext from '../context/socketContext';
@@ -7,12 +7,19 @@ import API from '../utils/API';
 import Avatar from 'avataaars';
 import UserStats from './userStats';
 import Spinner from './spinner';
+import SubTitle from './subTitle';
 
 const Users = ({ socket }) => {
 
     // Context
     const { user } = useContext(UserContext);
     const { users, setUsers } = useContext(UsersContext);
+
+    const getUsers = () => {
+        API.getUsers()
+            .then(res => setUsers(res.data))
+            .catch(err => console.log(err))
+    };
 
     useEffect(() => {
         socket.emit('SEND_USER', {
@@ -37,42 +44,55 @@ const Users = ({ socket }) => {
 
 
     return (
-        <div style={{ marginBottom: 30 }}>
-            <h4>{users.length ? users.length : ""} <i className="fas fa-users" /> Users</h4>
-            {users.length ? (
-                <ListGroup className="users">
-                    {users.map(online => (
-                        <ListGroupItem key={online._id}>
-                            <ListGroupItemText className="userStrong">
-                                <Avatar
-                                    style={{ width: '30px', height: '30px' }}
-                                    avatarStyle={online.avatar.avatarStyle}
-                                    topType={online.avatar.topType}
-                                    accessoriesType={online.avatar.accessoriesType}
-                                    hairColor={online.avatar.hairColor}
-                                    facialHairType={online.avatar.facialHairType}
-                                    facialHairColor={online.avatar.facialHairColor}
-                                    clotheType={online.avatar.clotheType}
-                                    clotheColor={online.avatar.clotheColor}
-                                    graphicType={online.avatar.graphicType}
-                                    eyeType={online.avatar.eyeType}
-                                    eyebrowType={online.avatar.eyebrowType}
-                                    mouthType={online.avatar.mouthType}
-                                    skinColor={online.avatar.skinColor}
-                                    online={online}
-                                />
-                                {online.username}&nbsp;
-                                <UserStats online={online} />
-                            </ListGroupItemText>
-                        </ListGroupItem>
-                    ))}
-                </ListGroup>
-            ) : (
-                    <Spinner
-                        altMsg="Loading..."
-                    />
-                )}
-        </div>
+        <>
+            <SubTitle
+                number={users.length ? users.length : ""}
+                icon={<i className="fas fa-users" />}
+                header="Reviewers"
+            />
+            <div className="usersDiv">
+                {users.length ? (
+                    <Table size="sm" responsive>
+                        <tbody className="users">
+                            {users.map(online => (
+                                <tr key={online._id}>
+                                    <td className="userStrong">
+                                        <Avatar
+                                            style={{ width: '30px', height: '30px' }}
+                                            avatarStyle={online.avatar.avatarStyle}
+                                            topType={online.avatar.topType}
+                                            accessoriesType={online.avatar.accessoriesType}
+                                            hairColor={online.avatar.hairColor}
+                                            facialHairType={online.avatar.facialHairType}
+                                            facialHairColor={online.avatar.facialHairColor}
+                                            clotheType={online.avatar.clotheType}
+                                            clotheColor={online.avatar.clotheColor}
+                                            graphicType={online.avatar.graphicType}
+                                            eyeType={online.avatar.eyeType}
+                                            eyebrowType={online.avatar.eyebrowType}
+                                            mouthType={online.avatar.mouthType}
+                                            skinColor={online.avatar.skinColor}
+                                            online={online}
+                                            getUsers={getUsers}
+                                        />
+                                    </td>
+                                    <td>
+                                        {online.username}
+                                    </td>
+                                    <td>
+                                        <UserStats online={online} getUsers={getUsers} />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                ) : (
+                        <Spinner
+                            altMsg="Loading..."
+                        />
+                    )}
+            </div>
+        </>
     );
 }
 

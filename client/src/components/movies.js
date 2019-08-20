@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Carousel, CarouselItem, CarouselIndicators, CarouselControl, Container } from 'reactstrap';
+import { Carousel, CarouselItem, CarouselIndicators, CarouselControl } from 'reactstrap';
 import moment from 'moment';
 import SocketContext from '../context/socketContext';
 import RoomContext from '../context/roomContext';
 import UserContext from '../context/userContext';
 import MovieDetail from './movieDetail';
 import Spinner from './spinner';
-import API from "../utils/API";
+import SubTitle from './subTitle';
+import API from '../utils/API';
 
 const Movies = ({ socket }) => {
 
     // Context
-    const { setRoom } = useContext(RoomContext);
+    const { room, setRoom } = useContext(RoomContext);
     const { user } = useContext(UserContext);
 
     // State
@@ -46,15 +47,31 @@ const Movies = ({ socket }) => {
     }
 
     const handleSetRoom = id => {
-        API.getMovie(id)
-            .then(res => {
-                socket.emit('SEND_JOIN_ROOM', {
-                    room: res.data.title,
-                    user: user.username
-                })
+        if (room) {
+            socket.emit('SEND_LEAVE_ROOM', {
+                room: room,
+                user: user.username
             })
-            .catch(err => console.log(err))
+            API.getMovie(id)
+                .then(res => {
+                    socket.emit('SEND_JOIN_ROOM', {
+                        room: res.data.title,
+                        user: user.username
+                    })
+                })
+                .catch(err => console.log(err))
+        } else {
+            API.getMovie(id)
+                .then(res => {
+                    socket.emit('SEND_JOIN_ROOM', {
+                        room: res.data.title,
+                        user: user.username
+                    })
+                })
+                .catch(err => console.log(err))
+        }
     }
+
     // Get and set state
     useEffect(() => {
         API.getMovies()
@@ -65,7 +82,6 @@ const Movies = ({ socket }) => {
     useEffect(() => {
         socket.on('RECEIVE_MOVIE', data => {
             if (data) {
-                console.log('receive movie: ' + data)
                 API.getMovies()
                     .then(res => setItems(res.data))
                     .catch(err => console.log(err))
@@ -79,7 +95,6 @@ const Movies = ({ socket }) => {
     useEffect(() => {
         socket.on('RECEIVE_JOIN_ROOM', data => {
             if (data) {
-                console.log(data);
                 setRoom(data.room);
             }
         });
@@ -88,11 +103,27 @@ const Movies = ({ socket }) => {
         };
     }, [socket, setRoom])
 
+    useEffect(() => {
+        socket.on('RECEIVE_LEAVE_ROOM', data => {
+            if (data) {
+                console.log(data);
+            }
+        });
+        return () => {
+            socket.off('RECEIVE_LEAVE_ROOM');
+        };
+    }, [socket])
+
     return (
-        <Container style={{ marginBottom: 20 }}>
-            <h4>{items.length ? items.length : ""} <i className="fas fa-film" /> Reviewed</h4>
+        <div style={{ marginBottom: 60 }}>
+            <SubTitle
+                number={items.length ? items.length : ""}
+                icon={<i className="fas fa-film" />}
+                header="Reviewed"
+            />
             {items.length ? (
                 <Carousel
+                    slide={false}
                     pause="hover"
                     keyboard={false}
                     interval={false}
@@ -115,7 +146,6 @@ const Movies = ({ socket }) => {
                                     released={moment(item.released).format('M/D/YYYY')}
                                     director={item.director}
                                     plot={item.plot}
-                                    genre={item.genre}
                                 />
                             </CarouselItem>
                         );
@@ -128,7 +158,7 @@ const Movies = ({ socket }) => {
                         altMsg="Loading..."
                     />
                 )}
-        </Container>
+        </div>
     );
 }
 
