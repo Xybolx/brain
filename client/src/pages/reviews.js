@@ -5,7 +5,6 @@ import Review from '../components/review';
 import Users from '../components/users';
 import MovieSearch from '../components/movieSearch';
 import Movies from '../components/movies';
-import Title from '../components/title';
 import Btn from '../components/btn';
 import { Row, Col, Collapse } from 'reactstrap';
 
@@ -39,7 +38,6 @@ const UserReviews = () => {
                 <Col
                     className="jumbotron jumbotron-fluid left"
                     md="6"
-                    style={{ marginBottom: 30 }}
                 >
                     <div
                         style={
@@ -64,7 +62,6 @@ const UserReviews = () => {
                 <Col
                     className="jumbotron jumbotron-fluid right"
                     md="6"
-                    style={{ marginBottom: 30 }}
                 >
                     <Users />
                     <Review />

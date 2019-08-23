@@ -68,7 +68,8 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
           <h6
             className="amazonTitle"
           >
-            <span
+            Amazon
+            <p
               className="amazon"
             >
               <a
@@ -78,12 +79,13 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
               >
                 <i className="fab fa-amazon" /> View on Amazon
                 </a>
-            </span>
+            </p>
           </h6>
           <h6
             className="trailerTitle"
           >
-            <span
+            Trailer
+            <p
               className="trailer"
             >
               <a
@@ -93,7 +95,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
               >
                 <i className="fab fa-youtube" /> View Trailer
                 </a>
-            </span>
+            </p>
           </h6>
           <h6
             className="releasedTitle"

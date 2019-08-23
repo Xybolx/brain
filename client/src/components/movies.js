@@ -89,7 +89,7 @@ const Movies = ({ socket, messages }) => {
     }, [socket, setRoom])
 
     return (
-        <div style={{ marginBottom: 60 }}>
+        <div style={{ marginBottom: 30 }}>
             <SubTitle
                 number={items.length ? items.length : ""}
                 icon={<i className="fas fa-film" />}
