@@ -1,21 +1,84 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import useInput from '../components/useInput';
+import API from '../utils/API';
+import UserContext from '../context/userContext';
 import IsValidEmailContext from '../context/isValidEmailContext';
 import IsValidPasswordContext from '../context/isValidPasswordContext';
 import Title from '../components/title';
 import Btn from '../components/btn';
 import { Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
 
-const LogInForm = ({ handleFormSubmit, emailValue, handleEmailChange, passwordValue, handlePasswordChange }) => {
+const LogInForm = () => {
 
     // Context
-    const { isValidEmail } = useContext(IsValidEmailContext);
-    const { isValidPassword } = useContext(IsValidPasswordContext);
+    const { setUser } = useContext(UserContext);
+    const { isValidEmail, setIsValidEmail } = useContext(IsValidEmailContext);
+    const { isValidPassword, setIsValidPassword } = useContext(IsValidPasswordContext);
+
+    // State
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [values, handleChange, handleClearInputs] = useInput();
+
+    // De-structure values
+    const { email, password } = values;
+
+    // Client-side validation
+    useEffect(() => {
+        const emailRegEx = /.+@.+\..+/;
+        const emailMatch = emailRegEx.test(email);
+        if (email && emailMatch) {
+            setIsValidEmail(true);
+        }
+        if (!emailMatch) {
+            setIsValidEmail(false);
+        }
+    }, [email, setIsValidEmail])
+
+    useEffect(() => {
+        const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
+        const passwordMatch = passwordRegEx.test(password);
+        if (password && passwordMatch) {
+            setIsValidPassword(true);
+        }
+        if (!passwordMatch) {
+            setIsValidPassword(false);
+        }
+    }, [password, setIsValidPassword])
+
+    // Get user and redirect function
+    const getUser = () => {
+        API.getUser()
+            .then(res => setUser(res.data))
+            .catch(err => console.log(err))
+    };
+
+    const redirect = () => {
+        setTimeout(() => setIsLoggedIn(true), 1000);
+    };
+
+    // Handle form submit
+    const handleFormSubmit = ev => {
+        ev.preventDefault();
+        if (email && password) {
+            API.logIn({
+                email,
+                password
+            })
+                .then(res => getUser())
+                .then(() => handleClearInputs())
+                .then(() => redirect())
+                .catch(err => console.log(err))
+        }
+    };
+
+    // Redirect to chat when user is logged in
+    if (isLoggedIn) {
+        return <Redirect to="/reviews" />
+    }
 
     return (
         <Form onSubmit={handleFormSubmit}>
-            <Title
-                header="Log In"
-            />
             <FormGroup>
                 <Label
                     className="label"
@@ -28,8 +91,8 @@ const LogInForm = ({ handleFormSubmit, emailValue, handleEmailChange, passwordVa
                     type="email"
                     name="email"
                     placeholder="Enter Email"
-                    value={emailValue}
-                    onChange={handleEmailChange}
+                    value={email || ""}
+                    onChange={handleChange}
                     required
                 />
                 <FormFeedback
@@ -62,8 +125,8 @@ const LogInForm = ({ handleFormSubmit, emailValue, handleEmailChange, passwordVa
                     type="password"
                     name="password"
                     placeholder="Enter Password"
-                    value={passwordValue}
-                    onChange={handlePasswordChange}
+                    value={password || ""}
+                    onChange={handleChange}
     
                     required
                 />

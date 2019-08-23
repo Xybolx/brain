@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import StatTitle from './statTitle';
 import { Badge, Progress } from 'reactstrap';
+import StatTitle from './statTitle';
 
 const MovieStats = ({ title, messages }) => {
 
@@ -119,7 +119,6 @@ const MovieStats = ({ title, messages }) => {
                 <Progress
                     color="warning"
                     value={neutralTotal}
-                    aria-valuemin={0}
                     max={movieMessages.length}
                 >
                     Neutral {neutralTotal}
@@ -127,7 +126,6 @@ const MovieStats = ({ title, messages }) => {
                 <Progress
                     color="danger"
                     value={negativeTotal}
-                    aria-valuemin={0}
                     max={movieMessages.length}
                 >
                     Negative {negativeTotal}

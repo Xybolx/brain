@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import Avatar from 'avataaars';
 import API from '../utils/API';
 import useInput from './useInput';
-import Title from './title';
 import IsValidEmailContext from '../context/isValidEmailContext';
 import IsValidPasswordContext from '../context/isValidPasswordContext';
 import IsValidUsernameContext from '../context/isValidUsernameContext';
@@ -25,6 +24,9 @@ const SignUpForm = () => {
     // useInput
     const [values, handleChange, handleClearInputs] = useInput();
 
+    // De-structuring values
+    const { email, password, username, avatarStyle, topType, accessoriesType, hairColor, facialHairType, facialHairColor, clotheType, clotheColor, graphicType, eyeType, eyebrowType, mouthType, skinColor } = values;
+
     // Get user and redirect function
     const getUser = () => {
         API.getUser()
@@ -38,7 +40,6 @@ const SignUpForm = () => {
 
     // Client-side validation
     useEffect(() => {
-        const email = values.email;
         const emailRegEx = /.+@.+\..+/;
         const emailMatch = emailRegEx.test(email);
         if (email && emailMatch) {
@@ -47,10 +48,9 @@ const SignUpForm = () => {
         if (!emailMatch) {
             setIsValidEmail(false);
         }
-    }, [values.email, setIsValidEmail])
+    }, [email, setIsValidEmail])
 
     useEffect(() => {
-        const password = values.password;
         const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
         const passwordMatch = passwordRegEx.test(password);
         if (password && passwordMatch) {
@@ -59,10 +59,9 @@ const SignUpForm = () => {
         if (!passwordMatch) {
             setIsValidPassword(false);
         }
-    }, [values.password, setIsValidPassword])
+    }, [password, setIsValidPassword])
 
     useEffect(() => {
-        const username = values.username;
         const usernameRegEx = /^(?=[0-9a-zA-Z#@$?]{2,}$).*/;
         const usernameMatch = usernameRegEx.test(username);
         if (username && usernameMatch) {
@@ -71,31 +70,31 @@ const SignUpForm = () => {
         if (!usernameMatch) {
             setIsValidUsername(false);
         }
-    }, [values.username, setIsValidUsername])
+    }, [username, setIsValidUsername])
 
     
 
     // handle submit
     const handleFormSubmit = ev => {
         ev.preventDefault();
-        if (values.email && values.username && values.password) {
+        if (email && username && password) {
             API.signUp({
-                email: values.email,
-                username: values.username,
-                password: values.password,
-                avatarStyle: values.avatarStyle,
-                topType: values.topType,
-                accessoriesType: values.accessoriesType,
-                hairColor: values.hairColor,
-                facialHairType: values.facialHairType,
-                facialHairColor: values.facialHairColor,
-                clotheType: values.clotheType,
-                clotheColor: values.clotheColor,
-                graphicType: values.graphicType,
-                eyeType: values.eyeType,
-                eyebrowType: values.eyebrowType,
-                mouthType: values.mouthType,
-                skinColor: values.skinColor,
+                email,
+                username,
+                password,
+                avatarStyle,
+                topType,
+                accessoriesType,
+                hairColor,
+                facialHairType,
+                facialHairColor,
+                clotheType,
+                clotheColor,
+                graphicType,
+                eyeType,
+                eyebrowType,
+                mouthType,
+                skinColor,
             })
                 .then(res => handleClearInputs())
                 .then(() => getUser())
@@ -106,21 +105,21 @@ const SignUpForm = () => {
 
     // styles
     const facialStyle = {
-        ...values.facialHairType
+        ...facialHairType
             !== 'Blank'
             ? { display: 'block', textAlign: 'left' }
             : { display: 'none', textAlign: 'left' }
     }
 
     const fabricStyle = {
-        ...values.clotheType
+        ...clotheType
             === 'BlazerShirt'
             ? { display: 'none', textAlign: 'left' }
             : { display: 'block', textAlign: 'left' },
     }
 
     const graphicStyle = {
-        ...values.clotheType
+        ...clotheType
             === 'GraphicShirt'
             ? { display: 'block', textAlign: 'left' }
             : { display: 'none', textAlign: 'left' }
@@ -140,9 +139,6 @@ const SignUpForm = () => {
     return (
         <div style={{ textAlign: "center" }}>
             <Form onSubmit={handleFormSubmit}>
-                <Title
-                    header="Sign Up"
-                />
                 <FormGroup>
                     <Label
                         className="label"
@@ -154,7 +150,7 @@ const SignUpForm = () => {
                         type="email"
                         name="email"
                         placeholder="Enter Email"
-                        value={values.email}
+                        value={email}
                         valid={isValidEmail}
                         invalid={!isValidEmail}
                         onChange={handleChange}
@@ -188,7 +184,7 @@ const SignUpForm = () => {
                         type="text"
                         name="username"
                         placeholder="Enter Username"
-                        value={values.username}
+                        value={username}
                         valid={isValidUsername}
                         invalid={!isValidUsername}
                         onChange={handleChange}
@@ -224,7 +220,7 @@ const SignUpForm = () => {
                         type="password"
                         name="password"
                         placeholder="Enter Password"
-                        value={values.password}
+                        value={password}
                         valid={isValidPassword}
                         invalid={!isValidPassword}
                         onChange={handleChange}
@@ -252,37 +248,34 @@ const SignUpForm = () => {
                 <Avatar
                     className="img-fluid"
                     style={{ width: '200px', height: '200px' }}
-                    avatarStyle={values.avatarStyle}
-                    topType={values.topType}
-                    accessoriesType={values.accessoriesType}
-                    hairColor={values.hairColor}
-                    facialHairType={values.facialHairType}
-                    facialHairColor={values.facialHairColor}
-                    clotheType={values.clotheType}
-                    clotheColor={values.clotheColor}
-                    graphicType={values.graphicType}
-                    eyeType={values.eyeType}
-                    eyebrowType={values.eyebrowType}
-                    mouthType={values.mouthType}
-                    skinColor={values.skinColor}
-                />
-                <Title
-                    header="Avatar"
+                    avatarStyle={avatarStyle}
+                    topType={topType}
+                    accessoriesType={accessoriesType}
+                    hairColor={hairColor}
+                    facialHairType={facialHairType}
+                    facialHairColor={facialHairColor}
+                    clotheType={clotheType}
+                    clotheColor={clotheColor}
+                    graphicType={graphicType}
+                    eyeType={eyeType}
+                    eyebrowType={eyebrowType}
+                    mouthType={mouthType}
+                    skinColor={skinColor}
                 />
                 <div style={avatarSelectStyle}>
                     <FormGroup>
                         <Label
                             className="label"
                         >
-                            Top Select
+                            Hair Type Select
                                 </Label>
                         <div>
                             <Input
                                 type="select"
                                 name="topType"
-                                value={values.topType}
+                                value={topType}
                                 onChange={handleChange}>
-                                <option></option>
+                                <option>Select Hair Type</option>
                                 <option>NoHair</option>
                                 <option>Eyepatch</option>
                                 <option>LongHairBigHair</option>
@@ -323,9 +316,9 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="accessoriesType"
-                                value={values.accessoriesType}
+                                value={accessoriesType}
                                 onChange={handleChange}>
-                                <option>Blank</option>
+                                <option>Select Accessory Type</option>
                                 <option>Kurt</option>
                                 <option>Prescription01</option>
                                 <option>Prescription02</option>
@@ -345,9 +338,9 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="hairColor"
-                                value={values.hairColor}
+                                value={hairColor}
                                 onChange={handleChange}>
-                                <option></option>
+                                <option>Select Hair Color</option>
                                 <option>Auburn</option>
                                 <option>Black</option>
                                 <option>Blonde</option>
@@ -371,9 +364,9 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="facialHairType"
-                                value={values.facialHairType}
+                                value={facialHairType}
                                 onChange={handleChange}>
-                                <option>Blank</option>
+                                <option>Select Facial Hair Type</option>
                                 <option>BeardMedium</option>
                                 <option>BeardLight</option>
                                 <option>BeardMajestic</option>
@@ -391,9 +384,9 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="facialHairColor"
-                                value={values.facialHairColor}
+                                value={facialHairColor}
                                 onChange={handleChange}>
-                                <option></option>
+                                <option>Select Facial Hair Color</option>
                                 <option>Auburn</option>
                                 <option>Black</option>
                                 <option>Blonde</option>
@@ -415,9 +408,9 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="clotheType"
-                                value={values.clotheType}
+                                value={clotheType}
                                 onChange={handleChange}>
-                                <option></option>
+                                <option>Select Clothing Type</option>
                                 <option>BlazerShirt</option>
                                 <option>BlazerSweater</option>
                                 <option>CollarSweater</option>
@@ -440,9 +433,9 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="clotheColor"
-                                value={values.clotheColor}
+                                value={clotheColor}
                                 onChange={handleChange}>
-                                <option></option>
+                                <option>Select Clothing Color</option>
                                 <option>Black</option>
                                 <option>Blue01</option>
                                 <option>Blue02</option>
@@ -471,9 +464,9 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="graphicType"
-                                value={values.graphicType}
+                                value={graphicType}
                                 onChange={handleChange}>
-                                <option></option>
+                                <option>Select Graphic Type</option>
                                 <option>Bat</option>
                                 <option>Cumbia</option>
                                 <option>Deer</option>
@@ -498,7 +491,7 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="eyeType"
-                                value={values.eyeType}
+                                value={eyeType}
                                 onChange={handleChange}>
                                 <option>Default</option>
                                 <option>Close</option>
@@ -525,7 +518,7 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="eyebrowType"
-                                value={values.eyebrowType}
+                                value={eyebrowType}
                                 onChange={handleChange}>
                                 <option>Default</option>
                                 <option>Angry</option>
@@ -552,7 +545,7 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="mouthType"
-                                value={values.mouthType}
+                                value={mouthType}
                                 onChange={handleChange}>
                                 <option>Default</option>
                                 <option>Concerned</option>
@@ -579,8 +572,9 @@ const SignUpForm = () => {
                             <Input
                                 type="select"
                                 name="skinColor"
-                                value={values.skinColor || "Light"}
+                                value={skinColor}
                                 onChange={handleChange}>
+                                <option>Select Skin Color</option>
                                 <option>Tanned</option>
                                 <option>Yellow</option>
                                 <option>Pale</option>
@@ -603,7 +597,7 @@ const SignUpForm = () => {
                         color="dark"
                         size="md"
                         icon={<i className="fas fa-user-plus" />}
-                        name="Submit"
+                        name="Sign Up"
                     >
                     </Btn>
                 </div>

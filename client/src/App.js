@@ -50,7 +50,7 @@ const App = () => {
   return (
     <Router>
       <TopNav />
-        <Container className="App">
+      <Container className="App">
         <Switch>
           <SocketContext.Provider value={socket}>
             <UserContext.Provider value={userValue}>
@@ -63,10 +63,10 @@ const App = () => {
                         <Route exact path="/signup" component={SignUp} />
                         <Route exact path="/login" component={LogIn} />
                         <Route exact path="/reviews" render={() => (
-                          userValue.user !== null && userValue.user !== "" ? (
-                            <UserReviews />
+                          userValue.user === null ? (
+                            <Redirect to="/logout" />
                           ) : (
-                              <Redirect to="/logout" />
+                              <UserReviews />
                             )
                         )} />
                         <Route exact path="/logout" component={LogOut} />

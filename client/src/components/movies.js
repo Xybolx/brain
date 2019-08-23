@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Carousel, CarouselItem, CarouselIndicators, CarouselControl } from 'reactstrap';
 import moment from 'moment';
+import API from '../utils/API';
 import SocketContext from '../context/socketContext';
 import RoomContext from '../context/roomContext';
 import UserContext from '../context/userContext';
 import MovieDetail from './movieDetail';
 import Spinner from './spinner';
 import SubTitle from './subTitle';
-import API from '../utils/API';
 
-const Movies = ({ socket }) => {
+const Movies = ({ socket, messages }) => {
 
     // Context
-    const { room, setRoom } = useContext(RoomContext);
+    const { setRoom } = useContext(RoomContext);
     const { user } = useContext(UserContext);
 
     // State
@@ -47,29 +47,14 @@ const Movies = ({ socket }) => {
     }
 
     const handleSetRoom = id => {
-        if (room) {
-            socket.emit('SEND_LEAVE_ROOM', {
-                room: room,
-                user: user.username
+        API.getMovie(id)
+            .then(res => {
+                socket.emit('SEND_JOIN_ROOM', {
+                    room: res.data.title,
+                    user: user.username
+                })
             })
-            API.getMovie(id)
-                .then(res => {
-                    socket.emit('SEND_JOIN_ROOM', {
-                        room: res.data.title,
-                        user: user.username
-                    })
-                })
-                .catch(err => console.log(err))
-        } else {
-            API.getMovie(id)
-                .then(res => {
-                    socket.emit('SEND_JOIN_ROOM', {
-                        room: res.data.title,
-                        user: user.username
-                    })
-                })
-                .catch(err => console.log(err))
-        }
+            .catch(err => console.log(err))
     }
 
     // Get and set state
@@ -103,17 +88,6 @@ const Movies = ({ socket }) => {
         };
     }, [socket, setRoom])
 
-    useEffect(() => {
-        socket.on('RECEIVE_LEAVE_ROOM', data => {
-            if (data) {
-                console.log(data);
-            }
-        });
-        return () => {
-            socket.off('RECEIVE_LEAVE_ROOM');
-        };
-    }, [socket])
-
     return (
         <div style={{ marginBottom: 60 }}>
             <SubTitle
@@ -143,9 +117,10 @@ const Movies = ({ socket }) => {
                                     title={item.title}
                                     onClick={() => handleSetRoom(item._id)}
                                     src={item.src}
-                                    released={moment(item.released).format('M/D/YYYY')}
+                                    released={moment(item.released, 'DD-MMM-YYYY').format('M/D/YYYY')}
                                     director={item.director}
                                     plot={item.plot}
+                                    messages={messages}
                                 />
                             </CarouselItem>
                         );

@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import SearchForm from './searchForm';
 import moment from 'moment';
-import SocketContext from '../context/socketContext';
-import SearchDetail from './searchDetail';
-import Spinner from './spinner';
 import API from '../utils/API';
+import SocketContext from '../context/socketContext';
+import useInput from './useInput';
+import SearchDetail from './searchDetail';
+import SearchForm from './searchForm';
+import SubTitle from './subTitle';
+import Spinner from './spinner';
 
 const MovieSearch = ({ socket, toggle }) => {
 
     // State
     const [result, setResult] = useState({});
-    const [search, setSearch] = useState('');
+    const [values, handleChange, handleClearInputs] = useInput();
 
-    // Handle input change(search)
-    const handleChange = ev => {
-        setSearch(ev.target.value);
-    };
+    // De-structure values
+    const { search } = values;
 
     // Save a movie to the database
     const saveMovie = () => {
@@ -39,7 +39,7 @@ const MovieSearch = ({ socket, toggle }) => {
             })
             .catch(err => console.log(err))
         toggle();
-        setSearch('');
+        handleClearInputs();
         setResult({});
     };
 
@@ -54,8 +54,11 @@ const MovieSearch = ({ socket, toggle }) => {
     };
 
     return (
-        <div>
-            <h4><i className="fas fa-search" /> Search</h4>
+        <>
+            <SubTitle
+                header="Search"
+                icon={<i className="fas fa-search" />}
+            />
             <div style={{ marginTop: 20, marginBottom: 60 }}>
                 {result.Title ? (
                     <SearchDetail
@@ -76,13 +79,13 @@ const MovieSearch = ({ socket, toggle }) => {
                         handleFormSubmit={handleFormSubmit}
                         inputType="search"
                         placeholder="Search for a movie"
-                        value={search}
+                        value={search || ""}
                         name="search"
                         handleChange={handleChange}
                     />
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

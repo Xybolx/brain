@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
 import { Col } from 'reactstrap';
+import API from '../utils/API';
 import UserContext from '../context/userContext';
 import RoomContext from '../context/roomContext';
-import API from '../utils/API';
+import PageLogo from '../components/pageLogo';
 import Title from '../components/title';
 
 const LogOut = () => {
@@ -11,14 +11,6 @@ const LogOut = () => {
     // Context
     const { setUser } = useContext(UserContext);
     const { setRoom } = useContext(RoomContext);
-
-    // State
-    const [isLoggedOut, setIsLoggedOut] = useState(false);
-
-    // Re-direct
-    const redirect = () => {
-        setTimeout(() => setIsLoggedOut(true), 1000);
-    };
 
     // Logout function runs on component mount
     useEffect(() => {
@@ -32,22 +24,18 @@ const LogOut = () => {
     useEffect(() => {
         const logOut = () => {
             API.logOut()
-                .then(() => redirect())
+                .then(res => window.location = "/")
                 .catch(err => console.log(err))
         };
         logOut();
-    }, [setUser, setRoom]);
-
-    // When user is logged out redirect to home
-    if (isLoggedOut) {
-        return <Redirect to="/" />
-    }
+    }, []);
 
     return (
-        <div style={{ marginTop: 60 }}>
+        <div style={{ marginTop: 30 }}>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <PageLogo />
                 <Title
-                    header="Log Out"
+                    header="LOG OUT"
                 />
             </Col>
         </div>

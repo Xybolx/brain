@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import API from '../utils/API';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import SocketContext from '../context/socketContext';
 import RoomContext from '../context/roomContext';
 import moment from 'moment';
@@ -8,26 +7,18 @@ import Spinner from './spinner';
 import SubTitle from './subTitle';
 import { Badge, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 
-const Reviews = ({ socket }) => {
+const Reviews = ({ socket, messages, getMessages }) => {
 
     // Context
     const { room } = useContext(RoomContext);
-    
+
     // State
-    const [messages, setMessages] = useState([]);
     const [roomMessages, setRoomMessages] = useState([]);
 
-    // Get messages function
-    const getMessages = () => {
-        API.getMessages()
-            .then(res => setMessages(res.data))
-            .catch(err => console.log(err))
-    };
-
     // Get and set state
-    useEffect(() => {
+    useCallback(() => {
         getMessages();
-    }, [])
+    }, [getMessages])
 
     useEffect(() => {
         const getRoomMessages = () => {
@@ -35,7 +26,7 @@ const Reviews = ({ socket }) => {
             setRoomMessages(roomMsgs);
         };
         getRoomMessages();
-    }, [room, messages])
+    }, [messages, room])
 
     // Subscribe and un-subscribe to socket
     useEffect(() => {
@@ -48,12 +39,12 @@ const Reviews = ({ socket }) => {
         return () => {
             socket.off('RECEIVE_MESSAGE');
         };
-    }, [socket])
+    }, [socket, getMessages])
 
     return (
         <div style={room ? { display: 'block' } : { display: 'none' }}>
             <SubTitle
-                style={ roomMessages.length ? { display: "block" } : { display: "none" }}
+                style={roomMessages.length ? { display: "block" } : { display: "none" }}
                 className="reviewTitle"
                 number={roomMessages.length ? `${roomMessages.length}` : ``}
                 icon={<i className="fas fa-theater-masks" />}
@@ -88,9 +79,24 @@ const Reviews = ({ socket }) => {
                                                 {moment(roomMessage.date).fromNow()}
                                             </span>
                                             <Badge
-                                                color={roomMessage.result === 0 ? "warning" : roomMessage.result < 0 ? "danger" : roomMessage.result > 0 ? "success" : "dark"}
+                                                color={
+                                                    roomMessage.result === 0
+                                                        ? "warning"
+                                                        : roomMessage.result < 0
+                                                            ? "danger"
+                                                            : roomMessage.result > 0
+                                                                ? "success"
+                                                                : "dark"
+                                                }
                                             >
-                                                {roomMessage.result === 0 ? "Neutral" : roomMessage.result < 0 ? "Negative" : roomMessage.result > 0 ? "Positive" : ""}
+                                                {roomMessage.result === 0
+                                                    ? "Neutral"
+                                                    : roomMessage.result < 0
+                                                        ? "Negative"
+                                                        : roomMessage.result > 0
+                                                            ? "Positive"
+                                                            : ""
+                                                }
                                             </Badge>
                                         </span>
                                     </strong>

@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Aldrich&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Special+Elite&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Limelight&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Monoton&display=swap');
+
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 
 .App {
   text-align: center;
@@ -41,6 +45,30 @@
   }
 }
 
+@-moz-keyframes Fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes Fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes Curtain {
   0% {
     background: url("https://ak6.picdn.net/shutterstock/videos/4744526/thumb/1.jpg"), url("https://s3-us-east-2.amazonaws.com/fgwebsitemedia/wp-content/uploads/2018/03/02161726/vintage-film-overlays.gif");
@@ -56,50 +84,34 @@
   }
 }
 
-@keyframes Neon {
-  10%{
-    color: transparent;
-    text-shadow: 1px 1px 1px transparent;
+@-moz-keyframes Curtain {
+  0% {
+    background: url("https://ak6.picdn.net/shutterstock/videos/4744526/thumb/1.jpg"), url("https://s3-us-east-2.amazonaws.com/fgwebsitemedia/wp-content/uploads/2018/03/02161726/vintage-film-overlays.gif");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
   }
-  20%{
-    color: white;
-    text-shadow: 1px 1px 2px gold;
-  }
-  30%{
-    color: transparent;
-    text-shadow: 1px 1px 1px transparent;
-  }
-  40%{
-    color: white;
-    text-shadow: 1px 1px 2px dodgerblue;
-  }
-  50%{
-    color: transparent;
-    text-shadow: 1px 1px 2px transparent;
-  }
-  60%{
-    color: white;
-    text-shadow: 1px 1px 2px tomato;
-  }
-  70%{
-    color: transparent;
-    text-shadow: 1px 1px 2px transparent;
-  }
-  80%{
-    color: white;
-    text-shadow: 1px 1px 2px violet; 
-  }
-  90%{
-    color: transparent;
-    text-shadow: 1px 1px 2px transparent;
-  }
-  100%{
-    color: white;
+  100% {
+    background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-radial-gradient(black, silver, black, black, black);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
   }
 }
 
-.toast-header {
-  color: black;
+@-webkit-keyframes Curtain {
+  0% {
+    background: url("https://ak6.picdn.net/shutterstock/videos/4744526/thumb/1.jpg"), url("https://s3-us-east-2.amazonaws.com/fgwebsitemedia/wp-content/uploads/2018/03/02161726/vintage-film-overlays.gif");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
+  100% {
+    background: url("https://i.pinimg.com/originals/87/cc/16/87cc16cd11205f5ba4f25f38b34a1f8c.gif"), repeating-radial-gradient(black, silver, black, black, black);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
 }
 
 .form-group {
@@ -116,10 +128,6 @@
   background-repeat: round;
 }
 
-.toast {
-  max-width: 100%;
-}
-
 .card-text {
   word-wrap: normal;
   word-break: break-word;
@@ -134,10 +142,12 @@
 }
 
 .img-fluid {
-  width: 50%;
+  max-width: 60%;
   max-height: 375px;
-  min-height: 300px;
+  min-height: 325px;
   animation: Fade 2.70s;
+  -moz-animation: Fade 2.70s;
+  -webkit-animation: Fade 2.70s;
 }
 
 .users {
@@ -178,7 +188,7 @@
 .statTitle {
   font-family: 'Permanent Marker', cursive;
   color: white;
-  border-bottom: solid white;
+  border-bottom: groove white;
 }
 
 .bg-danger {
@@ -204,16 +214,19 @@
 
 .badge-success {
   background: linear-gradient(darkgreen, lawngreen, darkgreen);
-  text-shadow: 1px 1px 1px black;
+  color: black !important;
+  text-shadow: 1px 1px 1px white;
 }
 
 .badge-danger {
   background: linear-gradient(darkred, tomato, darkred);
-  text-shadow: 1px 1px 1px black;
+  color: black !important;
+  text-shadow: 1px 1px 1px white;
 }
 
 .badge-dark {
   background: linear-gradient(black, black, silver);
+  text-shadow: 1px 1px 1px gold;
 }
 
 .badge {
@@ -281,8 +294,6 @@
   background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.514);
   background-size: contain;
   background-repeat: round;
-  background-size: contain;
-  background-repeat: round;
 }
 
 .spinnerSpan {
@@ -290,7 +301,7 @@
 }
 
 .navbar-toggler {
-  background: url("imgs/marquee.gif"), linear-gradient(black, black, silver) !important;
+  background: url("imgs/marquee.gif") !important;
   background-size: 100% 100% !important;
 }
 
@@ -313,6 +324,15 @@ h4 {
   background: linear-gradient(darkred, black, silver, black, darkred);
 }
 
+h3 {
+  color: white;
+  text-shadow: 1px 1px 1px gold;
+  background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(196, 161, 4, 0.425);
+  background-size: contain;
+  background-repeat: round;
+  padding: 10px;
+}
+
 .titleSpan {
   color: white;
   vertical-align: -11px;
@@ -321,6 +341,10 @@ h4 {
   background: url("https://dumielauxepices.net/sites/default/files/filmstrip-clipart-film-tape-608421-7450235.gif"), rgba(94, 65, 3, 0.678);
   background-size: contain;
   background-repeat: round;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 
@@ -384,6 +408,8 @@ p {
   background-repeat: no-repeat;
   background-position-y: bottom;
   animation: Curtain 5s;
+  -moz-animation: Curtain 5s;
+  -webkit-animation: Curtain 5s;
 }
 
 .insideSearch {
@@ -392,6 +418,8 @@ p {
   background-repeat: no-repeat;
   background-position-y: bottom;
   animation: Curtain 5s;
+  -moz-animation: Curtain 5s;
+  -webkit-animation: Curtain 5s;
 }
 
 .insideMovies {
@@ -399,6 +427,8 @@ p {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   animation: Curtain 5s;
+  -moz-animation: Curtain 5s;
+  -webkit-animation: Curtain 5s;
 }
 
 .plot {
@@ -417,11 +447,6 @@ p {
   text-shadow: 1px 1px 1px darkred;
 }
 
-.genre {
-  color: white;
-  text-shadow: 1px 1px 1px darkred;
-}
-
 .amazon {
   font-family: 'Aldrich', sans-serif;
 }
@@ -434,8 +459,6 @@ p {
   font-family: 'Limelight', cursive;
   color: yellow;
   background: rgba(0, 0, 0, 0.76);
-  margin-left: 30px;
-  margin-right: 30px;
 }
 
 .releasedTitle {
@@ -447,14 +470,6 @@ p {
 }
 
 .directorTitle {
-  font-family: 'Limelight', cursive;
-  color: yellow;
-  background: rgba(0, 0, 0, 0.76);
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
-.genreTitle {
   font-family: 'Limelight', cursive;
   color: yellow;
   background: rgba(0, 0, 0, 0.76);
@@ -481,15 +496,11 @@ p {
   background-size: 100% 100% !important;
   background-repeat: no-repeat !important;
   background-clip: padding-box;
-  border-collapse: separate;
-  border-spacing: 1px;
   padding-top: 20px !important;
 }
 
 .right {
   background: black !important;
-  background-size: contain !important;
-  background-repeat: round;
   padding-top: 20px !important;
 }
 
@@ -550,7 +561,6 @@ h6 {
   text-align: center;
   color: white;
   text-shadow: 1px 1px 1px black;
-  margin-top: 10px;
   padding-top: 70px;
 }
 

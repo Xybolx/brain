@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col } from 'reactstrap';
-import Title from '../components/title';
+import PageLogo from '../components/pageLogo';
 
 const Home = () => {
 
     return (
-        <div style={{ marginTop: 60 }}>
+        <div style={{ marginTop: 30 }}>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Title
-                    header="HOME"
-                />
+                <PageLogo />
                 <p
                     className="homeText"
                 >

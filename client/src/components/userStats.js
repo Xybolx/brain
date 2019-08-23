@@ -165,7 +165,6 @@ const UserStats = ({ online, getUsers }) => {
                         <Progress
                             color="warning"
                             value={neutralTotal}
-                            aria-valuemin={0}
                             max={msgs.length}
                         >
                             Neutral {neutralTotal}
@@ -173,7 +172,6 @@ const UserStats = ({ online, getUsers }) => {
                         <Progress
                             color="danger"
                             value={negativeTotal}
-                            aria-valuemin={0}
                             max={msgs.length}
                         >
                             Negative {negativeTotal}

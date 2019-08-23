@@ -1,18 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Collapse, Modal, ModalBody } from 'reactstrap';
-import MovieStats from './movieStats';
 import Btn from './btn';
-import API from '../utils/API';
+import MovieStats from './movieStats';
 
-const MovieDetail = ({ title, src, released, director, plot, onClick, onClickFavorite }) => {
+const MovieDetail = ({ title, src, released, director, plot, onClick, messages }) => {
 
   // State
-  const [messages, setMessages] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetails, setIsOpenDetails] = useState(false);
-
-  // Memo
-  useMemo(() => ({ messages, setMessages }), [messages, setMessages]);
 
   // Amazon URL 
   const BASE_URL = "https://www.amazon.com/s?k=";
@@ -21,17 +16,9 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, onClickFav
   // youtube URL
   const TRAILER_URL = "https://www.youtube.com/results?search_query=";
 
-  // Load messages function
-  const getMessages = () => {
-    API.getMessages()
-      .then(res => setMessages(res.data))
-      .catch(err => console.log(err))
-  };
-
   // Toggle collapse functions
   const toggle = () => {
     setIsOpen(!isOpen);
-    getMessages();
   };
 
   const toggleDetails = () => {

@@ -36,7 +36,7 @@ const TopNav = () => {
         }
     };
 
-    const isActiveChat = () => {
+    const isActiveReviews = () => {
         if (window.location.pathname === "/reviews") {
             return true;
         } else {
@@ -108,13 +108,13 @@ const TopNav = () => {
                             className="nav-link"
                             onClick={toggle}
                             activeStyle={{ fontWeight: "bold", textShadow: "1px 1px 1px gold" }}
-                            isActive={isActiveChat}
+                            isActive={isActiveReviews}
                             exact to="/reviews"
                         >
                             <i className="fas fa-theater-masks" /> Reviews
                             </NavLink>
                     </NavItem>
-                    <NavItem>
+                    <NavItem style={ window.location.pathname === "/reviews" ? { display: "inline-block" } : { display: "none" }}>
                         <NavLink
                             className="nav-link"
                             onClick={toggle}

@@ -31,7 +31,6 @@ const Users = ({ socket }) => {
     useEffect(() => {
         socket.on('RECEIVE_USER', data => {
             if (data) {
-                console.log(data);
                 API.getUsers()
                     .then(res => setUsers(res.data))
                     .catch(err => console.log(err))

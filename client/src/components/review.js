@@ -7,6 +7,7 @@ import RoomContext from '../context/roomContext';
 import Sentiment from 'sentiment';
 import ReviewForm from './reviewForm';
 import SubTitle from './subTitle';
+import PageLogo from './pageLogo';
 
 const Review = ({ socket }) => {
 
@@ -66,21 +67,31 @@ const Review = ({ socket }) => {
     };
 
     return (
-        <div style={room ? { display: 'block', marginBottom: 30, marginTop: 30 } : { display: 'none' }}>
-            <SubTitle
-                style={{ marginTop: 30 }}
-                icon={<i className="fas fa-theater-masks" />}
-                header={`${room}`}
-            />
-            <ReviewForm
-                handleFormSubmit={handleFormSubmit}
-                inputType="textarea"
-                placeholder="Write a review..."
-                value={review}
-                name="review"
-                handleChange={handleChange}
-            />
-        </div>
+        <>
+            {room ? (
+                <>
+                    <SubTitle
+                        style={{ marginTop: 30 }}
+                        icon={<i className="fas fa-theater-masks" />}
+                        header={`${room}`}
+                    />
+                    <ReviewForm
+                        handleFormSubmit={handleFormSubmit}
+                        inputType="textarea"
+                        placeholder="Write a review..."
+                        value={review}
+                        name="review"
+                        handleChange={handleChange}
+                    />
+                </>
+            ) : (
+
+                    <div style={{ marginTop: 60 }}>
+                        <PageLogo />
+                    </div>
+
+                )}
+        </>
     );
 }
 

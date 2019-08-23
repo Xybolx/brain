@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import API from '../utils/API';
 import Reviews from '../components/reviews';
 import Review from '../components/review';
 import Users from '../components/users';
@@ -11,18 +12,29 @@ import { Row, Col, Collapse } from 'reactstrap';
 const UserReviews = () => {
 
     // State
+    const [messages, setMessages] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
 
-    // toggle collapse function
+    // Memo
+    useMemo(() => ({ messages, setMessages }), [messages, setMessages]);
+
+    // toggle collapse/getMessages functions
     const toggle = () => {
         setIsOpen(!isOpen);
     };
 
+    const getMessages = () => {
+        API.getMessages()
+            .then(res => setMessages(res.data))
+            .catch(err => console.log(err))
+    };
+
+    useEffect(() => {
+        getMessages();
+    }, [])
+
     return (
-        <div>
-            <Title
-                header="Reviews"
-            />
+        <div style={{ marginTop: 5 }}>
             <Row>
                 <Col
                     className="jumbotron jumbotron-fluid left"
@@ -35,7 +47,7 @@ const UserReviews = () => {
                                 ? { display: 'none' }
                                 : { display: 'block' }}
                     >
-                        <Movies isOpen={isOpen} />
+                        <Movies messages={messages} />
                     </div>
                     <Collapse isOpen={isOpen}>
                         <MovieSearch toggle={toggle} />
@@ -56,7 +68,7 @@ const UserReviews = () => {
                 >
                     <Users />
                     <Review />
-                    <Reviews />
+                    <Reviews messages={messages} getMessages={getMessages} />
                 </Col>
             </Row>
         </div>
