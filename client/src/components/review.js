@@ -87,7 +87,9 @@ const Review = ({ socket }) => {
             ) : (
 
                     <div style={{ marginTop: 60 }}>
-                        <PageLogo />
+                        <PageLogo
+                            stackSize="8"
+                        />
                     </div>
 
                 )}

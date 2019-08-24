@@ -8,7 +8,9 @@ const LogIn = () => {
     return (
         <div style={{ marginTop: 30 }}>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <PageLogo />
+                <PageLogo
+                    stackSize="8"
+                />
                 <LogInForm />
             </Col>
         </div>

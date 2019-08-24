@@ -5,9 +5,9 @@ import API from '../utils/API';
 import UserContext from '../context/userContext';
 import IsValidEmailContext from '../context/isValidEmailContext';
 import IsValidPasswordContext from '../context/isValidPasswordContext';
-import Title from '../components/title';
 import Btn from '../components/btn';
-import { Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
+import InputLabel from '../components/inputLabel';
+import { Form, FormGroup, FormFeedback, Input } from 'reactstrap';
 
 const LogInForm = () => {
 
@@ -80,11 +80,9 @@ const LogInForm = () => {
     return (
         <Form onSubmit={handleFormSubmit}>
             <FormGroup>
-                <Label
-                    className="label"
-                >
-                    Email
-                            </Label>
+                <InputLabel
+                    labelText="Email"
+                />
                 <Input
                     valid={isValidEmail}
                     invalid={!isValidEmail}
@@ -114,11 +112,9 @@ const LogInForm = () => {
                                 </FormFeedback>
             </FormGroup>
             <FormGroup>
-                <Label
-                    className="label"
-                >
-                    Password
-                            </Label>
+                <InputLabel
+                    labelText="Password"
+                />
                 <Input
                     valid={isValidPassword}
                     invalid={!isValidPassword}
@@ -127,7 +123,7 @@ const LogInForm = () => {
                     placeholder="Enter Password"
                     value={password || ""}
                     onChange={handleChange}
-    
+
                     required
                 />
                 <FormFeedback

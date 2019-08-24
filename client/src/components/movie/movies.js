@@ -1,22 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Carousel, CarouselItem, CarouselIndicators, CarouselControl } from 'reactstrap';
 import moment from 'moment';
-import API from '../utils/API';
-import SocketContext from '../context/socketContext';
-import RoomContext from '../context/roomContext';
-import UserContext from '../context/userContext';
+import API from '../../utils/API';
+import SocketContext from '../../context/socketContext';
+import RoomContext from '../../context/roomContext';
+import UserContext from '../../context/userContext';
 import MovieDetail from './movieDetail';
-import Spinner from './spinner';
-import SubTitle from './subTitle';
+import Spinner from '../spinner';
+import SubTitle from '../subTitle';
 
-const Movies = ({ socket, messages }) => {
+const Movies = ({ socket, messages, getMessages, items, getMovies }) => {
 
     // Context
     const { setRoom } = useContext(RoomContext);
     const { user } = useContext(UserContext);
 
     // State
-    const [items, setItems] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -44,7 +43,7 @@ const Movies = ({ socket, messages }) => {
     const goToIndex = newIndex => {
         if (isAnimating) return;
         setActiveIndex(newIndex);
-    }
+    };
 
     const handleSetRoom = id => {
         API.getMovie(id)
@@ -55,27 +54,18 @@ const Movies = ({ socket, messages }) => {
                 })
             })
             .catch(err => console.log(err))
-    }
-
-    // Get and set state
-    useEffect(() => {
-        API.getMovies()
-            .then(res => setItems(res.data))
-            .catch(err => console.log(err))
-    }, [])
+    };
 
     useEffect(() => {
         socket.on('RECEIVE_MOVIE', data => {
             if (data) {
-                API.getMovies()
-                    .then(res => setItems(res.data))
-                    .catch(err => console.log(err))
+                getMovies();
             }
         });
         return () => {
             socket.off('RECEIVE_MOVIE');
         };
-    }, [socket])
+    }, [socket, getMovies])
 
     useEffect(() => {
         socket.on('RECEIVE_JOIN_ROOM', data => {
@@ -88,8 +78,12 @@ const Movies = ({ socket, messages }) => {
         };
     }, [socket, setRoom])
 
+    const containerStyle = {
+        marginBottom: 30
+    };
+
     return (
-        <div style={{ marginBottom: 30 }}>
+        <div style={containerStyle}>
             <SubTitle
                 number={items.length ? items.length : ""}
                 icon={<i className="fas fa-film" />}
@@ -121,6 +115,8 @@ const Movies = ({ socket, messages }) => {
                                     director={item.director}
                                     plot={item.plot}
                                     messages={messages}
+                                    getMessages={getMessages}
+                                    getMovies={getMovies}
                                 />
                             </CarouselItem>
                         );

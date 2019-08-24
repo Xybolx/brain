@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import moment from 'moment';
-import API from '../utils/API';
-import SocketContext from '../context/socketContext';
-import useInput from './useInput';
+import API from '../../utils/API';
+import SocketContext from '../../context/socketContext';
+import useInput from '../useInput';
 import SearchDetail from './searchDetail';
 import SearchForm from './searchForm';
-import SubTitle from './subTitle';
-import Spinner from './spinner';
+import SubTitle from '../subTitle';
+import Spinner from '../spinner';
 
 const MovieSearch = ({ socket, toggle }) => {
 
@@ -53,13 +53,22 @@ const MovieSearch = ({ socket, toggle }) => {
         }
     };
 
+    const searchDetailStyle = {
+        marginTop: 20,
+        marginBottom: 60
+    };
+
+    const searchFormStyle = {
+        marginTop: 20
+    };
+
     return (
         <>
             <SubTitle
                 header="Search"
                 icon={<i className="fas fa-search" />}
             />
-            <div style={{ marginTop: 20, marginBottom: 60 }}>
+            <div style={searchDetailStyle}>
                 {result.Title ? (
                     <SearchDetail
                         title={result.Title}
@@ -74,7 +83,7 @@ const MovieSearch = ({ socket, toggle }) => {
                             altMsg="No Result..."
                         />
                     )}
-                <div style={{ marginTop: 20 }}>
+                <div style={searchFormStyle}>
                     <SearchForm
                         handleFormSubmit={handleFormSubmit}
                         inputType="search"

@@ -4,7 +4,6 @@ import API from '../utils/API';
 import UserContext from '../context/userContext';
 import RoomContext from '../context/roomContext';
 import PageLogo from '../components/pageLogo';
-import Title from '../components/title';
 
 const LogOut = () => {
 
@@ -33,9 +32,8 @@ const LogOut = () => {
     return (
         <div style={{ marginTop: 30 }}>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <PageLogo />
-                <Title
-                    header="LOG OUT"
+                <PageLogo
+                    stackSize="8"
                 />
             </Col>
         </div>

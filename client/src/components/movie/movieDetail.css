@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css?family=Aldrich&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Limelight&display=swap');
+
+@keyframes Fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes Fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes Fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes Curtain {
+  0% {
+    background: url("../../imgs/curtain-close.jpg"), repeating-radial-gradient(black, silver, black, black, black);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
+  100% {
+    background: url("../../imgs/curtain-open.gif"), repeating-radial-gradient(black, silver, black, black, black);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
+}
+
+@-moz-keyframes Curtain {
+  0% {
+    background: url("../../imgs/curtain-close.jpg"), url("../../imgs/screen.gif");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
+  100% {
+    background: url("../../imgs/curtain-open.gif"), repeating-radial-gradient(black, silver, black, black, black);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
+}
+
+@-webkit-keyframes Curtain {
+  0% {
+    background: url("../../imgs/curtain-close.jpg"), url("../../imgs/screen.gif");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
+  100% {
+    background: url("../../imgs/curtain-open.gif"), repeating-radial-gradient(black, silver, black, black, black);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+  }
+}
+
+.img-fluid {
+  max-width: 60%;
+  max-height: 375px;
+  min-height: 325px;
+  animation: Fade 2.70s;
+  -moz-animation: Fade 2.70s;
+  -webkit-animation: Fade 2.70s;
+}
+
+.plot {
+  margin-bottom: 50px;
+  color: white;
+  text-shadow: 1px 1px 1px darkred;
+}
+
+.released {
+  color: white;
+  text-shadow: 1px 1px 1px darkred;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.director {
+  color: white;
+  text-shadow: 1px 1px 1px darkred;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.amazon {
+  text-decoration-line: none;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.trailer {
+  font-family: 'Aldrich', sans-serif;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.plotTitle {
+  font-family: 'Limelight', cursive;
+  color: yellow;
+}
+
+.releasedTitle {
+  font-family: 'Limelight', cursive;
+  color: yellow;
+}
+
+.directorTitle {
+  font-family: 'Limelight', cursive;
+  color: yellow;
+}
+
+.amazonTitle {
+  color: yellow;
+}
+
+.trailerTitle {
+  color: yellow;
+}
+
+.movieTitleDiv {
+  font-family: 'Limelight', cursive;
+  background: url("../../imgs/white-screen.gif"), url("../../imgs/film-tape.gif");
+  background-size: cover, contain;
+  background-blend-mode: multiply;
+  background-clip: border-box;
+  background-repeat: repeat-y, round;
+  background-position: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  max-width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: black;
+  text-shadow: 1px 1px 1px rgba(255, 255, 0, 0.329);
+  text-transform: uppercase; 
+}
+
+.movieTitleSpan {
+  max-width: 100%;
+  min-width: fit-content;
+}
+
+.insideMovies {
+  background: url("../../imgs/curtain-open.gif"), repeating-radial-gradient(black, rgba(192, 192, 192, 0.555), black, black, black, black);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: Curtain 5s;
+  -moz-animation: Curtain 5s;
+  -webkit-animation: Curtain 5s;
+  height: 460px;
+}
+
+.details {
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 0px 0px 0px 0px;
+}

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Collapse, Modal, ModalBody } from 'reactstrap';
-import Btn from './btn';
+import Btn from '../btn';
 import MovieStats from './movieStats';
+import "./movieDetail.css";
 
-const MovieDetail = ({ title, src, released, director, plot, onClick, messages }) => {
+const MovieDetail = ({ title, src, released, director, plot, onClick, messages, getMessages }) => {
 
   // State
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +43,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
             icon={<i className="fas fa-info" />}
             name={
               isOpenDetails
-                ? "Close"
+                ? "Details"
                 : "Details"}
           />
           <Btn
@@ -73,7 +74,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
               className="amazon"
             >
               <a
-                href={BASE_URL + title + END_URL}
+                href={BASE_URL + title + " movie " + END_URL}
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -128,11 +129,12 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
             </p>
           </h6>
         </Collapse>
-        <Modal isOpen={isOpen}>
+        <Modal isOpen={isOpen} centered>
           <ModalBody>
               <MovieStats
                 title={title}
                 messages={messages}
+                getMessages={getMessages}
               />
             <div className="closeDiv">
               <Btn

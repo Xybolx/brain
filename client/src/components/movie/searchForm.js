@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, InputGroup, InputGroupAddon, Form, FormGroup } from 'reactstrap';
-import Btn from './btn';
+import Btn from '../btn';
 
 const SearchForm = ({ handleFormSubmit, inputType, placeholder, value, name, handleChange }) => {
 

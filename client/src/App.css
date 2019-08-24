@@ -1,51 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Aldrich&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Monoton&display=swap');
 
 body {
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 .App {
   text-align: center;
-}
-
-@keyframes Fade {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-moz-keyframes Fade {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes Fade {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 @keyframes Curtain {
@@ -120,15 +84,6 @@ body {
   margin-bottom: 40px;
 }
 
-.img-fluid {
-  max-width: 60%;
-  max-height: 375px;
-  min-height: 325px;
-  animation: Fade 2.70s;
-  -moz-animation: Fade 2.70s;
-  -webkit-animation: Fade 2.70s;
-}
-
 .users {
   margin-bottom: 20px;
   text-align: center;
@@ -166,9 +121,9 @@ body {
 }
 
 .statTitle {
-  font-family: 'Permanent Marker', cursive;
   color: white;
   border-bottom: groove white;
+  margin-top: 5px;
 }
 
 .bg-danger {
@@ -331,7 +286,7 @@ h3 {
   font-family: 'Aldrich', sans-serif;
 }
 
-.movieTitleDiv {
+/* .movieTitleDiv {
   font-family: 'Limelight', cursive;
   background: url("imgs/white-screen.gif"), url("imgs/film-tape.gif");
   background-size: cover, contain;
@@ -347,7 +302,7 @@ h3 {
   color: black;
   text-shadow: 1px 1px 1px rgba(255, 255, 0, 0.329);
   text-transform: uppercase; 
-}
+} */
 
 .movieTitleSpan {
   max-width: 100%;
@@ -383,7 +338,7 @@ h3 {
   -webkit-animation: Curtain 5s;
 }
 
-.insideMovies {
+/* .insideMovies {
   background: url("imgs/curtain-open.gif"), url("imgs/screen.gif");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -391,15 +346,14 @@ h3 {
   -moz-animation: Curtain 5s;
   -webkit-animation: Curtain 5s;
   height: 460px;
-}
+} */
 
-.plot {
+/* .plot {
   margin-bottom: 50px;
   color: white;
   text-shadow: 1px 1px 1px darkred;
   margin-right: 30px;
   margin-left: 30px;
-  /* background: rgba(0, 0, 0, 0.76); */
 }
 
 .released {
@@ -407,7 +361,6 @@ h3 {
   text-shadow: 1px 1px 1px darkred;
   margin-right: 30px;
   margin-left: 30px;
-  /* background: rgba(0, 0, 0, 0.76); */
 }
 
 .director {
@@ -415,21 +368,18 @@ h3 {
   text-shadow: 1px 1px 1px darkred;
   margin-right: 30px;
   margin-left: 30px;
-  /* background: rgba(0, 0, 0, 0.76); */
 }
 
 .amazon {
   text-decoration-line: none;
   margin-right: 30px;
   margin-left: 30px;
-  /* background: rgba(0, 0, 0, 0.76); */
 }
 
 .trailer {
   font-family: 'Aldrich', sans-serif;
   margin-right: 30px;
   margin-left: 30px;
-  /* background: rgba(0, 0, 0, 0.76); */
 }
 
 .plotTitle {
@@ -448,7 +398,6 @@ h3 {
   font-family: 'Limelight', cursive;
   color: yellow;
   text-shadow: 1px 1px 1px white;
-  /* background: rgba(0, 0, 0, 0.76); */
 }
 
 .amazonTitle {
@@ -459,21 +408,21 @@ h3 {
 .trailerTitle {
   color: yellow;
   text-shadow: 1px 1px 1px white;
-}
+} */
 
 p {
   font-family: 'Aldrich', sans-serif;
   word-wrap: normal;
   word-break: break-word;
-  /* background: rgba(0, 0, 0, 0.76); */
 }
 
 .left {
-  background: url("imgs/seats.jpg") !important;
+  background: url("imgs/seats.jpg"), black !important;
   background-size: 100% 100% !important;
   background-repeat: no-repeat !important;
   background-clip: padding-box;
   padding-top: 10px !important;
+  height: 665px;
 }
 
 .right {
@@ -515,18 +464,22 @@ form {
   color: white;
 }
 
-.details {
+/* .details {
   margin-left: 50px;
   margin-right: 50px;
   padding: 0px 0px 0px 0px;;
   background: rgba(0, 0, 0, 0.733);
-}
+} */
 
 .modal-body {
   background: url("imgs/clap.jpg");
   background-size: cover;
   background-repeat: round;
   text-align: center;
+}
+
+.modal-content {
+  border-radius: 0% !important;
 }
 
 h6 {
@@ -570,6 +523,7 @@ h6 {
 
 .closeDiv {
   text-align: right;
+  margin-top: 5px;
 }
 
 .valid-feedback,
@@ -586,7 +540,11 @@ h6 {
   border-color: red !important;
 }
 
-@media (max-width: 576px) {
+.fa-stack {
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
   body {
     overflow-y: scroll;
   }

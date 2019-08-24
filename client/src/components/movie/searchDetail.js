@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Collapse } from 'reactstrap';
-import Btn from './btn';
+import Btn from '../btn';
 
 const SearchDetail = ({ title, src, released, director, plot, onClick }) => {
 

@@ -3,6 +3,10 @@ import { Button } from 'reactstrap';
 
 const Btn = ({ color, size, onClick, disabled, icon, name }) => {
 
+    const BtnStyle = {
+        marginLeft: 2
+    };
+
     return (
         <Button
             color={color}
@@ -11,7 +15,7 @@ const Btn = ({ color, size, onClick, disabled, icon, name }) => {
             disabled={disabled}
         >
             <span
-                style={{ marginLeft: 2 }}
+                style={BtnStyle}
             >
                 {icon} {name}
             </span>
