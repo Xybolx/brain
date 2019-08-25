@@ -1,13 +1,13 @@
 import React, { useEffect, useContext } from 'react';
 import { Table } from 'reactstrap';
-import UserContext from '../context/userContext';
-import UsersContext from '../context/usersContext';
-import SocketContext from '../context/socketContext';
-import API from '../utils/API';
+import UserContext from '../../context/userContext';
+import UsersContext from '../../context/usersContext';
+import SocketContext from '../../context/socketContext';
+import API from '../../utils/API';
 import Avatar from 'avataaars';
 import UserStats from './userStats';
-import { Spinner } from '../components/spinner';
-import SubTitle from './subTitle';
+import { Spinner } from '../spinner';
+import SubTitle from '../headers/subTitle';
 
 const Users = ({ socket, messages }) => {
 
@@ -15,6 +15,7 @@ const Users = ({ socket, messages }) => {
     const { user } = useContext(UserContext);
     const { users, setUsers } = useContext(UsersContext);
 
+    // get and set state
     const getUsers = () => {
         API.getUsers()
             .then(res => setUsers(res.data))

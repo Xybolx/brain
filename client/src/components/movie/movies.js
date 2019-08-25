@@ -7,7 +7,7 @@ import RoomContext from '../../context/roomContext';
 import UserContext from '../../context/userContext';
 import MovieDetail from './movieDetail';
 import { Spinner } from '../../components/spinner';
-import SubTitle from '../subTitle';
+import SubTitle from '../headers/subTitle';
 import './movies.css';
 
 const Movies = ({ socket, messages, items, getMovies }) => {
@@ -53,13 +53,13 @@ const Movies = ({ socket, messages, items, getMovies }) => {
                 user: user.username
             })
             API.getMovie(id)
-            .then(res => {
-                socket.emit('SEND_JOIN_ROOM', {
-                    room: res.data.title,
-                    user: user.username
+                .then(res => {
+                    socket.emit('SEND_JOIN_ROOM', {
+                        room: res.data.title,
+                        user: user.username
+                    })
                 })
-            })
-            .catch(err => console.log(err))
+                .catch(err => console.log(err))
         } else {
             API.getMovie(id)
                 .then(res => {
@@ -126,7 +126,11 @@ const Movies = ({ socket, messages, items, getMovies }) => {
                     next={next}
                     previous={previous}
                 >
-                    <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+                    <CarouselIndicators
+                        items={items}
+                        activeIndex={activeIndex}
+                        onClickHandler={goToIndex}
+                    />
                     {items.map(item => {
                         return (
                             <CarouselItem
@@ -146,8 +150,16 @@ const Movies = ({ socket, messages, items, getMovies }) => {
                             </CarouselItem>
                         );
                     })}
-                    <CarouselControl direction="prev" onClickHandler={previous}></CarouselControl>
-                    <CarouselControl direction="next" onClickHandler={next}></CarouselControl>
+                    <CarouselControl
+                        direction="prev"
+                        onClickHandler={previous}
+                    >
+                    </CarouselControl>
+                    <CarouselControl
+                        direction="next"
+                        onClickHandler={next}
+                    >
+                    </CarouselControl>
                 </Carousel>
             ) : (
                     <Spinner

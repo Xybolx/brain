@@ -11,13 +11,6 @@ export default {
   getUser: function(id) {
     return axios.get("/api/users/" + id);
   },
-  // saves a favorite
-  saveFavorite: function (favoriteData, id) {
-    return axios.put("/api/users/" + id, favoriteData);
-  },
-  getFavorites: function () {
-    return axios.get("/api/favorites");
-  },
     // Saves a user to the database
   signUp: function(userData) {
     return axios.post("/api/signup", userData);

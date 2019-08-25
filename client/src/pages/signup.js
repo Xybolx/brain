@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col } from 'reactstrap';
-import SignUpForm from '../components/signUpForm';
+import SignUpForm from '../components/form/signUpForm';
 import PageLogo from '../components/pageLogo';
 
 const SignUp = () => {

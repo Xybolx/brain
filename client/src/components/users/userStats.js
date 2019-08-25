@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Badge, Progress, Modal, ModalBody } from 'reactstrap';
-import UserContext from '../context/userContext';
-import useStats from "../components/useStats";
-import StatTitle from './statTitle';
-import Btn from './button/btn';
+import UserContext from '../../context/userContext';
+import useStats from "../useStats";
+import StatTitle from '../headers/statTitle';
+import Btn from '../button/btn';
 
 const UserStats = ({ online, getUsers, messages }) => {
 

@@ -5,7 +5,7 @@ import RoomContext from '../context/roomContext';
 import moment from 'moment';
 import Avatar from 'avataaars';
 import { Spinner } from '../components/spinner';
-import SubTitle from './subTitle';
+import SubTitle from './headers/subTitle';
 
 const Reviews = ({ socket, messages, getMessages }) => {
 

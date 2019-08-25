@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import moment from 'moment';
 import API from '../../utils/API';
 import SocketContext from '../../context/socketContext';
-import useForm from '../useForm';
+import useForm from '../form/useForm';
 import SearchDetail from './searchDetail';
-import InputFormGroup from '../inputFormGroup';
-import SubTitle from '../subTitle';
+import InputFormGroup from '../form/inputFormGroup';
+import SubTitle from '../headers/subTitle';
 import { Spinner } from '../../components/spinner';
 
 const MovieSearch = ({ socket, toggle }) => {

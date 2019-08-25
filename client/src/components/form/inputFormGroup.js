@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, InputGroup, InputGroupAddon, Form, FormGroup } from 'reactstrap';
-import Btn from './button/btn';
+import Btn from '../button/btn';
 
 const InputFormGroup = ({ handleFormSubmit, inputType, placeholder, value, name, handleChange, btnIcon }) => {
 

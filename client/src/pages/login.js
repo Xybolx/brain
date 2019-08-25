@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col } from 'reactstrap';
-import LogInForm from '../components/logInForm';
+import LogInForm from '../components/form/logInForm';
 import PageLogo from '../components/pageLogo';
 
 const LogIn = () => {

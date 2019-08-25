@@ -115,7 +115,12 @@ const TopNav = () => {
                             <i className="fas fa-theater-masks" /> Reviews
                             </NavLink>
                     </NavItem>
-                    <NavItem style={ window.location.pathname === "/reviews" ? { display: "inline-block" } : { display: "none" }}>
+                    <NavItem style={
+                        window.location.pathname
+                            === "/reviews"
+                            ? { display: "inline-block" }
+                            : { display: "none" }}
+                    >
                         <NavLink
                             className="nav-link"
                             onClick={toggle}

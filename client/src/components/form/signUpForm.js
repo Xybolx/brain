@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Avatar from 'avataaars';
-import API from '../utils/API';
+import API from '../../utils/API';
 import useForm from './useForm';
-import IsValidEmailContext from '../context/isValidEmailContext';
-import IsValidPasswordContext from '../context/isValidPasswordContext';
-import IsValidUsernameContext from '../context/isValidUsernameContext';
-import UserContext from '../context/userContext';
+import IsValidEmailContext from '../../context/isValidEmailContext';
+import IsValidPasswordContext from '../../context/isValidPasswordContext';
+import IsValidUsernameContext from '../../context/isValidUsernameContext';
+import UserContext from '../../context/userContext';
 import { Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
-import Btn from './btn';
+import Btn from '../button/btn';
 
 const SignUpForm = () => {
 

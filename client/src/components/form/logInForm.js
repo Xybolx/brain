@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import useForm from '../components/useForm';
-import API from '../utils/API';
-import UserContext from '../context/userContext';
-import IsValidEmailContext from '../context/isValidEmailContext';
-import IsValidPasswordContext from '../context/isValidPasswordContext';
-import Btn from './button/btn';
-import InputLabel from '../components/inputLabel';
+import useForm from './useForm';
+import API from '../../utils/API';
+import UserContext from '../../context/userContext';
+import IsValidEmailContext from '../../context/isValidEmailContext';
+import IsValidPasswordContext from '../../context/isValidPasswordContext';
+import Btn from '../button/btn';
+import InputLabel from './inputLabel';
 import { Form, FormGroup, FormFeedback, Input } from 'reactstrap';
 
 const LogInForm = () => {

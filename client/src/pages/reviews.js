@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import API from '../utils/API';
 import Reviews from '../components/reviews';
 import Review from '../components/review';
-import Users from '../components/users';
+import Users from '../components/users/users';
 import MovieSearch from '../components/movie/movieSearch';
 import Movies from '../components/movie/movies';
 import Btn from '../components/button/btn';

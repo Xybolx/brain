@@ -4,9 +4,9 @@ import UserContext from '../context/userContext';
 import SocketContext from '../context/socketContext';
 import RoomContext from '../context/roomContext';
 import Sentiment from 'sentiment';
-import useForm from './useForm';
-import InputFormGroup from './inputFormGroup';
-import SubTitle from './subTitle';
+import useForm from './form/useForm';
+import InputFormGroup from './form/inputFormGroup';
+import SubTitle from './headers/subTitle';
 import PageLogo from './pageLogo';
 
 const Review = ({ socket }) => {

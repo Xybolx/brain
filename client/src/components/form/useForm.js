@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
-import IsValidEmailContext from '../context/isValidEmailContext';
-import IsValidPasswordContext from '../context/isValidPasswordContext';
-import IsValidUsernameContext from '../context/isValidUsernameContext';
+import IsValidEmailContext from '../../context/isValidEmailContext';
+import IsValidPasswordContext from '../../context/isValidPasswordContext';
+import IsValidUsernameContext from '../../context/isValidUsernameContext';
 
 const useForm = () => {
 

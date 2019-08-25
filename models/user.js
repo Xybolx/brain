@@ -27,32 +27,19 @@ const userSchema = new Schema({
         default: Date.now
     },
     avatar: {
-
-    avatarStyle: String,
-
-    topType: String,
-
-    accessoriesType: String,
-
-    hairColor: String,
-
-    facialHairType: String,
-
-    facialHairColor: String,
-
-    clotheType: String,
-
-    clotheColor: String,
-
-    graphicType: String,
-
-    eyeType: String,
-
-    eyebrowType: String,
-
-    mouthType: String,
-
-    skinColor: String,
+        avatarStyle: String,
+        topType: String,
+        accessoriesType: String,
+        hairColor: String,
+        facialHairType: String,
+        facialHairColor: String,
+        clotheType: String,
+        clotheColor: String,
+        graphicType: String,
+        eyeType: String,
+        eyebrowType: String,
+        mouthType: String,
+        skinColor: String,
     },
     userMessages: {
         type: Array,
@@ -87,6 +74,5 @@ userSchema.methods.validPassword = function (password, cb) {
 }
 
 const User = mongoose.model("User", userSchema);
-
 
 module.exports = User;
