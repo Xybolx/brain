@@ -1,0 +1,41 @@
+.carousel-control-prev {
+  background: url("../../imgs/arrow.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  z-index: 0;
+  cursor: pointer;
+  top: 30px !important;
+  height: 10%;
+}
+
+.carousel-control-next {
+  background: url("../../imgs/arrow.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  z-index: 0;
+  transform: rotate(180deg);
+  cursor: pointer;
+  top: 30px !important;
+  height: 10%;
+}
+
+.carousel-control-next-icon {
+  width: 0px;
+  z-index: -1;
+  transform: rotate(180deg);
+  top: -50px;
+  display: none !important;
+}
+
+.carousel-control-prev-icon {
+  width: 0px;
+  z-index: -1;
+  top: -50px;
+  display: none !important;
+}
+
+.carousel-indicators {
+  display: none !important;
+}

@@ -32,7 +32,7 @@ module.exports = function (io) {
       socket.on('SEND_LEAVE_ROOM', data => {
         let room = data.room;
         socket.leave(room);
-        io.in(room).emit('RECEIVE_LEAVE_ROOM', data);
+        io.emit('RECEIVE_LEAVE_ROOM', data);
       });
 
     });

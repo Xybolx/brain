@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Avatar from 'avataaars';
 import API from '../utils/API';
-import useInput from './useInput';
+import useForm from './useForm';
 import IsValidEmailContext from '../context/isValidEmailContext';
 import IsValidPasswordContext from '../context/isValidPasswordContext';
 import IsValidUsernameContext from '../context/isValidUsernameContext';
@@ -22,7 +22,7 @@ const SignUpForm = () => {
     const { setUser } = useContext(UserContext);
 
     // useInput
-    const [values, handleChange, handleClearInputs] = useInput();
+    const [values, handleChange, handleClearInputs] = useForm();
 
     // De-structuring values
     const { email, password, username, avatarStyle, topType, accessoriesType, hairColor, facialHairType, facialHairColor, clotheType, clotheColor, graphicType, eyeType, eyebrowType, mouthType, skinColor } = values;
@@ -590,8 +590,8 @@ const SignUpForm = () => {
                     <Btn
                         disabled={
                             !isValidEmail
-                            && !isValidPassword
-                            && !isValidUsername
+                            || !isValidPassword
+                            || !isValidUsername
                         }
                         type="submit"
                         color="dark"

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
+import './navbar.css';
 
 const TopNav = () => {
 

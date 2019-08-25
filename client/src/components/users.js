@@ -6,10 +6,10 @@ import SocketContext from '../context/socketContext';
 import API from '../utils/API';
 import Avatar from 'avataaars';
 import UserStats from './userStats';
-import Spinner from './spinner';
+import { Spinner } from '../components/spinner';
 import SubTitle from './subTitle';
 
-const Users = ({ socket }) => {
+const Users = ({ socket, messages }) => {
 
     // Context
     const { user } = useContext(UserContext);
@@ -71,15 +71,17 @@ const Users = ({ socket }) => {
                                             eyebrowType={online.avatar.eyebrowType}
                                             mouthType={online.avatar.mouthType}
                                             skinColor={online.avatar.skinColor}
-                                            online={online}
-                                            getUsers={getUsers}
                                         />
                                     </td>
                                     <td>
                                         {online.username}
                                     </td>
                                     <td>
-                                        <UserStats online={online} getUsers={getUsers} />
+                                        <UserStats
+                                            online={online}
+                                            getUsers={getUsers}
+                                            messages={messages}
+                                        />
                                     </td>
                                 </tr>
                             ))}

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Collapse, Modal, ModalBody } from 'reactstrap';
-import Btn from '../btn';
+import Btn from '../button/btn';
 import MovieStats from './movieStats';
 import "./movieDetail.css";
 
-const MovieDetail = ({ title, src, released, director, plot, onClick, messages, getMessages }) => {
+const MovieDetail = ({ title, src, released, director, plot, onClick, messages }) => {
 
   // State
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +43,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages, 
             icon={<i className="fas fa-info" />}
             name={
               isOpenDetails
-                ? "Details"
+                ? "Close"
                 : "Details"}
           />
           <Btn
@@ -134,7 +134,6 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages, 
               <MovieStats
                 title={title}
                 messages={messages}
-                getMessages={getMessages}
               />
             <div className="closeDiv">
               <Btn

@@ -5,7 +5,7 @@ import Review from '../components/review';
 import Users from '../components/users';
 import MovieSearch from '../components/movie/movieSearch';
 import Movies from '../components/movie/movies';
-import Btn from '../components/btn';
+import Btn from '../components/button/btn';
 import { Row, Col, Collapse } from 'reactstrap';
 
 const UserReviews = () => {
@@ -51,30 +51,52 @@ const UserReviews = () => {
                     className="jumbotron jumbotron-fluid left"
                     md="6"
                 >
-                    <div style={isOpen ? { display: "none" } : { display: "block" }}>
-                        <Movies messages={messages} getMessages={getMessages} items={items} getMovies={getMovies} />
+                    <div style={
+                        isOpen
+                            ? { display: "none" }
+                            : { display: "block" }}
+                    >
+                        <Movies
+                            messages={messages}
+                            getMessages={getMessages}
+                            items={items}
+                            getMovies={getMovies}
+                        />
                     </div>
                     <Collapse isOpen={isOpen}>
-                        <div style={isOpen ? { display: "block" } : { display: "none" }}>
-                        <MovieSearch toggle={toggle} />
+                        <div
+                            style={
+                                isOpen
+                                    ? { display: "block" }
+                                    : { display: "none" }}
+                        >
+                            <MovieSearch
+                                toggle={toggle}
+                            />
                         </div>
                     </Collapse>
-                    <Btn
-                        onClick={toggle}
-                        color="dark"
-                        size="md"
-                        icon={<i className="fas fa-search" />}
-                        name={isOpen ? "Close" : "Search"}
-                    >
-                    </Btn>
+                    <div style={{ marginBottom: 20 }}>
+                        <Btn
+                            onClick={toggle}
+                            color="dark"
+                            size="md"
+                            icon={<i className="fas fa-search" />}
+                            name={isOpen ? "Close" : "Search"}
+                        />
+                    </div>
                 </Col>
                 <Col
                     className="jumbotron jumbotron-fluid right"
                     md="6"
                 >
-                    <Users />
+                    <Users
+                        messages={messages}
+                    />
                     <Review />
-                    <Reviews messages={messages} getMessages={getMessages} />
+                    <Reviews
+                        messages={messages}
+                        getMessages={getMessages}
+                    />
                 </Col>
             </Row>
         </div>

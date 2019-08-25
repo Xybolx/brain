@@ -1,14 +1,14 @@
 import React from "react";
 import { Label } from "reactstrap";
 
-const InputLabel = props => {
+const InputLabel = ({ labelText }) => {
 
     return (
         <div>
             <Label 
                 className="label"
             >
-                {props.labelText}
+                {labelText}
             </Label>
         </div>
     );

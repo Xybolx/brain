@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Badge, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import SocketContext from '../context/socketContext';
 import RoomContext from '../context/roomContext';
 import moment from 'moment';
 import Avatar from 'avataaars';
-import Spinner from './spinner';
+import { Spinner } from '../components/spinner';
 import SubTitle from './subTitle';
-import { Badge, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 
 const Reviews = ({ socket, messages, getMessages }) => {
 
@@ -16,10 +16,6 @@ const Reviews = ({ socket, messages, getMessages }) => {
     const [roomMessages, setRoomMessages] = useState([]);
 
     // Get and set state
-    useCallback(() => {
-        getMessages();
-    }, [getMessages])
-
     useEffect(() => {
         const getRoomMessages = () => {
             const roomMsgs = messages.filter(message => message.movie === room);

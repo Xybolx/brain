@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import moment from 'moment';
 import API from '../../utils/API';
 import SocketContext from '../../context/socketContext';
-import useInput from '../useInput';
+import useForm from '../useForm';
 import SearchDetail from './searchDetail';
-import SearchForm from './searchForm';
+import InputFormGroup from '../inputFormGroup';
 import SubTitle from '../subTitle';
-import Spinner from '../spinner';
+import { Spinner } from '../../components/spinner';
 
 const MovieSearch = ({ socket, toggle }) => {
 
     // State
     const [result, setResult] = useState({});
-    const [values, handleChange, handleClearInputs] = useInput();
+    const [values, handleChange, handleClearInputs] = useForm();
 
     // De-structure values
     const { search } = values;
@@ -84,13 +84,14 @@ const MovieSearch = ({ socket, toggle }) => {
                         />
                     )}
                 <div style={searchFormStyle}>
-                    <SearchForm
+                    <InputFormGroup
                         handleFormSubmit={handleFormSubmit}
                         inputType="search"
                         placeholder="Search for a movie"
                         value={search || ""}
                         name="search"
                         handleChange={handleChange}
+                        btnIcon={<i className="fas fa-search" />}
                     />
                 </div>
             </div>

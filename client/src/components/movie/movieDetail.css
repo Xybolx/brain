@@ -95,6 +95,8 @@
   margin-bottom: 50px;
   color: white;
   text-shadow: 1px 1px 1px darkred;
+  margin-left: 12px;
+  margin-right: 12px;
 }
 
 .released {

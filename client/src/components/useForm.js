@@ -3,7 +3,7 @@ import IsValidEmailContext from '../context/isValidEmailContext';
 import IsValidPasswordContext from '../context/isValidPasswordContext';
 import IsValidUsernameContext from '../context/isValidUsernameContext';
 
-const useInput = () => {
+const useForm = () => {
 
     // context
     const { setIsValidEmail } = useContext(IsValidEmailContext);
@@ -28,4 +28,4 @@ const useInput = () => {
 
 }
 
-export default useInput;
+export default useForm;

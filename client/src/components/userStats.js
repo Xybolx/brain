@@ -1,22 +1,19 @@
-import React, { useState, useContext, useEffect, useMemo } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Badge, Progress, Modal, ModalBody } from 'reactstrap';
 import UserContext from '../context/userContext';
-import useUserStats from "../components/useUserStats";
-import StatTitle from '../components/statTitle';
-import Btn from '../components/btn';
+import useStats from "../components/useStats";
+import StatTitle from './statTitle';
+import Btn from './button/btn';
 
-const UserStats = ({ online, getUsers }) => {
+const UserStats = ({ online, getUsers, messages }) => {
 
     // Context
     const { user } = useContext(UserContext);
 
     // State
-    const [messages, setMessages] = useState([]);
-    const [scoreTotal, neutralTotal, positiveTotal, negativeTotal, neutralAvg, positiveAvg, negativeAvg] = useUserStats(messages)
+    const [statMessages, setStatMessages] = useState([]);
+    const [scoreTotal, neutralTotal, positiveTotal, negativeTotal, neutralAvg, positiveAvg, negativeAvg] = useStats(statMessages);
     const [isOpen, setIsOpen] = useState(false);
-
-    // Memo
-    useMemo(() => ({ messages, setMessages }), [messages, setMessages]);
 
     // Toggle user stats
     const toggle = () => {
@@ -24,10 +21,10 @@ const UserStats = ({ online, getUsers }) => {
         getUsers();
     };
 
-    // Getting and setting state
     useEffect(() => {
-        setMessages(online.userMessages);
-    }, [online.userMessages])
+      const msgFilter = messages.filter(message => message.author === online.username);
+      setStatMessages(msgFilter)
+    }, [messages, online.username])
 
     return (
         <>
@@ -107,21 +104,21 @@ const UserStats = ({ online, getUsers }) => {
                         <Progress
                             color="success"
                             value={positiveTotal}
-                            max={messages.length}
+                            max={statMessages.length}
                         >
                             Positive {positiveTotal}
                         </Progress>
                         <Progress
                             color="warning"
                             value={neutralTotal}
-                            max={messages.length}
+                            max={statMessages.length}
                         >
                             Neutral {neutralTotal}
                         </Progress>
                         <Progress
                             color="danger"
                             value={negativeTotal}
-                            max={messages.length}
+                            max={statMessages.length}
                         >
                             Negative {negativeTotal}
                         </Progress>

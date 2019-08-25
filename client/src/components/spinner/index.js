@@ -1,6 +1,7 @@
 import React from 'react';
+import './spinner.css';
 
-const Spinner = ({ altMsg }) => {
+export const Spinner = ({ altMsg }) => {
 
     return (
         <h4>
@@ -14,5 +15,3 @@ const Spinner = ({ altMsg }) => {
         </h4>
     );
 }
-
-export default Spinner;

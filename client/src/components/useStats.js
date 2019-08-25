@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useUserStats = messages => {
+const useStats = statMessages => {
     
     // state
     const [scoreTotal, setScoreTotal] = useState('');
@@ -14,52 +14,52 @@ const useUserStats = messages => {
     useEffect(() => {
         const getScoreTotal = () => {
             let sum = 0;
-            messages.map(message => {
-                sum = sum += message;
+            statMessages.map(message => {
+                sum = sum += message.result;
                 return setScoreTotal(sum);
             });
         }
         getScoreTotal();
-    }, [messages])
+    }, [statMessages])
 
     useEffect(() => {
         const getNeutralTotal = () => {
-            const neutralMessages = messages.filter(message => message === 0);
+            const neutralMessages = statMessages.filter(message => message.result === 0);
             setNeutralTotal(neutralMessages.length);
         }
         getNeutralTotal();
-    }, [messages])
+    }, [statMessages])
 
     useEffect(() => {
-        setNeutralAvg(Math.round(neutralTotal / messages.length * 100));
-    }, [neutralAvg, neutralTotal, messages.length])
+        setNeutralAvg(Math.round(neutralTotal / statMessages.length * 100));
+    }, [neutralAvg, neutralTotal, statMessages.length])
 
     useEffect(() => {
         const getPositiveTotal = () => {
-            const positiveMessages = messages.filter(message => message > 0);
+            const positiveMessages = statMessages.filter(message => message.result > 0);
             setPositiveTotal(positiveMessages.length);
         }
         getPositiveTotal();
-    }, [messages])
+    }, [statMessages])
 
     useEffect(() => {
-        setPositiveAvg(Math.round(positiveTotal / messages.length * 100));
-    }, [positiveAvg, positiveTotal, messages.length])
+        setPositiveAvg(Math.round(positiveTotal / statMessages.length * 100));
+    }, [positiveAvg, positiveTotal, statMessages.length])
 
     useEffect(() => {
         const getNegativeTotal = () => {
-            const negativeMessages = messages.filter(message => message < 0);
+            const negativeMessages = statMessages.filter(message => message.result < 0);
             setNegativeTotal(negativeMessages.length);
         }
         getNegativeTotal();
-    }, [messages])
+    }, [statMessages])
 
     useEffect(() => {
-        setNegativeAvg(Math.round(negativeTotal / messages.length * 100));
-    }, [negativeAvg, negativeTotal, messages.length])
+        setNegativeAvg(Math.round(negativeTotal / statMessages.length * 100));
+    }, [negativeAvg, negativeTotal, statMessages.length])
 
     return [scoreTotal, neutralTotal, positiveTotal, negativeTotal, neutralAvg, positiveAvg, negativeAvg]
 
 }
 
-export default useUserStats;
+export default useStats;

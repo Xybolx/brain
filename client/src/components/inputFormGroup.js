@@ -1,8 +1,8 @@
 import React from 'react';
 import { Input, InputGroup, InputGroupAddon, Form, FormGroup } from 'reactstrap';
-import Btn from '../btn';
+import Btn from './button/btn';
 
-const SearchForm = ({ handleFormSubmit, inputType, placeholder, value, name, handleChange }) => {
+const InputFormGroup = ({ handleFormSubmit, inputType, placeholder, value, name, handleChange, btnIcon }) => {
 
     return (
         <Form onSubmit={handleFormSubmit}>
@@ -21,7 +21,8 @@ const SearchForm = ({ handleFormSubmit, inputType, placeholder, value, name, han
                         <Btn
                             type="submit"
                             color="dark"
-                            icon={<i className="fas fa-search" />}
+                            disabled={!value}
+                            icon={btnIcon}
                         />
                     </InputGroupAddon>
                 </InputGroup>
@@ -30,4 +31,4 @@ const SearchForm = ({ handleFormSubmit, inputType, placeholder, value, name, han
     );
 }
 
-export default SearchForm;
+export default InputFormGroup;

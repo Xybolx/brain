@@ -1,34 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Badge, Progress } from 'reactstrap';
-import useMovieStats from "../../components/useMovieStats";
+import useStats from "../../components/useStats";
 import StatTitle from '../statTitle';
 
 const MovieStats = ({ title, messages }) => {
 
     // State
-    const [movieMessages, setMovieMessages] = useState([]);
-    const [scoreTotal, setScoreTotal] = useState('');
-    const [neutralTotal, positiveTotal, negativeTotal, neutralAvg, positiveAvg, negativeAvg] = useMovieStats(movieMessages)
-
-    // // Memo
-    // useMemo(() => ({ messages, setMessages }), [messages, setMessages]);
+    const [statMessages, setStatMessages] = useState([]);
+    const [scoreTotal, neutralTotal, positiveTotal, negativeTotal, neutralAvg, positiveAvg, negativeAvg] = useStats(statMessages);
 
     // Get and set state
     useEffect(() => {
         const comments = messages.filter(message => message.movie === title);
-        setMovieMessages(comments);
+        setStatMessages(comments);
     }, [title, messages])
-
-    useEffect(() => {
-        const getScoreTotal = () => {
-            let sum = 0;
-            movieMessages.map(movieMessage => {
-                sum = sum += movieMessage.result;
-                return setScoreTotal(sum);
-            });
-        }
-        getScoreTotal();
-    }, [movieMessages])
 
     return (
         <div className="statsTitle" style={{ textAlign: "center" }}>
@@ -72,21 +57,21 @@ const MovieStats = ({ title, messages }) => {
                 <Progress
                     color="success"
                     value={positiveTotal}
-                    max={movieMessages.length}
+                    max={statMessages.length}
                 >
                     Positive {positiveTotal}
                 </Progress>
                 <Progress
                     color="warning"
                     value={neutralTotal}
-                    max={movieMessages.length}
+                    max={statMessages.length}
                 >
                     Neutral {neutralTotal}
                 </Progress>
                 <Progress
                     color="danger"
                     value={negativeTotal}
-                    max={movieMessages.length}
+                    max={statMessages.length}
                 >
                     Negative {negativeTotal}
                 </Progress>

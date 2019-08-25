@@ -1,0 +1,13 @@
+.titleSpan {
+  color: white;
+  vertical-align: -11px;
+  text-shadow: 1px 1px 1px gold;
+  font-family: 'Monoton', cursive;
+  background: url("imgs/film-tape.gif"), rgba(94, 65, 3, 0.678);
+  background-size: contain;
+  background-repeat: round;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
+}

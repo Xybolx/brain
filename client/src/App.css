@@ -168,79 +168,10 @@ body {
   font-family: 'Aldrich', sans-serif !important;
 }
 
-.carousel-control-prev {
-  background: url("imgs/arrow.gif");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right;
-  z-index: 0;
-  cursor: pointer;
-  top: 30px !important;
-  height: 10%;
-}
-
-.carousel-control-next {
-  background: url("imgs/arrow.gif");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right;
-  z-index: 0;
-  transform: rotate(180deg);
-  cursor: pointer;
-  top: 30px !important;
-  height: 10%;
-}
-
-.carousel-control-next-icon {
-  width: 0px;
-  z-index: -1;
-  transform: rotate(180deg);
-  top: -50px;
-  display: none !important;
-}
-
-.carousel-control-prev-icon {
-  width: 0px;
-  z-index: -1;
-  top: -50px;
-  display: none !important;
-}
-
-.carousel-indicators {
-  display: none !important;
-}
-
-.btn {
-  vertical-align: baseline !important;
-}
-
-#brandSpan {
-  vertical-align: -4px;
-  font-family: 'Monoton', cursive;
-  text-shadow: 1px 1px 1px gold;
-  background: url("imgs/film-tape.gif"), rgba(94, 65, 3, 0.514);
-  background-size: contain;
-  background-repeat: round;
-}
-
-.spinnerSpan {
-  vertical-align: -11px;
-}
-
-.navbar-toggler {
-  background: url("imgs/marquee.gif") !important;
-  background-size: 100% 100% !important;
-}
-
-.nav-link {
-  font-family: 'Aldrich', sans-serif;
-}
-
 h3,
 h4,
 h5,
 h6 {
-  color: whitesmoke;
   font-family: 'Monoton', cursive;
 }
 
@@ -257,56 +188,6 @@ h3 {
   background-size: contain;
   background-repeat: round;
   padding: 10px;
-}
-
-.titleSpan {
-  color: white;
-  vertical-align: -11px;
-  text-shadow: 1px 1px 1px gold;
-  font-family: 'Monoton', cursive;
-  background: url("imgs/film-tape.gif"), rgba(94, 65, 3, 0.678);
-  background-size: contain;
-  background-repeat: round;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 2px;
-  padding-right: 2px;
-}
-
-.btn-dark {
-  background: linear-gradient(black, black, silver);
-  font-family: 'Aldrich', sans-serif;
-}
-
-.btn-dark:hover {
-  background: linear-gradient(silver, black, black);
-}
-
-.btn-link {
-  font-family: 'Aldrich', sans-serif;
-}
-
-/* .movieTitleDiv {
-  font-family: 'Limelight', cursive;
-  background: url("imgs/white-screen.gif"), url("imgs/film-tape.gif");
-  background-size: cover, contain;
-  background-blend-mode: multiply;
-  background-clip: border-box;
-  background-repeat: repeat-y, round;
-  background-position: center;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  max-width: 100%;
-  margin-left: 20px;
-  margin-right: 20px;
-  color: black;
-  text-shadow: 1px 1px 1px rgba(255, 255, 0, 0.329);
-  text-transform: uppercase; 
-} */
-
-.movieTitleSpan {
-  max-width: 100%;
-  min-width: fit-content;
 }
 
 .userStrong {
@@ -337,78 +218,6 @@ h3 {
   -moz-animation: Curtain 5s;
   -webkit-animation: Curtain 5s;
 }
-
-/* .insideMovies {
-  background: url("imgs/curtain-open.gif"), url("imgs/screen.gif");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  animation: Curtain 5s;
-  -moz-animation: Curtain 5s;
-  -webkit-animation: Curtain 5s;
-  height: 460px;
-} */
-
-/* .plot {
-  margin-bottom: 50px;
-  color: white;
-  text-shadow: 1px 1px 1px darkred;
-  margin-right: 30px;
-  margin-left: 30px;
-}
-
-.released {
-  color: white;
-  text-shadow: 1px 1px 1px darkred;
-  margin-right: 30px;
-  margin-left: 30px;
-}
-
-.director {
-  color: white;
-  text-shadow: 1px 1px 1px darkred;
-  margin-right: 30px;
-  margin-left: 30px;
-}
-
-.amazon {
-  text-decoration-line: none;
-  margin-right: 30px;
-  margin-left: 30px;
-}
-
-.trailer {
-  font-family: 'Aldrich', sans-serif;
-  margin-right: 30px;
-  margin-left: 30px;
-}
-
-.plotTitle {
-  font-family: 'Limelight', cursive;
-  color: yellow;
-  text-shadow: 1px 1px 1px white;
-}
-
-.releasedTitle {
-  font-family: 'Limelight', cursive;
-  color: yellow;
-  text-shadow: 1px 1px 1px white;
-}
-
-.directorTitle {
-  font-family: 'Limelight', cursive;
-  color: yellow;
-  text-shadow: 1px 1px 1px white;
-}
-
-.amazonTitle {
-  color: yellow;
-  text-shadow: 1px 1px 1px white;
-}
-
-.trailerTitle {
-  color: yellow;
-  text-shadow: 1px 1px 1px white;
-} */
 
 p {
   font-family: 'Aldrich', sans-serif;
@@ -464,18 +273,16 @@ form {
   color: white;
 }
 
-/* .details {
-  margin-left: 50px;
-  margin-right: 50px;
-  padding: 0px 0px 0px 0px;;
-  background: rgba(0, 0, 0, 0.733);
-} */
-
 .modal-body {
   background: url("imgs/clap.jpg");
   background-size: cover;
   background-repeat: round;
   text-align: center;
+}
+
+.closeDiv {
+  text-align: right;
+  margin-top: 5px;
 }
 
 .modal-content {
@@ -521,11 +328,6 @@ h6 {
   margin-left: 5px;
 }
 
-.closeDiv {
-  text-align: right;
-  margin-top: 5px;
-}
-
 .valid-feedback,
 .invalid-feedback {
   font-family: 'Aldrich', sans-serif;
@@ -538,10 +340,6 @@ h6 {
 
 .is-invalid .form-control {
   border-color: red !important;
-}
-
-.fa-stack {
-  z-index: 0;
 }
 
 @media (max-width: 768px) {

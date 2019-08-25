@@ -6,13 +6,14 @@ import SocketContext from '../../context/socketContext';
 import RoomContext from '../../context/roomContext';
 import UserContext from '../../context/userContext';
 import MovieDetail from './movieDetail';
-import Spinner from '../spinner';
+import { Spinner } from '../../components/spinner';
 import SubTitle from '../subTitle';
+import './movies.css';
 
-const Movies = ({ socket, messages, getMessages, items, getMovies }) => {
+const Movies = ({ socket, messages, items, getMovies }) => {
 
     // Context
-    const { setRoom } = useContext(RoomContext);
+    const { room, setRoom } = useContext(RoomContext);
     const { user } = useContext(UserContext);
 
     // State
@@ -46,7 +47,12 @@ const Movies = ({ socket, messages, getMessages, items, getMovies }) => {
     };
 
     const handleSetRoom = id => {
-        API.getMovie(id)
+        if (room) {
+            socket.emit('SEND_LEAVE_ROOM', {
+                room: room,
+                user: user.username
+            })
+            API.getMovie(id)
             .then(res => {
                 socket.emit('SEND_JOIN_ROOM', {
                     room: res.data.title,
@@ -54,6 +60,16 @@ const Movies = ({ socket, messages, getMessages, items, getMovies }) => {
                 })
             })
             .catch(err => console.log(err))
+        } else {
+            API.getMovie(id)
+                .then(res => {
+                    socket.emit('SEND_JOIN_ROOM', {
+                        room: res.data.title,
+                        user: user.username
+                    })
+                })
+                .catch(err => console.log(err))
+        }
     };
 
     useEffect(() => {
@@ -77,6 +93,17 @@ const Movies = ({ socket, messages, getMessages, items, getMovies }) => {
             socket.off('RECEIVE_JOIN_ROOM');
         };
     }, [socket, setRoom])
+
+    useEffect(() => {
+        socket.on('RECEIVE_LEAVE_ROOM', data => {
+            if (data) {
+                console.log(`You left the ${data.room} room!`);
+            }
+        });
+        return () => {
+            socket.off('RECEIVE_LEAVE_ROOM');
+        };
+    }, [socket])
 
     const containerStyle = {
         marginBottom: 30
@@ -115,8 +142,6 @@ const Movies = ({ socket, messages, getMessages, items, getMovies }) => {
                                     director={item.director}
                                     plot={item.plot}
                                     messages={messages}
-                                    getMessages={getMessages}
-                                    getMovies={getMovies}
                                 />
                             </CarouselItem>
                         );

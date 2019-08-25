@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import useInput from '../components/useInput';
+import useForm from '../components/useForm';
 import API from '../utils/API';
 import UserContext from '../context/userContext';
 import IsValidEmailContext from '../context/isValidEmailContext';
 import IsValidPasswordContext from '../context/isValidPasswordContext';
-import Btn from '../components/btn';
+import Btn from './button/btn';
 import InputLabel from '../components/inputLabel';
 import { Form, FormGroup, FormFeedback, Input } from 'reactstrap';
 
@@ -18,7 +18,7 @@ const LogInForm = () => {
 
     // State
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [values, handleChange, handleClearInputs] = useInput();
+    const [values, handleChange, handleClearInputs] = useForm();
 
     // De-structure values
     const { email, password } = values;
@@ -145,7 +145,7 @@ const LogInForm = () => {
                                 </FormFeedback>
             </FormGroup>
             <Btn
-                disabled={!isValidEmail && !isValidPassword}
+                disabled={!isValidEmail || !isValidPassword}
                 type="submit"
                 color="dark"
                 size="md"
