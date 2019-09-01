@@ -5,6 +5,7 @@ import Review from '../components/review';
 import Users from '../components/users/users';
 import MovieSearch from '../components/movie/movieSearch';
 import Movies from '../components/movie/movies';
+import useBoolean from '../components/useBoolean';
 import Btn from '../components/button/btn';
 import { Row, Col, Collapse } from 'reactstrap';
 
@@ -13,15 +14,9 @@ const UserReviews = () => {
     // State
     const [items, setItems] = useState([]);
     const [messages, setMessages] = useState([]);
-    const [isOpen, setIsOpen] = useState(false);
-
-    // Memo
-    useMemo(() => ({ messages, setMessages }), [messages, setMessages]);
 
     // toggle collapse/getMessages functions
-    const toggle = () => {
-        setIsOpen(!isOpen);
-    };
+    const showCollapse = useBoolean(false);
 
     const getMessages = () => {
         API.getMessages()
@@ -45,14 +40,14 @@ const UserReviews = () => {
     }, [])
 
     return (
-        <div style={{ marginTop: 5 }}>
+        <div className="container-page" style={{ marginTop: 5 }}>
             <Row>
                 <Col
                     className="jumbotron jumbotron-fluid left"
                     md="6"
                 >
                     <div style={
-                        isOpen
+                        showCollapse.value 
                             ? { display: "none" }
                             : { display: "block" }}
                     >
@@ -63,25 +58,25 @@ const UserReviews = () => {
                             getMovies={getMovies}
                         />
                     </div>
-                    <Collapse isOpen={isOpen}>
+                    <Collapse isOpen={showCollapse.value}>
                         <div
                             style={
-                                isOpen
+                                showCollapse.value
                                     ? { display: "block" }
                                     : { display: "none" }}
                         >
                             <MovieSearch
-                                toggle={toggle}
+                                toggle={showCollapse.toggle}
                             />
                         </div>
                     </Collapse>
                     <div style={{ marginBottom: 20 }}>
                         <Btn
-                            onClick={toggle}
+                            onClick={showCollapse.toggle}
                             color="dark"
                             size="md"
                             icon={<i className="fas fa-search" />}
-                            name={isOpen ? "Close" : "Search"}
+                            name={showCollapse.value ? "Close" : "Search"}
                         />
                     </div>
                 </Col>

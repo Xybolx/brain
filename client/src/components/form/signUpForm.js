@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Avatar from 'avataaars';
-import API from '../../utils/API';
-import useForm from './useForm';
+import { Form, FormGroup, FormFeedback, Input } from 'reactstrap';
 import IsValidEmailContext from '../../context/isValidEmailContext';
 import IsValidPasswordContext from '../../context/isValidPasswordContext';
 import IsValidUsernameContext from '../../context/isValidUsernameContext';
 import UserContext from '../../context/userContext';
-import { Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
+import Avatar from 'avataaars';
+import API from '../../utils/API';
+import InputLabel from './inputLabel';
+import useForm from './useForm';
 import Btn from '../button/btn';
 
 const SignUpForm = () => {
@@ -140,12 +141,9 @@ const SignUpForm = () => {
         <div style={{ textAlign: "center" }}>
             <Form onSubmit={handleFormSubmit}>
                 <FormGroup>
-                    <Label
-                        className="label"
-                        htmlFor="emailInput"
-                    >
-                        Email
-                            </Label>
+                    <InputLabel
+                        labelText="Email"
+                    />
                     <Input
                         type="email"
                         name="email"
@@ -174,12 +172,9 @@ const SignUpForm = () => {
                         </FormFeedback>
                 </FormGroup>
                 <FormGroup>
-                    <Label
-                        className="label"
-                        htmlFor="usernameInput"
-                    >
-                        Username
-                            </Label>
+                    <InputLabel
+                        labelText="Username"
+                    />
                     <Input
                         type="text"
                         name="username"
@@ -210,12 +205,9 @@ const SignUpForm = () => {
                         </FormFeedback>
                 </FormGroup>
                 <FormGroup>
-                    <Label
-                        className="label"
-                        htmlFor="passwordInput"
-                    >
-                        Password
-                            </Label>
+                    <InputLabel
+                        labelText="Password"
+                    />
                     <Input
                         type="password"
                         name="password"
@@ -264,11 +256,9 @@ const SignUpForm = () => {
                 />
                 <div style={avatarSelectStyle}>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Hair Type Select
-                                </Label>
+                        <InputLabel
+                            labelText="Hair Type Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -307,11 +297,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Accessory Select
-                                </Label>
+                        <InputLabel
+                            labelText="Accessories Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -329,11 +317,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Hair Color Select
-                                </Label>
+                        <InputLabel
+                            labelText="Hair Color Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -355,11 +341,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Facial Hair Select
-                                </Label>
+                        <InputLabel
+                            labelText="Facial Hair Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -375,11 +359,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup style={facialStyle}>
-                        <Label
-                            className="label"
-                        >
-                            Facial Hair Color Select
-                                </Label>
+                        <InputLabel
+                            labelText="Facial Hair Color Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -399,11 +381,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Clothing Select
-                                </Label>
+                        <InputLabel
+                            labelText="Clothing Type Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -424,11 +404,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup style={fabricStyle}>
-                        <Label
-                            className="label"
-                        >
-                            Fabric Color Select
-                                </Label>
+                        <InputLabel
+                            labelText="Fabric Color Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -455,11 +433,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup style={graphicStyle}>
-                        <Label
-                            className="label"
-                        >
-                            Graphic Select
-                                </Label>
+                        <InputLabel
+                            labelText="Graphic Type Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -482,11 +458,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Eye Type Select
-                                </Label>
+                        <InputLabel
+                            labelText="Eye Type Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -509,11 +483,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Eyebrow Type Select
-                                </Label>
+                        <InputLabel
+                            labelText="Eyebrow Type Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -536,11 +508,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Mouth Type Select
-                                </Label>
+                        <InputLabel
+                            labelText="Mouth Type Select"
+                        />
                         <div>
                             <Input
                                 type="select"
@@ -563,11 +533,9 @@ const SignUpForm = () => {
                         </div>
                     </FormGroup>
                     <FormGroup>
-                        <Label
-                            className="label"
-                        >
-                            Skin Color Select
-                                </Label>
+                        <InputLabel
+                            labelText="Skin Color Select"
+                        />
                         <div>
                             <Input
                                 type="select"

@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { Collapse, Modal, ModalBody } from 'reactstrap';
 import Btn from '../button/btn';
 import MovieStats from './movieStats';
+import useBoolean from '../useBoolean';
 import "./movieDetail.css";
 
 const MovieDetail = ({ title, src, released, director, plot, onClick, messages }) => {
-
-  // State
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenDetails, setIsOpenDetails] = useState(false);
 
   // Amazon URL 
   const BASE_URL = "https://www.amazon.com/s?k=";
@@ -18,31 +15,27 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
   const TRAILER_URL = "https://www.youtube.com/results?search_query=";
 
   // Toggle collapse functions
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
+  const showStats = useBoolean(false);
 
-  const toggleDetails = () => {
-    setIsOpenDetails(!isOpenDetails);
-  };
+  const showDetails = useBoolean(false);
 
   return (
     <div className="moviesDiv">
       <div className="insideMovies text-center">
         <div>
           <Btn
-            onClick={toggle}
+            onClick={showStats.toggle}
             color="dark" size="sm"
             icon={<i className="fas fa-poll-h" />}
             name="Stats"
           />
           <Btn
-            onClick={toggleDetails}
+            onClick={showDetails.toggle}
             color="dark"
             size="sm"
             icon={<i className="fas fa-info" />}
             name={
-              isOpenDetails
+              showDetails.value
                 ? "Close"
                 : "Details"}
           />
@@ -55,24 +48,16 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
           />
         </div>
         <div className="movieTitleDiv">
-          <strong
-            className="movieTitle"
-          >
-            <span
-              className="movieTitleSpan"
-            >
+          <strong className="movieTitle">
+            <span className="movieTitleSpan">
               {title}
             </span>
           </strong>
         </div>
-        <Collapse className="details" isOpen={isOpenDetails}>
-          <h6
-            className="amazonTitle"
-          >
+        <Collapse className="details" isOpen={showDetails.value}>
+          <h6 className="amazonTitle">
             Amazon
-            <p
-              className="amazon"
-            >
+            <p className="amazon">
               <a
                 href={BASE_URL + title + " movie " + END_URL}
                 rel="noopener noreferrer"
@@ -82,13 +67,9 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
                 </a>
             </p>
           </h6>
-          <h6
-            className="trailerTitle"
-          >
+          <h6 className="trailerTitle">
             Trailer
-            <p
-              className="trailer"
-            >
+            <p className="trailer">
               <a
                 href={TRAILER_URL + title + "trailer"}
                 rel="noopener noreferrer"
@@ -98,38 +79,26 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
                 </a>
             </p>
           </h6>
-          <h6
-            className="releasedTitle"
-          >
+          <h6 className="releasedTitle">
             Released
-            <p
-              className="released"
-            >
+            <p className="released">
               {released}
             </p>
           </h6>
-          <h6
-            className="directorTitle"
-          >
+          <h6 className="directorTitle">
             Director(s)
-            <p
-              className="director"
-            >
+            <p className="director">
               {director}
             </p>
           </h6>
-          <h6
-            className="plotTitle"
-          >
+          <h6 className="plotTitle">
             Plot
-            <p
-              className="plot"
-            >
+            <p className="plot">
               {plot}
             </p>
           </h6>
         </Collapse>
-        <Modal isOpen={isOpen} centered>
+        <Modal isOpen={showStats.value} centered>
           <ModalBody>
               <MovieStats
                 title={title}
@@ -139,7 +108,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
               <Btn
                 color="dark"
                 size="md"
-                onClick={toggle}
+                onClick={showStats.toggle}
                 icon={<i className="fas fa-window-close" />}
                 name="Close"
               />
@@ -151,7 +120,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
           className="img-fluid"
           src={src}
           style={
-            isOpenDetails
+            showDetails.value
               ? { display: "none" }
               : { display: "block", margin: "0 auto" }}
         />

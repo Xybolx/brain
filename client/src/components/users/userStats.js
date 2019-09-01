@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Badge, Progress, Modal, ModalBody } from 'reactstrap';
+import Avatar from 'avataaars';
 import UserContext from '../../context/userContext';
 import useStats from "../useStats";
 import StatTitle from '../headers/statTitle';
+import ProgTitle from '../progTitle';
 import Btn from '../button/btn';
 
 const UserStats = ({ online, getUsers, messages }) => {
@@ -12,8 +14,16 @@ const UserStats = ({ online, getUsers, messages }) => {
 
     // State
     const [statMessages, setStatMessages] = useState([]);
-    const [scoreTotal, neutralTotal, positiveTotal, negativeTotal, neutralAvg, positiveAvg, negativeAvg] = useStats(statMessages);
     const [isOpen, setIsOpen] = useState(false);
+    const [
+        scoreTotal,
+        neutralTotal,
+        positiveTotal,
+        negativeTotal,
+        neutralAvg,
+        positiveAvg,
+        negativeAvg
+    ] = useStats(statMessages);
 
     // Toggle user stats
     const toggle = () => {
@@ -22,8 +32,8 @@ const UserStats = ({ online, getUsers, messages }) => {
     };
 
     useEffect(() => {
-      const msgFilter = messages.filter(message => message.author === online.username);
-      setStatMessages(msgFilter)
+        const msgFilter = messages.filter(message => message.author === online.username);
+        setStatMessages(msgFilter)
     }, [messages, online.username])
 
     return (
@@ -47,30 +57,45 @@ const UserStats = ({ online, getUsers, messages }) => {
                 <ModalBody>
                     <div className="statsTitle">
                         <StatTitle
+                            icon={<Avatar
+                                style={{ width: '20px', height: '25px' }}
+                                avatarStyle={online.avatar.avatarStyle}
+                                topType={online.avatar.topType}
+                                accessoriesType={online.avatar.accessoriesType}
+                                hairColor={online.avatar.hairColor}
+                                facialHairType={online.avatar.facialHairType}
+                                facialHairColor={online.avatar.facialHairColor}
+                                clotheType={online.avatar.clotheType}
+                                clotheColor={online.avatar.clotheColor}
+                                graphicType={online.avatar.graphicType}
+                                eyeType={online.avatar.eyeType}
+                                eyebrowType={online.avatar.eyebrowType}
+                                mouthType={online.avatar.mouthType}
+                                skinColor={online.avatar.skinColor}
+                            />}
                             header={online.username}
-                            icon={<i className="fas fa-user" />}
                         />
                         <StatTitle
-                            header="Overall Rating:"
+                            icon={<i className="fas fa-balance-scale" />}
+                            header="FilmBrains Bias:"
                             badge={
                                 <Badge
                                     color={
-                                        scoreTotal === 0
-                                            ? "warning"
-                                            : scoreTotal < 0
-                                                ? "danger"
-                                                : scoreTotal > 0
-                                                    ? "success" : "dark"}
+                                        scoreTotal < 0
+                                            ? "danger"
+                                            : scoreTotal > 0
+                                                ? "success"
+                                                : "warning"
+                                    }
                                     pill
                                 >
-                                    <i className="fas fa-poll-h" /> {scoreTotal === 0
-                                        ? "Neutral"
+                                    {scoreTotal > 0
+                                        ? `+ ${scoreTotal}`
                                         : scoreTotal < 0
-                                            ? "Negative"
-                                            : scoreTotal > 0
-                                                ? "Positive"
-                                                : "No Data"}
-                                </Badge>}
+                                            ? `${scoreTotal}`
+                                            : "Even"}
+                                </Badge>
+                            }
                         />
                         <StatTitle
                             header="Averages"
@@ -81,21 +106,27 @@ const UserStats = ({ online, getUsers, messages }) => {
                             value={positiveAvg}
                             max={100}
                         >
-                            {isNaN(positiveAvg) ? `Positive: No Data` : `Positive ${positiveAvg}%`}
+                            {isNaN(positiveAvg)
+                                ? `No Data`
+                                : `Positive ${positiveAvg}%`}
                         </Progress>
                         <Progress
                             color="warning"
                             value={neutralAvg}
                             max={100}
                         >
-                            {isNaN(neutralAvg) ? `Neutral: No Data` : `Neutral ${neutralAvg}%`}
+                            {isNaN(neutralAvg)
+                                ? `No Data`
+                                : `Neutral ${neutralAvg}%`}
                         </Progress>
                         <Progress
                             color="danger"
                             value={negativeAvg}
                             max={100}
                         >
-                            {isNaN(negativeAvg) ? `Negative: No Data` : `Negative ${negativeAvg}%`}
+                            {isNaN(negativeAvg)
+                                ? `No Data`
+                                : `Negative ${negativeAvg}%`}
                         </Progress>
                         <StatTitle
                             header="Totals"
@@ -106,21 +137,21 @@ const UserStats = ({ online, getUsers, messages }) => {
                             value={positiveTotal}
                             max={statMessages.length}
                         >
-                            Positive {positiveTotal}
+                            Positive {positiveTotal}/{statMessages.length}
                         </Progress>
                         <Progress
                             color="warning"
                             value={neutralTotal}
                             max={statMessages.length}
                         >
-                            Neutral {neutralTotal}
+                            Neutral {neutralTotal}/{statMessages.length}
                         </Progress>
                         <Progress
                             color="danger"
                             value={negativeTotal}
                             max={statMessages.length}
                         >
-                            Negative {negativeTotal}
+                            Negative {negativeTotal}/{statMessages.length}
                         </Progress>
                         <div className="closeDiv">
                             <Btn

@@ -1,9 +1,11 @@
 import React from 'react';
 
-const StatTitle = ({ icon, header, badge }) => {
+const StatTitle = ({ icon, header, badge, button }) => {
 
     return (
-        <h6 className="statTitle">{icon} {header} {badge}</h6>
+        <div className="text-center">
+            <h6 className="statTitle"> {icon} {header} {badge}<span>{button}</span></h6>
+        </div>
     );
 }
 

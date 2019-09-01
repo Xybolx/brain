@@ -6,7 +6,7 @@ import useForm from '../form/useForm';
 import SearchDetail from './searchDetail';
 import InputFormGroup from '../form/inputFormGroup';
 import SubTitle from '../headers/subTitle';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../spinner';
 
 const MovieSearch = ({ socket, toggle }) => {
 
@@ -88,7 +88,7 @@ const MovieSearch = ({ socket, toggle }) => {
                         handleFormSubmit={handleFormSubmit}
                         inputType="search"
                         placeholder="Search for a movie"
-                        value={search || ""}
+                        value={search}
                         name="search"
                         handleChange={handleChange}
                         btnIcon={<i className="fas fa-search" />}

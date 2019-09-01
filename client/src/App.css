@@ -12,50 +12,20 @@ body {
   text-align: center;
 }
 
-@keyframes Curtain {
+/* @keyframes Curtain {
   0% {
-    background: url("imgs/curtain-close.jpg"), url("imgs/screen.gif");
+    background: url("https://thumbs.gfycat.com/AccurateGloomyBlueshark-max-1mb.gif");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position-y: bottom;
   }
   100% {
-    background: url("imgs/curtain-open.gif"), repeating-radial-gradient(black, silver, black, black, black);
+    background: url("https://thumbs.gfycat.com/AccurateGloomyBlueshark-max-1mb.gif");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position-y: bottom;
   }
-}
-
-@-moz-keyframes Curtain {
-  0% {
-    background: url("imgs/curtain-close.jpg"), url("imgs/screen.gif");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-  }
-  100% {
-    background: url("imgs/curtain-open.gif"), repeating-radial-gradient(black, silver, black, black, black);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-  }
-}
-
-@-webkit-keyframes Curtain {
-  0% {
-    background: url("imgs/curtain-close.jpg"), url("imgs/screen.gif");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-  }
-  100% {
-    background: url("imgs/curtain-open.gif"), repeating-radial-gradient(black, silver, black, black, black);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-  }
-}
+} */
 
 .form-group {
   text-align: left;
@@ -63,12 +33,13 @@ body {
 
 .messages {
   text-align: center;
-  min-height: 250px;
-  max-height: 250px;
-  background: url("imgs/clap.jpg");
+  min-height: 190px;
+  max-height: 190px;
   overflow-y: scroll;
-  background-size: contain;
-  background-repeat: round;
+}
+
+.insideMessages > :first-child {
+  border-top: solid .5px white;
 }
 
 .card-text {
@@ -85,9 +56,8 @@ body {
 }
 
 .users {
-  margin-bottom: 20px;
   text-align: center;
-  font-family: 'Aldrich', sans-serif;
+  font-family: 'Limelight', cursive;
 }
 
 .usersDiv {
@@ -120,22 +90,31 @@ body {
   font-family: 'Aldrich', sans-serif;
 }
 
+.statDiv {
+  margin-left: 20px;
+}
+
 .statTitle {
   color: white;
-  border-bottom: groove white;
+  border-bottom: solid 1px white;
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .bg-danger {
-  background: linear-gradient(darkred, tomato, darkred);
+  background: linear-gradient(darkred, tomato, darkred) !important;
+  margin-top: .5px;
 }
 
 .bg-success {
-  background: linear-gradient(darkgreen, lawngreen, darkgreen);
+  background: linear-gradient(darkgreen, lawngreen, darkgreen) !important;
+  margin-bottom: .5px;
 }
 
 .bg-warning {
-  background: linear-gradient(darkgoldenrod, yellow, goldenrod);
+  background: linear-gradient(darkgoldenrod, yellow, goldenrod) !important;
+  margin-top: .5px;
+  margin-bottom: .5px;
 }
 
 .bg-dark {
@@ -149,14 +128,14 @@ body {
 
 .badge-success {
   background: linear-gradient(darkgreen, lawngreen, darkgreen);
-  color: black !important;
-  text-shadow: 1px 1px 1px white;
+  color: white !important;
+  text-shadow: 1px 1px 1px black;
 }
 
 .badge-danger {
   background: linear-gradient(darkred, tomato, darkred);
-  color: black !important;
-  text-shadow: 1px 1px 1px white;
+  color: white !important;
+  text-shadow: 1px 1px 1px black;
 }
 
 .badge-dark {
@@ -190,33 +169,21 @@ h3 {
   padding: 10px;
 }
 
-.userStrong {
-  font-family: 'Limelight', cursive;
-}
-
 .movieStrong {
   font-family: 'Limelight', cursive;
   color: black;
 }
 
 .searchDiv {
-  background: url("imgs/curtain-open.gif"), repeating-linear-gradient(black, black, silver);
+  background: transparent;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-position-y: bottom;
-  animation: Curtain 5s;
-  -moz-animation: Curtain 5s;
-  -webkit-animation: Curtain 5s;
 }
 
 .insideSearch {
-  background: url("imgs/curtain-open.gif"), url("imgs/screen.gif");
+  background: transparent;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-position-y: bottom;
-  animation: Curtain 5s;
-  -moz-animation: Curtain 5s;
-  -webkit-animation: Curtain 5s;
 }
 
 p {
@@ -226,10 +193,11 @@ p {
 }
 
 .left {
-  background: url("imgs/seats.jpg"), black !important;
+  background: url("https://i-love-png.com/images/movie_theater_png_903217.png"), black !important;
   background-size: 100% 100% !important;
-  background-repeat: no-repeat !important;
-  background-clip: padding-box;
+  background-repeat: repeat-y !important;
+  background-clip: border-box;
+  background-position: center;
   padding-top: 10px !important;
   height: 665px;
 }
@@ -240,7 +208,7 @@ p {
 }
 
 .card {
-  background: #161616a9 !important;
+  background: transparent !important;
   color: white;
   font-family: 'Aldrich', sans-serif;
   border-radius: 0px !important;
@@ -273,11 +241,19 @@ form {
   color: white;
 }
 
-.modal-body {
+.modal-content {
   background: url("imgs/clap.jpg");
   background-size: cover;
   background-repeat: round;
   text-align: center;
+}
+
+.progDiv {
+  margin-left: 20px;
+  font-family: 'Limelight', cursive;
+  font-size: smaller;
+  text-decoration-line: underline;
+  color: white;
 }
 
 .closeDiv {
@@ -298,7 +274,7 @@ h6 {
   text-align: center;
   color: white;
   text-shadow: 1px 1px 1px black;
-  padding-top: 70px;
+  margin-top: 65px;
 }
 
 #titleHeader {
@@ -308,6 +284,10 @@ h6 {
 
 .fa-brain {
   color: lightpink;
+}
+
+.fa-stack {
+  vertical-align: -8px !important;
 }
 
 .homeLink {
@@ -340,10 +320,4 @@ h6 {
 
 .is-invalid .form-control {
   border-color: red !important;
-}
-
-@media (max-width: 768px) {
-  body {
-    overflow-y: scroll;
-  }
 }

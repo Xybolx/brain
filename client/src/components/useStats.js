@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 const useStats = statMessages => {
     
     // state
-    const [scoreTotal, setScoreTotal] = useState('');
-    const [neutralTotal, setNeutralTotal] = useState('');
-    const [positiveTotal, setPositiveTotal] = useState('');
-    const [negativeTotal, setNegativeTotal] = useState('');
-    const [neutralAvg, setNeutralAvg] = useState('');
-    const [positiveAvg, setPositiveAvg] = useState('');
-    const [negativeAvg, setNegativeAvg] = useState('');
+    const [scoreTotal, setScoreTotal] = useState(0);
+    const [neutralTotal, setNeutralTotal] = useState(0);
+    const [positiveTotal, setPositiveTotal] = useState(0);
+    const [negativeTotal, setNegativeTotal] = useState(0);
+    const [neutralAvg, setNeutralAvg] = useState(0);
+    const [positiveAvg, setPositiveAvg] = useState(0);
+    const [negativeAvg, setNegativeAvg] = useState(0);
 
     useEffect(() => {
         const getScoreTotal = () => {

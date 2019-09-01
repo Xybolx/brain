@@ -17,7 +17,7 @@ import UserReviews from './pages/reviews';
 import LogOut from './pages/logOut';
 import './App.css';
 
-const socket = io();
+const socket = io("http://localhost:3001");
 
 socket.on('connect', () => {
   let id = socket.io.engine.id;

@@ -12,6 +12,7 @@ const userSchema = new Schema({
         },
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
     },
+
     username: {
         type: String,
         required: [true, 'Username is required!'],
@@ -22,10 +23,12 @@ const userSchema = new Schema({
         required: [true, 'Password is required!'],
         minlength: [6, "Must be at least 6 characters long!"]
     },
+
     date: {
         type: Date,
         default: Date.now
     },
+
     avatar: {
         avatarStyle: String,
         topType: String,
@@ -41,10 +44,12 @@ const userSchema = new Schema({
         mouthType: String,
         skinColor: String,
     },
+
     userMessages: {
         type: Array,
         default: []
     }
+    
 });
 
 userSchema.pre('save', function (next) {

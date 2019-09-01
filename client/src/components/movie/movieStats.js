@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Badge, Progress } from 'reactstrap';
-import useStats from "../../components/useStats";
+import useStats from "../useStats";
 import StatTitle from '../headers/statTitle';
+import ProgTitle from '../progTitle';
 
 const MovieStats = ({ title, messages }) => {
 
@@ -19,18 +20,19 @@ const MovieStats = ({ title, messages }) => {
 
     // Get and set state
     useEffect(() => {
-        const comments = messages.filter(message => message.movie === title);
-        setStatMessages(comments);
+        const msgFilter = messages.filter(message => message.movie === title);
+        setStatMessages(msgFilter);
     }, [title, messages])
 
     return (
         <div className="statsTitle" style={{ textAlign: "center" }}>
             <StatTitle
-                header={title}
                 icon={<i className="fas fa-film" />}
+                header={title}
             />
             <StatTitle
-                header="Overall Rating:"
+                icon={<i className="fas fa-balance-scale" />}
+                header="FilmBrains Score:"
                 badge={
                     <Badge
                         color={
@@ -40,17 +42,11 @@ const MovieStats = ({ title, messages }) => {
                                     ? "danger"
                                     : scoreTotal > 0
                                         ? "success"
-                                        : "dark"}
+                                        : "dark"
+                        }
                         pill
                     >
-                        <i className="fas fa-poll-h" />
-                        {scoreTotal === 0
-                            ? "Neutral"
-                            : scoreTotal < 0
-                                ? "Negative"
-                                : scoreTotal > 0
-                                    ? "Positive"
-                                    : "No Data"}
+                        {scoreTotal > 0 ? `+ ${scoreTotal}` : scoreTotal < 0 ? `${scoreTotal}` : "Even"}
                     </Badge>
                 }
             />
@@ -63,8 +59,8 @@ const MovieStats = ({ title, messages }) => {
                 value={positiveAvg}
                 max={100}
             >
-                {isNaN(positiveAvg) 
-                    ? `Positive: No Data` 
+                {isNaN(positiveAvg)
+                    ? `No Data`
                     : `Positive ${positiveAvg}%`}
             </Progress>
             <Progress
@@ -72,8 +68,8 @@ const MovieStats = ({ title, messages }) => {
                 value={neutralAvg}
                 max={100}
             >
-                {isNaN(neutralAvg) 
-                    ? `Neutral: No Data` 
+                {isNaN(neutralAvg)
+                    ? `No Data`
                     : `Neutral ${neutralAvg}%`}
             </Progress>
             <Progress
@@ -81,8 +77,8 @@ const MovieStats = ({ title, messages }) => {
                 value={negativeAvg}
                 max={100}
             >
-                {isNaN(negativeAvg) 
-                    ? `Negative: No Data` 
+                {isNaN(negativeAvg)
+                    ? `No Data`
                     : `Negative ${negativeAvg}%`}
             </Progress>
             <StatTitle
@@ -94,21 +90,21 @@ const MovieStats = ({ title, messages }) => {
                 value={positiveTotal}
                 max={statMessages.length}
             >
-                Positive {positiveTotal}
+                Positive {positiveTotal}/{statMessages.length}
             </Progress>
             <Progress
                 color="warning"
                 value={neutralTotal}
                 max={statMessages.length}
             >
-                Neutral {neutralTotal}
+                Neutral {neutralTotal}/{statMessages.length}
             </Progress>
             <Progress
                 color="danger"
                 value={negativeTotal}
                 max={statMessages.length}
             >
-                Negative {negativeTotal}
+                Negative {negativeTotal}/{statMessages.length}
             </Progress>
         </div>
     );

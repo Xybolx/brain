@@ -4,7 +4,7 @@ import SocketContext from '../context/socketContext';
 import RoomContext from '../context/roomContext';
 import moment from 'moment';
 import Avatar from 'avataaars';
-import { Spinner } from '../components/spinner';
+import PageLogo from './pageLogo';
 import SubTitle from './headers/subTitle';
 
 const Reviews = ({ socket, messages, getMessages }) => {
@@ -40,14 +40,17 @@ const Reviews = ({ socket, messages, getMessages }) => {
     return (
         <div style={room ? { display: 'block' } : { display: 'none' }}>
             <SubTitle
-                style={roomMessages.length ? { display: "block" } : { display: "none" }}
                 className="reviewTitle"
-                number={roomMessages.length ? `${roomMessages.length}` : ``}
+                number={roomMessages.length ? `${roomMessages.length}` : `No`}
                 icon={<i className="fas fa-theater-masks" />}
                 header="Review(s)"
             />
-            {roomMessages.length ? (
-                <div className="messages">
+            <div className="messages">
+                <PageLogo
+                    className="messages-logo"
+                    stackSize="6"
+                />
+                <div className="insideMessages">
                     {roomMessages.map(roomMessage => (
                         <Card key={roomMessage._id}>
                             <CardBody>
@@ -104,11 +107,7 @@ const Reviews = ({ socket, messages, getMessages }) => {
                         </Card>
                     ))}
                 </div>
-            ) : (
-                    <Spinner
-                        altMsg="No Reviews..."
-                    />
-                )}
+            </div>
         </div>
     );
 }

@@ -6,6 +6,7 @@ const messageSchema = new Schema({
     type: String,
     required: true
   },
+
   avatar: {
     avatarStyle: String,
     topType: String,
@@ -21,17 +22,21 @@ const messageSchema = new Schema({
     mouthType: String,
     skinColor: String,
   },
+
   message: {
     type: String,
     required: true
   },
+
   movie: {
     type: String
   },
+
   result: {
     type: Number,
     required: true
   },
+
   date: {
     type: Date,
     default: Date.now,
@@ -39,6 +44,7 @@ const messageSchema = new Schema({
       unique: true
     }
   },
+  
 });
 
 const Message = mongoose.model("Message", messageSchema);

@@ -11,7 +11,7 @@ const InputFormGroup = ({ handleFormSubmit, inputType, placeholder, value, name,
                     <Input
                         type={inputType}
                         placeholder={placeholder}
-                        value={value}
+                        value={value || ""}
                         name={name}
                         onChange={handleChange}
                     />
