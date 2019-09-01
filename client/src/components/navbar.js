@@ -115,8 +115,7 @@ const TopNav = () => {
                             <i className="fas fa-theater-masks" /> Reviews
                             </NavLink>
                     </NavItem>
-                    <NavItem
-                    >
+                    <NavItem>
                         <NavLink
                             className="nav-link"
                             onClick={toggle}
