@@ -73,11 +73,11 @@
 }
 
 .plot {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   color: black;
   text-shadow: 1px 1px 1px gold;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .released {
