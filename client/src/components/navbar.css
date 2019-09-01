@@ -8,7 +8,7 @@
 }
 
 #brandSpan {
-  vertical-align: -4px;
+  vertical-align: 4px;
   font-family: 'Monoton', cursive;
   text-shadow: 1px 1px 1px gold;
   background: url("../imgs/film-tape.gif"), rgba(94, 65, 3, 0.514);

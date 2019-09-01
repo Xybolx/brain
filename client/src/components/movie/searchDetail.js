@@ -38,7 +38,7 @@ const SearchDetail = ({ title, src, released, director, plot, onClick }) => {
                         color="dark"
                         size="sm"
                         icon={<i className="fas fa-film" />}
-                        name="Review"
+                        name="Save"
                     />
                 </div>
                 <div className="movieTitleDiv">
