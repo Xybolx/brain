@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Collapse, Modal, ModalBody } from 'reactstrap';
 import Btn from '../button/btn';
 import MovieStats from './movieStats';

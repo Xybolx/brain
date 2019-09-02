@@ -75,9 +75,10 @@
 .plot {
   margin-bottom: 40px;
   color: black;
-  text-shadow: 1px 1px 1px gold;
+  text-shadow: .5px .5px .5px gold;
   margin-left: 8px;
   margin-right: 8px;
+  font-size: 12px;
 }
 
 .released {
