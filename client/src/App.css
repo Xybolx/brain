@@ -12,21 +12,6 @@ body {
   text-align: center;
 }
 
-/* @keyframes Curtain {
-  0% {
-    background: url("https://thumbs.gfycat.com/AccurateGloomyBlueshark-max-1mb.gif");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-  }
-  100% {
-    background: url("https://thumbs.gfycat.com/AccurateGloomyBlueshark-max-1mb.gif");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-  }
-} */
-
 .form-group {
   text-align: left;
 }
@@ -320,4 +305,9 @@ h6 {
 
 .is-invalid .form-control {
   border-color: red !important;
+}
+
+.page-logo {
+  position: absolute;
+  left: 20px;
 }

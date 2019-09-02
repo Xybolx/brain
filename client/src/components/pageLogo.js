@@ -3,7 +3,7 @@ import React from 'react';
 const PageLogo = ({ stackSize }) => {
 
     return (
-        <div className="text-center">
+        <div className="page-logo">
         <div className={`fa-stack fa-${stackSize}x`}>
             <div>
                 <i className="fas fa-film fa-stack-2x" />
