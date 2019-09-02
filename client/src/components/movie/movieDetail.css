@@ -51,14 +51,12 @@
     background: url("https://ak8.picdn.net/shutterstock/videos/18814838/thumb/1.jpg?ip=x480");
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position-y: bottom;
   }
   100% {
     background: transparent;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position-y: bottom;
-    background-position-x: 5px;
   }
 }
 
