@@ -16,7 +16,6 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
 
   // Toggle collapse functions
   const showStats = useBoolean(false);
-
   const showDetails = useBoolean(false);
 
   return (
@@ -63,7 +62,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <i className="fab fa-amazon" /> View on Amazon
+                <i className="fab fa-amazon" /> View
                 </a>
             </p>
           </h6>
@@ -75,7 +74,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <i className="fab fa-youtube" /> View Trailer
+                <i className="fab fa-youtube" /> View
                 </a>
             </p>
           </h6>
