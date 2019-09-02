@@ -229,7 +229,7 @@ form {
 .modal-content {
   background: url("imgs/clap.jpg");
   background-size: cover;
-  background-repeat: round;
+  background-repeat: no-repeat;
   text-align: center;
 }
 

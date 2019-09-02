@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import API from '../utils/API';
 import Reviews from '../components/reviews';
 import Review from '../components/review';
@@ -16,7 +16,7 @@ const UserReviews = () => {
     const [messages, setMessages] = useState([]);
 
     // toggle collapse/getMessages functions
-    const showCollapse = useBoolean(false);
+    const [isOpen, toggleCollapse] = useBoolean(false);
 
     const getMessages = () => {
         API.getMessages()
@@ -47,7 +47,7 @@ const UserReviews = () => {
                     md="6"
                 >
                     <div style={
-                        showCollapse.value 
+                        isOpen 
                             ? { display: "none" }
                             : { display: "block" }}
                     >
@@ -58,25 +58,25 @@ const UserReviews = () => {
                             getMovies={getMovies}
                         />
                     </div>
-                    <Collapse isOpen={showCollapse.value}>
+                    <Collapse isOpen={isOpen}>
                         <div
                             style={
-                                showCollapse.value
+                                isOpen
                                     ? { display: "block" }
                                     : { display: "none" }}
                         >
                             <MovieSearch
-                                toggle={showCollapse.toggle}
+                                toggleCollapse={toggleCollapse}
                             />
                         </div>
                     </Collapse>
                     <div style={{ marginBottom: 20 }}>
                         <Btn
-                            onClick={showCollapse.toggle}
+                            onClick={toggleCollapse}
                             color="dark"
                             size="md"
                             icon={<i className="fas fa-search" />}
-                            name={showCollapse.value ? "Close" : "Search"}
+                            name={isOpen ? "Close" : "Search"}
                         />
                     </div>
                 </Col>

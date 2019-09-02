@@ -4,7 +4,6 @@ import Avatar from 'avataaars';
 import UserContext from '../../context/userContext';
 import useStats from "../useStats";
 import StatTitle from '../headers/statTitle';
-import ProgTitle from '../progTitle';
 import Btn from '../button/btn';
 
 const UserStats = ({ online, getUsers, messages }) => {

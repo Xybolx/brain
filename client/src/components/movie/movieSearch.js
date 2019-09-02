@@ -8,7 +8,7 @@ import InputFormGroup from '../form/inputFormGroup';
 import SubTitle from '../headers/subTitle';
 import { Spinner } from '../spinner';
 
-const MovieSearch = ({ socket, toggle }) => {
+const MovieSearch = ({ socket, toggleCollapse }) => {
 
     // State
     const [result, setResult] = useState({});
@@ -38,7 +38,7 @@ const MovieSearch = ({ socket, toggle }) => {
                 })
             })
             .catch(err => console.log(err))
-        toggle();
+        toggleCollapse();
         handleClearInputs();
         setResult({});
     };

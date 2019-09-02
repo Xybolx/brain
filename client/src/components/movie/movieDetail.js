@@ -15,26 +15,26 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
   const TRAILER_URL = "https://www.youtube.com/results?search_query=";
 
   // Toggle collapse functions
-  const showStats = useBoolean(false);
-  const showDetails = useBoolean(false);
+  const [isOpenStats, toggleStats] = useBoolean(false);
+  const [isOpenDetails, toggleDetails] = useBoolean(false);
 
   return (
     <div className="moviesDiv">
       <div className="insideMovies text-center">
         <div>
           <Btn
-            onClick={showStats.toggle}
+            onClick={toggleStats}
             color="dark" size="sm"
             icon={<i className="fas fa-poll-h" />}
             name="Stats"
           />
           <Btn
-            onClick={showDetails.toggle}
+            onClick={toggleDetails}
             color="dark"
             size="sm"
             icon={<i className="fas fa-info" />}
             name={
-              showDetails.value
+              isOpenDetails
                 ? "Close"
                 : "Details"}
           />
@@ -53,7 +53,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
             </span>
           </strong>
         </div>
-        <Collapse className="details" isOpen={showDetails.value}>
+        <Collapse className="details" isOpen={isOpenDetails}>
           <h6 className="amazonTitle">
             Amazon
             <p className="amazon">
@@ -97,7 +97,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
             </p>
           </h6>
         </Collapse>
-        <Modal isOpen={showStats.value} centered>
+        <Modal isOpen={isOpenStats} centered>
           <ModalBody>
               <MovieStats
                 title={title}
@@ -107,7 +107,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
               <Btn
                 color="dark"
                 size="md"
-                onClick={showStats.toggle}
+                onClick={toggleStats}
                 icon={<i className="fas fa-window-close" />}
                 name="Close"
               />
@@ -119,7 +119,7 @@ const MovieDetail = ({ title, src, released, director, plot, onClick, messages }
           className="img-fluid"
           src={src}
           style={
-            showDetails.value
+            isOpenDetails
               ? { display: "none" }
               : { display: "block", margin: "0 auto" }}
         />
