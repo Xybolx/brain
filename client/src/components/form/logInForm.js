@@ -72,13 +72,13 @@ const LogInForm = () => {
         }
     };
 
-    // Redirect to chat when user is logged in
+    // Redirect to reviews when user is logged in
     if (isLoggedIn) {
         return <Redirect to="/reviews" />
     }
 
     return (
-        <Form onSubmit={handleFormSubmit}>
+        <Form className="login-form" onSubmit={handleFormSubmit}>
             <FormGroup>
                 <InputLabel
                     labelText="Email"
@@ -123,7 +123,6 @@ const LogInForm = () => {
                     placeholder="Enter Password"
                     value={password || ""}
                     onChange={handleChange}
-
                     required
                 />
                 <FormFeedback
