@@ -182,7 +182,7 @@ p {
   background-size: 100% 100% !important;
   background-repeat: repeat-y !important;
   background-clip: border-box;
-  background-position: 5px;
+  background-position: -3px !important;
   padding-top: 10px !important;
   height: 665px;
 }

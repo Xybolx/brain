@@ -49,19 +49,19 @@
 @keyframes Curtain {
   0% {
     background: url("https://ak8.picdn.net/shutterstock/videos/18814838/thumb/1.jpg?ip=x480");
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
   }
   100% {
-    background: transparent;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
+  background: url("https://ak8.picdn.net/shutterstock/videos/18814838/thumb/1.jpg?ip=x480");
+  background-size: 0% 0%;
+  background-position-y: -1000px;
+  background-repeat: no-repeat;
   }
 }
 
 .img-fluid {
-  max-width: 100%;
+  max-width: 75%;
   max-height: 375px;
   min-height: 375px;
   mix-blend-mode: darken;
@@ -157,7 +157,7 @@
 }
 
 .insideMovies {
-  animation: Curtain 5s;
+  animation: Curtain 4.8s;
   height: 465px;
 }
 

@@ -48,7 +48,7 @@ const Users = ({ socket, messages }) => {
             <SubTitle
                 number={users.length ? users.length : ""}
                 icon={<i className="fas fa-users" />}
-                header="Reviewers"
+                header="Reviewer(s)"
             />
             <div className="usersDiv">
                 {users.length ? (
