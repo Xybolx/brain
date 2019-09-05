@@ -59,7 +59,6 @@ const Users = ({ socket, messages }) => {
                                     <td className="userStrong">
                                         <Avatar
                                             style={{ width: '30px', height: '30px' }}
-                                            avatarStyle={online.avatar.avatarStyle}
                                             topType={online.avatar.topType}
                                             accessoriesType={online.avatar.accessoriesType}
                                             hairColor={online.avatar.hairColor}

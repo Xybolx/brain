@@ -26,7 +26,6 @@ router.post("/signup", function (req, res) {
         username: req.body.username,
         password: req.body.password,
         avatar: {
-            avatarStyle: req.body.avatarStyle,
             topType: req.body.topType,
             accessoriesType: req.body.accessoriesType,
             hairColor: req.body.hairColor,

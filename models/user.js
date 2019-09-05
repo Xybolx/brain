@@ -30,7 +30,6 @@ const userSchema = new Schema({
     },
 
     avatar: {
-        avatarStyle: String,
         topType: String,
         accessoriesType: String,
         hairColor: String,
