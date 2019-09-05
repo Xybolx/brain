@@ -26,7 +26,7 @@ const SignUpForm = () => {
     const [values, handleChange, handleClearInputs] = useForm();
 
     // De-structuring values
-    const { email, password, username, avatarStyle, topType, accessoriesType, hairColor, facialHairType, facialHairColor, clotheType, clotheColor, graphicType, eyeType, eyebrowType, mouthType, skinColor } = values;
+    const { email, password, username, topType, accessoriesType, hairColor, facialHairType, facialHairColor, clotheType, clotheColor, graphicType, eyeType, eyebrowType, mouthType, skinColor } = values;
 
     // Get user and redirect function
     const getUser = () => {
@@ -83,7 +83,6 @@ const SignUpForm = () => {
                 email,
                 username,
                 password,
-                avatarStyle,
                 topType,
                 accessoriesType,
                 hairColor,
@@ -240,7 +239,6 @@ const SignUpForm = () => {
                 <Avatar
                     className="img-fluid"
                     style={{ width: '200px', height: '200px' }}
-                    avatarStyle={avatarStyle}
                     topType={topType}
                     accessoriesType={accessoriesType}
                     hairColor={hairColor}

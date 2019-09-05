@@ -58,7 +58,6 @@ const UserStats = ({ online, getUsers, messages }) => {
                         <StatTitle
                             icon={<Avatar
                                 style={{ width: '20px', height: '25px' }}
-                                avatarStyle={online.avatar.avatarStyle}
                                 topType={online.avatar.topType}
                                 accessoriesType={online.avatar.accessoriesType}
                                 hairColor={online.avatar.hairColor}
