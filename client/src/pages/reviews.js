@@ -5,6 +5,7 @@ import Review from '../components/review';
 import Users from '../components/users/users';
 import MovieSearch from '../components/movie/movieSearch';
 import Movies from '../components/movie/movies';
+import useSpeech from '../components/useSpeech';
 import useBoolean from '../components/useBoolean';
 import Btn from '../components/button/btn';
 import { Row, Col, Collapse } from 'reactstrap';
@@ -14,6 +15,7 @@ const UserReviews = () => {
     // State
     const [items, setItems] = useState([]);
     const [messages, setMessages] = useState([]);
+    const state = useSpeech("Welcome to film brains");
 
     // toggle collapse/getMessages functions
     const [isOpen, toggleCollapse] = useBoolean(false);
@@ -41,6 +43,7 @@ const UserReviews = () => {
 
     return (
         <div className="container-page">
+            <pre style={{ display: "none" }}>{JSON.stringify(state, null, 2)}</pre>
             <Row>
                 <Col
                     className="jumbotron jumbotron-fluid left"
