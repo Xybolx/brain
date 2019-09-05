@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.static("client/src/imgs"));
 
 // session stuff
-app.use(session({ secret: "keyboard cat", resave: false, saveUninitialized: true }));
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
