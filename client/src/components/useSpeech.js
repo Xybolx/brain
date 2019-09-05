@@ -18,7 +18,7 @@ const useSpeech = (text, opts = {}) => {
         utterance.onpause = () => setState({ isPlaying: false });
         uterranceRef.current = utterance;
         window.speechSynthesis.speak(uterranceRef.current);
-    }, [opts.volume, setState, text]);
+    }, []);
 
     return state;
 };
