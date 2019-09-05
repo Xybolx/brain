@@ -40,7 +40,7 @@ const UserReviews = () => {
     }, [])
 
     return (
-        <div className="container-page" style={{ marginTop: 5 }}>
+        <div className="container-page">
             <Row>
                 <Col
                     className="jumbotron jumbotron-fluid left"
@@ -70,7 +70,6 @@ const UserReviews = () => {
                             />
                         </div>
                     </Collapse>
-                    <div style={{ marginBottom: 20 }}>
                         <Btn
                             onClick={toggleCollapse}
                             color="dark"
@@ -78,7 +77,6 @@ const UserReviews = () => {
                             icon={<i className="fas fa-search" />}
                             name={isOpen ? "Close" : "Search"}
                         />
-                    </div>
                 </Col>
                 <Col
                     className="jumbotron jumbotron-fluid right"

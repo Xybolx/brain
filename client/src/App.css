@@ -5,7 +5,8 @@
 
 body {
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
+  background: rgb(0, 0, 0) !important;
 }
 
 .App {
@@ -180,16 +181,16 @@ p {
 .left {
   background: url("https://i-love-png.com/images/movie_theater_png_903217.png"), black !important;
   background-size: 100% 100% !important;
-  background-repeat: repeat-y !important;
   background-clip: border-box;
   background-position: -3px !important;
   padding-top: 10px !important;
-  height: 665px;
+  height: 695px;
 }
 
 .right {
   background: black !important;
   padding-top: 10px !important;
+  height: 695px;
 }
 
 .card {
@@ -282,20 +283,21 @@ h6 {
 
 .homeText {
   font-family: 'Aldrich', sans-serif;
-  color: black;
-  text-shadow: 1px 1px 1px gold;
+  color: whitesmoke;
+  text-shadow: .5px .5px .5px gold;
 }
 
 .label {
   font-family: 'Aldrich', sans-serif;
-  color: black;
-  text-shadow: 1px 1px 1px gold;
+  color: whitesmoke;
+  text-shadow: .5px .5px .5px gold;
   margin-left: 5px;
 }
 
 .valid-feedback,
 .invalid-feedback {
   font-family: 'Aldrich', sans-serif;
+  text-shadow: .5px .5px .5px white;
 }
 
 .form-control {

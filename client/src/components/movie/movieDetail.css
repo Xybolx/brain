@@ -61,9 +61,9 @@
 }
 
 .img-fluid {
-  max-width: 75%;
-  max-height: 375px;
-  min-height: 375px;
+  max-width: 100%;
+  max-height: 395px;
+  min-height: 395px;
   mix-blend-mode: darken;
   opacity: .9;
   animation: Fade 2s;
@@ -82,14 +82,14 @@
 
 .released {
   color: black;
-  text-shadow: 1px 1px 1px gold;
+  text-shadow: .5px .5px .5px gold;
   margin-right: 30px;
   margin-left: 30px;
 }
 
 .director {
   color: black;
-  text-shadow: 1px 1px 1px gold;
+  text-shadow: .5px .5px .5px gold;
   margin-right: 30px;
   margin-left: 30px;
 }
@@ -137,8 +137,8 @@
 
 .movieTitleDiv {
   font-family: 'Limelight', cursive;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
   max-width: 100%;
   margin-left: 20px;
   margin-right: 20px;
@@ -151,8 +151,6 @@
 }
 
 .movieTitleSpan {
-  padding-top: 5px;
-  padding-bottom: 5px;
   text-shadow: 1px 1px 1px rgba(255, 217, 0, 0.658);
 }
 
