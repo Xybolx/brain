@@ -89,18 +89,14 @@ body {
 
 .bg-danger {
   background: linear-gradient(darkred, tomato, darkred) !important;
-  margin-top: .5px;
 }
 
 .bg-success {
   background: linear-gradient(darkgreen, lawngreen, darkgreen) !important;
-  margin-bottom: .5px;
 }
 
 .bg-warning {
   background: linear-gradient(darkgoldenrod, yellow, goldenrod) !important;
-  margin-top: .5px;
-  margin-bottom: .5px;
 }
 
 .bg-dark {
