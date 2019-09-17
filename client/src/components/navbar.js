@@ -112,7 +112,7 @@ const TopNav = () => {
                             isActive={isActiveReviews}
                             exact to="/reviews"
                         >
-                            <i className="fas fa-theater-masks" /> Reviews
+                            <i className="fas fa-theater-masks fa-fw" /> Reviews
                             </NavLink>
                     </NavItem>
                     <NavItem>
