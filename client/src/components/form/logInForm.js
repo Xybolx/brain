@@ -33,7 +33,7 @@ const LogInForm = () => {
         if (!emailMatch) {
             setIsValidEmail(false);
         }
-    }, [email, setIsValidEmail])
+    }, [email, setIsValidEmail]);
 
     useEffect(() => {
         const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
@@ -44,7 +44,14 @@ const LogInForm = () => {
         if (!passwordMatch) {
             setIsValidPassword(false);
         }
-    }, [password, setIsValidPassword])
+    }, [password, setIsValidPassword]);
+
+    useEffect(() => {
+        window.addEventListener("beforeunload", setIsValidPassword(false));
+        return () => {
+            window.removeEventListener("beforeunload", setIsValidPassword(false));
+        }
+    }, [setIsValidPassword]);
 
     // Get user and redirect function
     const getUser = () => {

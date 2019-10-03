@@ -49,7 +49,7 @@ const SignUpForm = () => {
         if (!emailMatch) {
             setIsValidEmail(false);
         }
-    }, [email, setIsValidEmail])
+    }, [email, setIsValidEmail]);
 
     useEffect(() => {
         const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
@@ -60,7 +60,7 @@ const SignUpForm = () => {
         if (!passwordMatch) {
             setIsValidPassword(false);
         }
-    }, [password, setIsValidPassword])
+    }, [password, setIsValidPassword]);
 
     useEffect(() => {
         const usernameRegEx = /^(?=[0-9a-zA-Z#@$?]{2,}$).*/;
@@ -71,9 +71,21 @@ const SignUpForm = () => {
         if (!usernameMatch) {
             setIsValidUsername(false);
         }
-    }, [username, setIsValidUsername])
+    }, [username, setIsValidUsername]);
 
-    
+    useEffect(() => {
+        window.addEventListener("beforeunload", setIsValidPassword(false));
+        return () => {
+            window.removeEventListener("beforeunload", setIsValidPassword(false));
+        };
+    }, [setIsValidPassword]);
+
+    useEffect(() => {
+        window.addEventListener("beforeunload", setIsValidUsername(false));
+        return () => {
+            window.removeEventListener("beforeunload", setIsValidUsername(false));
+        };
+    }, [setIsValidUsername]);
 
     // handle submit
     const handleFormSubmit = ev => {

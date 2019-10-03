@@ -11,7 +11,6 @@ const useSpeech = (text, opts = {}) => {
 
     useEffect(() => {
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.volume = opts.volume || 1;
         utterance.onstart = () => setState({ isPlaying: true });
         utterance.onresume = () => setState({ isPlaying: true });
         utterance.onend = () => setState({ isPlaying: false });

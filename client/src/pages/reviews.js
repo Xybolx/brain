@@ -35,11 +35,11 @@ const UserReviews = () => {
     // Get and set state
     useEffect(() => {
         getMovies();
-    }, [])
+    }, []);
 
     useEffect(() => {
         getMessages();
-    }, [])
+    }, []);
 
     return (
         <div className="container-page">
