@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Form, FormGroup, FormFeedback, Input } from 'reactstrap';
-import IsValidEmailContext from '../../context/isValidEmailContext';
-import IsValidPasswordContext from '../../context/isValidPasswordContext';
-import IsValidUsernameContext from '../../context/isValidUsernameContext';
 import UserContext from '../../context/userContext';
 import Avatar from 'avataaars';
 import API from '../../utils/API';
 import InputLabel from './inputLabel';
 import useForm from './useForm';
+import useValidate from '../useValidate';
 import Btn from '../button/btn';
 
 const SignUpForm = () => {
@@ -17,13 +15,12 @@ const SignUpForm = () => {
     const [isSignedUp, setIsSignedUp] = useState(false);
 
     // context
-    const { isValidEmail, setIsValidEmail } = useContext(IsValidEmailContext);
-    const { isValidPassword, setIsValidPassword } = useContext(IsValidPasswordContext);
-    const { isValidUsername, setIsValidUsername } = useContext(IsValidUsernameContext);
     const { setUser } = useContext(UserContext);
 
     // useInput
     const [values, handleChange, handleClearInputs] = useForm();
+    // useValidate
+    const [isValidEmail, isValidPassword, isValidUsername] = useValidate(values);
 
     // De-structuring values
     const { email, password, username, topType, accessoriesType, hairColor, facialHairType, facialHairColor, clotheType, clotheColor, graphicType, eyeType, eyebrowType, mouthType, skinColor } = values;
@@ -38,54 +35,6 @@ const SignUpForm = () => {
     const redirect = () => {
         setTimeout(() => setIsSignedUp(true), 1000);
     };
-
-    // Client-side validation
-    useEffect(() => {
-        const emailRegEx = /.+@.+\..+/;
-        const emailMatch = emailRegEx.test(email);
-        if (email && emailMatch) {
-            setIsValidEmail(true);
-        }
-        if (!emailMatch) {
-            setIsValidEmail(false);
-        }
-    }, [email, setIsValidEmail]);
-
-    useEffect(() => {
-        const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
-        const passwordMatch = passwordRegEx.test(password);
-        if (password && passwordMatch) {
-            setIsValidPassword(true);
-        }
-        if (!passwordMatch) {
-            setIsValidPassword(false);
-        }
-    }, [password, setIsValidPassword]);
-
-    useEffect(() => {
-        const usernameRegEx = /^(?=[0-9a-zA-Z#@$?]{2,}$).*/;
-        const usernameMatch = usernameRegEx.test(username);
-        if (username && usernameMatch) {
-            setIsValidUsername(true);
-        }
-        if (!usernameMatch) {
-            setIsValidUsername(false);
-        }
-    }, [username, setIsValidUsername]);
-
-    useEffect(() => {
-        window.addEventListener("beforeunload", setIsValidPassword(false));
-        return () => {
-            window.removeEventListener("beforeunload", setIsValidPassword(false));
-        };
-    }, [setIsValidPassword]);
-
-    useEffect(() => {
-        window.addEventListener("beforeunload", setIsValidUsername(false));
-        return () => {
-            window.removeEventListener("beforeunload", setIsValidUsername(false));
-        };
-    }, [setIsValidUsername]);
 
     // handle submit
     const handleFormSubmit = ev => {
@@ -160,12 +109,13 @@ const SignUpForm = () => {
                         name="email"
                         placeholder="Enter Email"
                         value={email}
-                        valid={isValidEmail}
-                        invalid={!isValidEmail}
+                        valid={email && isValidEmail}
+                        invalid={email && !isValidEmail}
                         onChange={handleChange}
                     />
                     <FormFeedback
                         style={
+                            email &&
                             isValidEmail
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
@@ -175,6 +125,7 @@ const SignUpForm = () => {
                         </FormFeedback>
                     <FormFeedback
                         style={
+                            email &
                             !isValidEmail
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
@@ -191,12 +142,13 @@ const SignUpForm = () => {
                         name="username"
                         placeholder="Enter Username"
                         value={username}
-                        valid={isValidUsername}
-                        invalid={!isValidUsername}
+                        valid={username && isValidUsername}
+                        invalid={username && !isValidUsername}
                         onChange={handleChange}
                     />
                     <FormFeedback
                         style={
+                            username &&
                             isValidUsername
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
@@ -207,6 +159,7 @@ const SignUpForm = () => {
                         </FormFeedback>
                     <FormFeedback
                         style={
+                            username &&
                             !isValidUsername
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
@@ -224,12 +177,13 @@ const SignUpForm = () => {
                         name="password"
                         placeholder="Enter Password"
                         value={password}
-                        valid={isValidPassword}
-                        invalid={!isValidPassword}
+                        valid={password && isValidPassword}
+                        invalid={password && !isValidPassword}
                         onChange={handleChange}
                     />
                     <FormFeedback
                         style={
+                            password &&
                             isValidPassword
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
@@ -240,6 +194,7 @@ const SignUpForm = () => {
                         </FormFeedback>
                     <FormFeedback
                         style={
+                            password &&
                             !isValidPassword
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }

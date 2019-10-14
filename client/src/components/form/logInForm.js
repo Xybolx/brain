@@ -1,10 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import useForm from './useForm';
+import useValidate from '../useValidate';
 import API from '../../utils/API';
 import UserContext from '../../context/userContext';
-import IsValidEmailContext from '../../context/isValidEmailContext';
-import IsValidPasswordContext from '../../context/isValidPasswordContext';
 import Btn from '../button/btn';
 import InputLabel from './inputLabel';
 import { Form, FormGroup, FormFeedback, Input } from 'reactstrap';
@@ -13,45 +12,14 @@ const LogInForm = () => {
 
     // Context
     const { setUser } = useContext(UserContext);
-    const { isValidEmail, setIsValidEmail } = useContext(IsValidEmailContext);
-    const { isValidPassword, setIsValidPassword } = useContext(IsValidPasswordContext);
 
     // State
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [values, handleChange, handleClearInputs] = useForm();
+    const [isValidEmail, isValidPassword] = useValidate(values);
 
     // De-structure values
     const { email, password } = values;
-
-    // Client-side validation
-    useEffect(() => {
-        const emailRegEx = /.+@.+\..+/;
-        const emailMatch = emailRegEx.test(email);
-        if (email && emailMatch) {
-            setIsValidEmail(true);
-        }
-        if (!emailMatch) {
-            setIsValidEmail(false);
-        }
-    }, [email, setIsValidEmail]);
-
-    useEffect(() => {
-        const passwordRegEx = /^(?=[0-9a-zA-Z#@$?]{6,}$).*/;
-        const passwordMatch = passwordRegEx.test(password);
-        if (password && passwordMatch) {
-            setIsValidPassword(true);
-        }
-        if (!passwordMatch) {
-            setIsValidPassword(false);
-        }
-    }, [password, setIsValidPassword]);
-
-    useEffect(() => {
-        window.addEventListener("beforeunload", setIsValidPassword(false));
-        return () => {
-            window.removeEventListener("beforeunload", setIsValidPassword(false));
-        }
-    }, [setIsValidPassword]);
 
     // Get user and redirect function
     const getUser = () => {
@@ -91,8 +59,8 @@ const LogInForm = () => {
                     labelText="Email"
                 />
                 <Input
-                    valid={isValidEmail}
-                    invalid={!isValidEmail}
+                    valid={email && isValidEmail}
+                    invalid={email && !isValidEmail}
                     type="email"
                     name="email"
                     placeholder="Enter Email"
@@ -102,6 +70,7 @@ const LogInForm = () => {
                 />
                 <FormFeedback
                     style={
+                        email &&
                         isValidEmail
                             ? { display: 'block', marginLeft: 5 }
                             : { display: 'none' }}
@@ -111,6 +80,7 @@ const LogInForm = () => {
                                 </FormFeedback>
                 <FormFeedback
                     style={
+                        email &&
                         !isValidEmail
                             ? { display: 'block', marginLeft: 5 }
                             : { display: 'none' }}
@@ -123,8 +93,8 @@ const LogInForm = () => {
                     labelText="Password"
                 />
                 <Input
-                    valid={isValidPassword}
-                    invalid={!isValidPassword}
+                    valid={password && isValidPassword}
+                    invalid={password && !isValidPassword}
                     type="password"
                     name="password"
                     placeholder="Enter Password"
@@ -134,6 +104,7 @@ const LogInForm = () => {
                 />
                 <FormFeedback
                     style={
+                        password && 
                         isValidPassword
                             ? { display: 'block', marginLeft: 5 }
                             : { display: 'none' }}
@@ -143,6 +114,7 @@ const LogInForm = () => {
                                 </FormFeedback>
                 <FormFeedback
                     style={
+                        password &&
                         !isValidPassword
                             ? { display: 'block', marginLeft: 5 }
                             : { display: 'none' }}
