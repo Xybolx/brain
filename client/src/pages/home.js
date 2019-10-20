@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col } from 'reactstrap';
-import PageLogo from '../components/pageLogo';
+import PageLogo from '../components/logo/pageLogo';
 
 const Home = () => {
 

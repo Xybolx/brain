@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import API from '../utils/API';
-import UserContext from '../context/userContext';
-import SocketContext from '../context/socketContext';
-import RoomContext from '../context/roomContext';
+import API from '../../utils/API';
+import UserContext from '../../context/userContext';
+import SocketContext from '../../context/socketContext';
+import RoomContext from '../../context/roomContext';
 import Sentiment from 'sentiment';
-import useForm from './form/useForm';
-import InputFormGroup from './form/inputFormGroup';
-import SubTitle from './headers/subTitle';
-import PageLogo from './pageLogo';
+import useForm from '../form/useForm';
+import InputFormGroup from '../form/inputFormGroup';
+import SubTitle from '../headers/subTitle';
+import PageLogo from '../logo/pageLogo';
 
 const Review = ({ socket }) => {
 

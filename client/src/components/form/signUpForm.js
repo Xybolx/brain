@@ -6,7 +6,7 @@ import Avatar from 'avataaars';
 import API from '../../utils/API';
 import InputLabel from './inputLabel';
 import useForm from './useForm';
-import useValidate from '../useValidate';
+import useValidate from '../hooks/useValidate';
 import Btn from '../button/btn';
 
 const SignUpForm = () => {
@@ -20,7 +20,7 @@ const SignUpForm = () => {
     // useInput
     const [values, handleChange, handleClearInputs] = useForm();
     // useValidate
-    const [isValidEmail, isValidPassword, isValidUsername] = useValidate(values);
+    const errors = useValidate(values);
 
     // De-structuring values
     const { email, password, username, topType, accessoriesType, hairColor, facialHairType, facialHairColor, clotheType, clotheColor, graphicType, eyeType, eyebrowType, mouthType, skinColor } = values;
@@ -109,24 +109,24 @@ const SignUpForm = () => {
                         name="email"
                         placeholder="Enter Email"
                         value={email}
-                        valid={email && isValidEmail}
-                        invalid={email && !isValidEmail}
+                        valid={email && errors.isValidEmail}
+                        invalid={email && !errors.isValidEmail}
                         onChange={handleChange}
                     />
                     <FormFeedback
                         style={
                             email &&
-                            isValidEmail
+                            errors.isValidEmail
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        valid={isValidEmail}
+                        valid={errors.isValidEmail}
                     >Valid email!
                         </FormFeedback>
                     <FormFeedback
                         style={
                             email &
-                            !isValidEmail
+                            !errors.isValidEmail
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
@@ -142,25 +142,25 @@ const SignUpForm = () => {
                         name="username"
                         placeholder="Enter Username"
                         value={username}
-                        valid={username && isValidUsername}
-                        invalid={username && !isValidUsername}
+                        valid={username && errors.isValidUsername}
+                        invalid={username && !errors.isValidUsername}
                         onChange={handleChange}
                     />
                     <FormFeedback
                         style={
                             username &&
-                            isValidUsername
+                            errors.isValidUsername
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        valid={isValidUsername}
+                        valid={errors.isValidUsername}
                     >
                         Strange name...but okay!
                         </FormFeedback>
                     <FormFeedback
                         style={
                             username &&
-                            !isValidUsername
+                            !errors.isValidUsername
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
@@ -177,25 +177,25 @@ const SignUpForm = () => {
                         name="password"
                         placeholder="Enter Password"
                         value={password}
-                        valid={password && isValidPassword}
-                        invalid={password && !isValidPassword}
+                        valid={password && errors.isValidPassword}
+                        invalid={password && !errors.isValidPassword}
                         onChange={handleChange}
                     />
                     <FormFeedback
                         style={
                             password &&
-                            isValidPassword
+                            errors.isValidPassword
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
-                        valid={isValidPassword}
+                        valid={errors.isValidPassword}
                     >
                         Valid password!
                         </FormFeedback>
                     <FormFeedback
                         style={
                             password &&
-                            !isValidPassword
+                            !errors.isValidPassword
                                 ? { display: 'block', marginLeft: 5 }
                                 : { display: 'none' }
                         }
@@ -522,9 +522,9 @@ const SignUpForm = () => {
                 <div className="buttonDiv">
                     <Btn
                         disabled={
-                            !isValidEmail
-                            || !isValidPassword
-                            || !isValidUsername
+                            !errors.isValidEmail
+                            || !errors.isValidPassword
+                            || !errors.isValidUsername
                         }
                         type="submit"
                         color="dark"

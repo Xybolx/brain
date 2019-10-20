@@ -1,5 +1,5 @@
 .navbar-toggler {
-  background: url("../imgs/marquee.gif") !important;
+  background: url("../../imgs/marquee.gif") !important;
   background-size: 100% 100% !important;
 }
 
@@ -11,7 +11,7 @@
   vertical-align: 4px;
   font-family: 'Monoton', cursive;
   text-shadow: 1px 1px 1px gold;
-  background: url("../imgs/film-tape.gif"), rgba(94, 65, 3, 0.514);
+  background: url("../../imgs/film-tape.gif"), rgba(94, 65, 3, 0.514);
   background-size: contain;
   background-repeat: round;
 }

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import useForm from './useForm';
-import useValidate from '../useValidate';
+import useValidate from '../hooks/useValidate';
 import API from '../../utils/API';
 import UserContext from '../../context/userContext';
 import Btn from '../button/btn';
@@ -16,7 +16,7 @@ const LogInForm = () => {
     // State
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [values, handleChange, handleClearInputs] = useForm();
-    const [isValidEmail, isValidPassword] = useValidate(values);
+    const errors = useValidate(values);
 
     // De-structure values
     const { email, password } = values;
@@ -59,8 +59,8 @@ const LogInForm = () => {
                     labelText="Email"
                 />
                 <Input
-                    valid={email && isValidEmail}
-                    invalid={email && !isValidEmail}
+                    valid={email && errors.isValidEmail}
+                    invalid={email && !errors.isValidEmail}
                     type="email"
                     name="email"
                     placeholder="Enter Email"
@@ -71,17 +71,17 @@ const LogInForm = () => {
                 <FormFeedback
                     style={
                         email &&
-                        isValidEmail
+                        errors.isValidEmail
                             ? { display: 'block', marginLeft: 5 }
                             : { display: 'none' }}
-                    valid={isValidEmail}
+                    valid={errors.isValidEmail}
                 >
                     Valid email!
                                 </FormFeedback>
                 <FormFeedback
                     style={
                         email &&
-                        !isValidEmail
+                        !errors.isValidEmail
                             ? { display: 'block', marginLeft: 5 }
                             : { display: 'none' }}
                 >
@@ -93,8 +93,8 @@ const LogInForm = () => {
                     labelText="Password"
                 />
                 <Input
-                    valid={password && isValidPassword}
-                    invalid={password && !isValidPassword}
+                    valid={password && errors.isValidPassword}
+                    invalid={password && !errors.isValidPassword}
                     type="password"
                     name="password"
                     placeholder="Enter Password"
@@ -105,17 +105,17 @@ const LogInForm = () => {
                 <FormFeedback
                     style={
                         password && 
-                        isValidPassword
+                        errors.isValidPassword
                             ? { display: 'block', marginLeft: 5 }
                             : { display: 'none' }}
-                    valid={isValidPassword}
+                    valid={errors.isValidPassword}
                 >
                     Valid password!
                                 </FormFeedback>
                 <FormFeedback
                     style={
                         password &&
-                        !isValidPassword
+                        !errors.isValidPassword
                             ? { display: 'block', marginLeft: 5 }
                             : { display: 'none' }}
                 >
@@ -123,7 +123,7 @@ const LogInForm = () => {
                                 </FormFeedback>
             </FormGroup>
             <Btn
-                disabled={!isValidEmail || !isValidPassword}
+                disabled={!errors.isValidEmail || !errors.isValidPassword}
                 type="submit"
                 color="dark"
                 size="md"

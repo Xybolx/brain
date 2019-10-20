@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Badge, Progress, Modal, ModalBody } from 'reactstrap';
 import Avatar from 'avataaars';
 import UserContext from '../../context/userContext';
-import useStats from "../useStats";
+import useStats from "../hooks/useStats";
 import StatTitle from '../headers/statTitle';
 import Btn from '../button/btn';
 

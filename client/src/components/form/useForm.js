@@ -1,27 +1,17 @@
-import { useState, useContext } from 'react';
-import IsValidEmailContext from '../../context/isValidEmailContext';
-import IsValidPasswordContext from '../../context/isValidPasswordContext';
-import IsValidUsernameContext from '../../context/isValidUsernameContext';
+import { useState } from 'react';
 
 const useForm = () => {
-
-    // context
-    const { setIsValidEmail } = useContext(IsValidEmailContext);
-    const { setIsValidPassword } = useContext(IsValidPasswordContext);
-    const { setIsValidUsername } = useContext(IsValidUsernameContext);
 
     const [state, setState] = useState({});
 
     const handleChange = ev => {
         ev.persist();
-        setState(state => ({ ...state, [ev.target.name]: ev.target.value }))
+        const { name, value } = ev.target;
+        setState(state => ({ ...state, [name]: value }))
     };
 
     const handleClearInputs = () => {
         setState({});
-        setIsValidEmail(false);
-        setIsValidPassword(false);
-        setIsValidUsername(false);
     };
 
     return [state, handleChange, handleClearInputs];

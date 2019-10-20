@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Badge, Card, CardBody, CardTitle, CardText } from 'reactstrap';
-import SocketContext from '../context/socketContext';
-import RoomContext from '../context/roomContext';
+import SocketContext from '../../context/socketContext';
+import RoomContext from '../../context/roomContext';
 import moment from 'moment';
 import Avatar from 'avataaars';
-import PageLogo from './pageLogo';
-import SubTitle from './headers/subTitle';
+import PageLogo from '../logo/pageLogo';
+import SubTitle from '../headers/subTitle';
 
 const Reviews = ({ socket, messages, getMessages }) => {
 

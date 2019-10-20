@@ -2,7 +2,7 @@ import React from 'react';
 import { Collapse, Modal, ModalBody } from 'reactstrap';
 import Btn from '../button/btn';
 import MovieStats from './movieStats';
-import useBoolean from '../useBoolean';
+import useBoolean from '../hooks/useBoolean';
 import "./movieDetail.css";
 
 const MovieDetail = ({ title, src, released, director, plot, onClick, messages }) => {

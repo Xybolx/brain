@@ -3,7 +3,7 @@ import { Col } from 'reactstrap';
 import API from '../utils/API';
 import UserContext from '../context/userContext';
 import RoomContext from '../context/roomContext';
-import PageLogo from '../components/pageLogo';
+import PageLogo from '../components/logo/pageLogo';
 
 const LogOut = () => {
 

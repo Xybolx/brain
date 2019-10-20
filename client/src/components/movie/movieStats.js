@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Badge, Progress } from 'reactstrap';
-import useStats from "../useStats";
+import useStats from "../hooks/useStats";
 import StatTitle from '../headers/statTitle';
-import ProgTitle from '../progTitle';
 
 const MovieStats = ({ title, messages }) => {
 
