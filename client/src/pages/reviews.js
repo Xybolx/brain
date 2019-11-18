@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import API from '../utils/API';
+import React, { useEffect } from 'react';
 import Reviews from '../components/review/reviews';
 import Review from '../components/review/review';
 import Users from '../components/users/users';
@@ -7,39 +6,25 @@ import MovieSearch from '../components/movie/movieSearch';
 import Movies from '../components/movie/movies';
 import useSpeech from '../components/hooks/useSpeech';
 import useBoolean from '../components/hooks/useBoolean';
+import useAPI from '../components/hooks/useAPI';
 import Btn from '../components/button/btn';
 import { Row, Col, Collapse } from 'reactstrap';
 
 const UserReviews = () => {
 
     // State
-    const [items, setItems] = useState([]);
-    const [messages, setMessages] = useState([]);
     const state = useSpeech("Welcome to film brains");
-
-    // toggle collapse/getMessages functions
     const [isOpen, toggleCollapse] = useBoolean(false);
-
-    const getMessages = () => {
-        API.getMessages()
-            .then(res => setMessages(res.data))
-            .catch(err => console.log(err))
-    };
-
-    const getMovies = () => {
-        API.getMovies()
-            .then(res => setItems(res.data))
-            .catch(err => console.log(err))
-    };
+    const { items, messages, getMessages, getMovies } = useAPI();
 
     // Get and set state
     useEffect(() => {
         getMovies();
-    }, []);
+    }, [getMovies]);
 
     useEffect(() => {
         getMessages();
-    }, []);
+    }, [getMessages]);
 
     return (
         <div className="container-page">

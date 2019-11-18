@@ -1,20 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 import useForm from './useForm';
 import useValidate from '../hooks/useValidate';
+import useBoolean from '../hooks/useBoolean';
+import useAPI from '../hooks/useAPI';
 import API from '../../utils/API';
-import UserContext from '../../context/userContext';
 import Btn from '../button/btn';
 import InputLabel from './inputLabel';
 import { Form, FormGroup, FormFeedback, Input } from 'reactstrap';
 
 const LogInForm = () => {
 
-    // Context
-    const { setUser } = useContext(UserContext);
-
     // State
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { getUser } = useAPI();
+    const [isLoggedIn, toggleIsLoggedIn] = useBoolean(false);
     const [values, handleChange, handleClearInputs] = useForm();
     const errors = useValidate(values);
 
@@ -22,14 +21,14 @@ const LogInForm = () => {
     const { email, password } = values;
 
     // Get user and redirect function
-    const getUser = () => {
-        API.getUser()
-            .then(res => setUser(res.data))
-            .catch(err => console.log(err))
-    };
+    // const getUser = () => {
+    //     API.getUser()
+    //         .then(res => setUser(res.data))
+    //         .catch(err => console.log(err))
+    // };
 
     const redirect = () => {
-        setTimeout(() => setIsLoggedIn(true), 1000);
+        setTimeout(() => toggleIsLoggedIn(), 1000);
     };
 
     // Handle form submit

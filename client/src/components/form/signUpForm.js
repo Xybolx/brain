@@ -1,24 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Form, FormGroup, FormFeedback, Input } from 'reactstrap';
-import UserContext from '../../context/userContext';
 import Avatar from 'avataaars';
 import API from '../../utils/API';
 import InputLabel from './inputLabel';
 import useForm from './useForm';
 import useValidate from '../hooks/useValidate';
+import useBoolean from '../hooks/useBoolean';
+import useAPI from '../hooks/useAPI';
 import Btn from '../button/btn';
 
 const SignUpForm = () => {
 
-    // state
-    const [isSignedUp, setIsSignedUp] = useState(false);
-
-    // context
-    const { setUser } = useContext(UserContext);
+    // useAPI
+    const { getUser } = useAPI(); 
+    
+    // useBoolean
+    const [isSignedUp, toggleIsSignedUp] = useBoolean(false);
 
     // useInput
     const [values, handleChange, handleClearInputs] = useForm();
+
     // useValidate
     const errors = useValidate(values);
 
@@ -26,14 +28,14 @@ const SignUpForm = () => {
     const { email, password, username, topType, accessoriesType, hairColor, facialHairType, facialHairColor, clotheType, clotheColor, graphicType, eyeType, eyebrowType, mouthType, skinColor } = values;
 
     // Get user and redirect function
-    const getUser = () => {
-        API.getUser()
-            .then(res => setUser(res.data))
-            .catch(err => console.log(err))
-    };
+    // const getUser = () => {
+    //     API.getUser()
+    //         .then(res => setUser(res.data))
+    //         .catch(err => console.log(err))
+    // };
 
     const redirect = () => {
-        setTimeout(() => setIsSignedUp(true), 1000);
+        setTimeout(() => toggleIsSignedUp(), 1000);
     };
 
     // handle submit
