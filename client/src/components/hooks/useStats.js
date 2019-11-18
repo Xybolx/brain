@@ -18,33 +18,33 @@ const useStats = statMessages => {
                 sum = sum += message.result;
                 return setScoreTotal(sum);
             });
-        }
+        };
         getScoreTotal();
-    }, [statMessages])
+    }, [statMessages]);
 
     useEffect(() => {
         const getNeutralTotal = () => {
             const neutralMessages = statMessages.filter(message => message.result === 0);
             setNeutralTotal(neutralMessages.length);
-        }
+        };
         getNeutralTotal();
-    }, [statMessages])
+    }, [statMessages]);
 
     useEffect(() => {
         setNeutralAvg(Math.round(neutralTotal / statMessages.length * 100));
-    }, [neutralAvg, neutralTotal, statMessages.length])
+    }, [neutralAvg, neutralTotal, statMessages.length]);
 
     useEffect(() => {
         const getPositiveTotal = () => {
             const positiveMessages = statMessages.filter(message => message.result > 0);
             setPositiveTotal(positiveMessages.length);
-        }
+        };
         getPositiveTotal();
-    }, [statMessages])
+    }, [statMessages]);
 
     useEffect(() => {
         setPositiveAvg(Math.round(positiveTotal / statMessages.length * 100));
-    }, [positiveAvg, positiveTotal, statMessages.length])
+    }, [positiveAvg, positiveTotal, statMessages.length]);
 
     useEffect(() => {
         const getNegativeTotal = () => {
@@ -52,14 +52,22 @@ const useStats = statMessages => {
             setNegativeTotal(negativeMessages.length);
         }
         getNegativeTotal();
-    }, [statMessages])
+    }, [statMessages]);
 
     useEffect(() => {
         setNegativeAvg(Math.round(negativeTotal / statMessages.length * 100));
-    }, [negativeAvg, negativeTotal, statMessages.length])
+    }, [negativeAvg, negativeTotal, statMessages.length]);
 
-    return [scoreTotal, neutralTotal, positiveTotal, negativeTotal, neutralAvg, positiveAvg, negativeAvg]
+    return [
+        scoreTotal, 
+        neutralTotal, 
+        positiveTotal, 
+        negativeTotal, 
+        neutralAvg, 
+        positiveAvg, 
+        negativeAvg
+    ];
 
-}
+};
 
 export default useStats;
