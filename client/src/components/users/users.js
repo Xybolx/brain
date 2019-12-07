@@ -88,9 +88,10 @@ const Users = ({ socket, messages }) => {
                         </tbody>
                     </Table>
                 ) : (
-                        <Spinner
-                            altMsg="Loading..."
-                        />
+                        // <Spinner
+                        //     altMsg="Loading..."
+                        // />
+                        <div></div>
                     )}
             </div>
         </>

@@ -1,14 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import Reviews from '../components/review/reviews';
 import Review from '../components/review/review';
-import Users from '../components/users/users';
+// import Users from '../components/users/users';
 import MovieSearch from '../components/movie/movieSearch';
-import Movies from '../components/movie/movies';
+import { Spinner } from '../components/spinner';
+// import Movies from '../components/movie/movies';
 import useSpeech from '../components/hooks/useSpeech';
 import useBoolean from '../components/hooks/useBoolean';
 import useAPI from '../components/hooks/useAPI';
 import Btn from '../components/button/btn';
 import { Row, Col, Collapse } from 'reactstrap';
+
+const Movies = lazy(() =>
+    import('../components/movie/movies'));
+
+const Users = lazy(() =>
+    import('../components/users/users'));
 
 const UserReviews = () => {
 
@@ -34,18 +41,20 @@ const UserReviews = () => {
                     className="jumbotron jumbotron-fluid left"
                     md="6"
                 >
-                    <div style={
-                        isOpen 
-                            ? { display: "none" }
-                            : { display: "block" }}
-                    >
-                        <Movies
-                            messages={messages}
-                            getMessages={getMessages}
-                            items={items}
-                            getMovies={getMovies}
-                        />
-                    </div>
+                    <Suspense fallback={<Spinner altMsg="Getting Movies..." />}>
+                        <div style={
+                            isOpen
+                                ? { display: "none" }
+                                : { display: "block" }}
+                        >
+                            <Movies
+                                messages={messages}
+                                getMessages={getMessages}
+                                items={items}
+                                getMovies={getMovies}
+                            />
+                        </div>
+                    </Suspense>
                     <Collapse isOpen={isOpen}>
                         <div
                             style={
@@ -58,21 +67,23 @@ const UserReviews = () => {
                             />
                         </div>
                     </Collapse>
-                        <Btn
-                            onClick={toggleCollapse}
-                            color="dark"
-                            size="md"
-                            icon={<i className="fas fa-search" />}
-                            name={isOpen ? "Close" : "Search"}
-                        />
+                    <Btn
+                        onClick={toggleCollapse}
+                        color="dark"
+                        size="md"
+                        icon={<i className="fas fa-search" />}
+                        name={isOpen ? "Close" : "Search"}
+                    />
                 </Col>
                 <Col
                     className="jumbotron jumbotron-fluid right"
                     md="6"
                 >
-                    <Users
-                        messages={messages}
-                    />
+                    <Suspense fallback={<Spinner altMsg="Getting Users..." />}>
+                        <Users
+                            messages={messages}
+                        />
+                    </Suspense>
                     <Review />
                     <Reviews
                         messages={messages}

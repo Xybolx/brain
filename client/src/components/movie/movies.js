@@ -168,9 +168,10 @@ const Movies = ({ socket, messages, items, getMovies }) => {
                     </CarouselControl>
                 </Carousel>
             ) : (
-                    <Spinner
-                        altMsg="Loading..."
-                    />
+                    // <Spinner
+                    //     altMsg="Loading..."
+                    // />
+                    <div></div>
                 )}
         </div>
     );

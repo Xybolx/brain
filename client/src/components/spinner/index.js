@@ -14,4 +14,4 @@ export const Spinner = ({ altMsg }) => {
             <span className="spinnerSpan">{altMsg}</span>
         </h4>
     );
-}
+};
