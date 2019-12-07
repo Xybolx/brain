@@ -73,15 +73,21 @@ const Movies = ({ socket, messages, items, getMovies }) => {
     };
 
     useEffect(() => {
+
+        const goToIndex = newIndex => {
+                setActiveIndex(newIndex);
+                getMovies();
+        };
+
         socket.on('RECEIVE_MOVIE', data => {
             if (data) {
-                getMovies();
+                goToIndex(0);
             }
         });
         return () => {
             socket.off('RECEIVE_MOVIE');
         };
-    }, [socket, getMovies])
+    }, [socket, getMovies]);
 
     useEffect(() => {
         socket.on('RECEIVE_JOIN_ROOM', data => {
