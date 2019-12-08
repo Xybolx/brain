@@ -6,7 +6,6 @@ import SocketContext from '../../context/socketContext';
 import API from '../../utils/API';
 import Avatar from 'avataaars';
 import UserStats from './userStats';
-import { Spinner } from '../spinner';
 import SubTitle from '../headers/subTitle';
 
 const Users = ({ socket, messages }) => {
@@ -15,20 +14,21 @@ const Users = ({ socket, messages }) => {
     const { user } = useContext(UserContext);
     const { users, setUsers } = useContext(UsersContext);
 
-    // get and set state
+    // get and set state of users
     const getUsers = () => {
         API.getUsers()
             .then(res => setUsers(res.data))
             .catch(err => console.log(err))
     };
 
+    // Subscribe/un-subscribe to SEND_USER socket event
     useEffect(() => {
         socket.emit('SEND_USER', {
             user
         });
     }, [user, socket])
 
-    // Subscribe/un-subscribe to socket
+    // Subscribe/un-subscribe to RECEIVE_USER socket event
     useEffect(() => {
         socket.on('RECEIVE_USER', data => {
             if (data) {
@@ -96,7 +96,7 @@ const Users = ({ socket, messages }) => {
             </div>
         </>
     );
-}
+};
 
 const UsersWithSocket = props => (
     <SocketContext.Consumer>

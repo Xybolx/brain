@@ -4,6 +4,7 @@ import API from '../utils/API';
 import UserContext from '../context/userContext';
 import RoomContext from '../context/roomContext';
 import PageLogo from '../components/logo/pageLogo';
+import { Spinner } from '../components/spinner';
 
 const LogOut = () => {
 
@@ -11,7 +12,7 @@ const LogOut = () => {
     const { setUser } = useContext(UserContext);
     const { setRoom } = useContext(RoomContext);
 
-    // Logout function runs on component mount
+    // Logout functions run on component mount
     useEffect(() => {
         setRoom(null);
     }, [setRoom])
@@ -33,6 +34,7 @@ const LogOut = () => {
         <div className="page-container" style={{ marginTop: 30 }}>
             <PageLogo stackSize="8" />
             <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <Spinner altMsg="El Fin" />
             </Col>
         </div>
     );

@@ -6,7 +6,6 @@ import SocketContext from '../../context/socketContext';
 import RoomContext from '../../context/roomContext';
 import UserContext from '../../context/userContext';
 import MovieDetail from './movieDetail';
-import { Spinner } from '../../components/spinner';
 import SubTitle from '../headers/subTitle';
 import './movies.css';
 
@@ -75,8 +74,8 @@ const Movies = ({ socket, messages, items, getMovies }) => {
     useEffect(() => {
 
         const goToIndex = newIndex => {
-                setActiveIndex(newIndex);
-                getMovies();
+            setActiveIndex(newIndex);
+            getMovies();
         };
 
         socket.on('RECEIVE_MOVIE', data => {
@@ -120,7 +119,7 @@ const Movies = ({ socket, messages, items, getMovies }) => {
             <SubTitle
                 number={items.length ? items.length : ""}
                 icon={<i className="fas fa-film" />}
-                header="Reviewed"
+                header="Now Showing"
             />
             {items.length ? (
                 <Carousel
@@ -168,10 +167,7 @@ const Movies = ({ socket, messages, items, getMovies }) => {
                     </CarouselControl>
                 </Carousel>
             ) : (
-                    // <Spinner
-                    //     altMsg="Loading..."
-                    // />
-                    <div></div>
+                    <i className="fas fa-film" />
                 )}
         </div>
     );
