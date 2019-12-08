@@ -167,7 +167,7 @@ const Movies = ({ socket, messages, items, getMovies }) => {
                     </CarouselControl>
                 </Carousel>
             ) : (
-                    <i className="fas fa-film" />
+                    <div></div>
                 )}
         </div>
     );

@@ -1,10 +1,8 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import Reviews from '../components/review/reviews';
 import Review from '../components/review/review';
-// import Users from '../components/users/users';
 import MovieSearch from '../components/movie/movieSearch';
 import { Spinner } from '../components/spinner';
-// import Movies from '../components/movie/movies';
 import useSpeech from '../components/hooks/useSpeech';
 import useBoolean from '../components/hooks/useBoolean';
 import useAPI from '../components/hooks/useAPI';
